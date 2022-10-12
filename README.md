@@ -5,10 +5,10 @@ TO-DO LIST:
 - [x] add and delete data from firestore
 - [x] user login using email and password
 - [x] log out functionality
-- [] add Google auth Login
-- [] user sessions after login
-- [] store user profile data
-- [] user feed data
+- [ ] add Google auth Login
+- [ ] user sessions after login
+- [ ] store user profile data
+- [ ] user feed data
 etc...
 
 ## Recommended IDE Setup
