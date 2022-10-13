@@ -1,14 +1,18 @@
 # is216-vue-vite
 
-TO-DO LIST:
+## To-Do List:
 - [x] connect to firestore
 - [x] add and delete data from firestore
 - [x] user login using email and password
 - [x] log out functionality
 - [ ] add Google auth Login
-- [ ] user sessions after login
+- [ ] user sessions after login (v important)
+- [ ] unique user data linked to them (v important) e.g (cannot have user seeing their own profile on feed, or editing other user's data etc.)
 - [ ] store user profile data
 - [ ] user feed data
+- [ ] Match logic
+- [ ] feedback/comment system
+- [ ] events creation and listings
 etc...
 
 ## Recommended IDE Setup
