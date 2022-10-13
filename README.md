@@ -5,6 +5,7 @@
 - [x] add and delete data from firestore
 - [x] user login using email and password
 - [x] log out functionality
+- [ ] setup vue-router
 - [ ] add Google auth Login
 - [ ] user sessions after login (v important)
 - [ ] unique user data linked to them (v important) e.g (cannot have user seeing their own profile on feed, or editing other user's data etc.)
