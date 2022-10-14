@@ -1,7 +1,7 @@
 # is216-vue-vite
 ##
-Note: Please Run ```sh
-    npm install``` after every pull in case of updated dependencies.
+Note: Please Run ``` 
+npm install``` after every pull in case of updated dependencies.
 ## To-Do List:
 - [x] connect to firestore
 - [x] add and delete data from firestore
