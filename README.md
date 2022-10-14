@@ -1,11 +1,14 @@
 # is216-vue-vite
-
+##
+Note: Please Run ```sh
+    npm install``` after every pull in case of updated dependencies.
 ## To-Do List:
 - [x] connect to firestore
 - [x] add and delete data from firestore
 - [x] user login using email and password
-- [x] log out functionality
-- [ ] setup vue-router
+- [ ] log out functionality
+- [x] setup vue-router
+- [x] add vuex store
 - [ ] add Google auth Login
 - [ ] user sessions after login (v important)
 - [ ] unique user data linked to them (v important) e.g (cannot have user seeing their own profile on feed, or editing other user's data etc.)
