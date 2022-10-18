@@ -5,10 +5,8 @@ import App from "./App.vue";
 // import "./assets/main.css";
 import store from './store'
 
-// Import our custom CSS
-import './scss/styles.scss'
-// Import all of Bootstrap's JS
-import * as bootstrap from 'bootstrap'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 
 createApp(App).use(router).use(store).mount("#app");
 
