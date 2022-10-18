@@ -21,6 +21,7 @@ const store = createStore({
             state.user = payload
             //Log out the user state
             console.log(state.user)
+            console.log('user state changeed');
         }
     },
     actions: {

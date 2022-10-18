@@ -1,13 +1,19 @@
 <template>
   <div>
     <Navbar />
-    <router-view/>
+    <router-view />
+    <button @click="test">test button</button>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
+import Navbar from "./components/Navbar.vue";
 export default {
-  components: {Navbar}
-}
+  components: { Navbar },
+  methods: {
+    test: function () {
+      console.log("testing");
+    },
+  },
+};
 </script>
