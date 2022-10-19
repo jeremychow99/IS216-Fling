@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from "node:url";
-const path = require('path')
+const path = require("path");
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -10,7 +10,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
-      '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+      "~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
     },
   },
 });
