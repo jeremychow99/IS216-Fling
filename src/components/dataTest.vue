@@ -54,5 +54,4 @@ export default {
   <input v-model="inputData" type="text" />
   <button @click="deleteData">Delete data</button>
   <input v-model="deleteInput" type="text" />
-
 </template>

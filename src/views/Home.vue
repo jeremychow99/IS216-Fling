@@ -1,26 +1,31 @@
 <template>
-    <div>
-      <div v-for="blog in blogs" :key="blog.id">
-        <div>
-          <h3 >{{ blog.title }}</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur aspernatur consectetur doloremque sunt ducimus enim iure animi fugit nulla et! Perferendis autem deleniti quo eum corrupti reiciendis voluptatem ab ducimus?</p>
-        </div>
+  <div>
+    <div v-for="blog in blogs" :key="blog.id">
+      <div>
+        <h3>{{ blog.title }}</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
+          aspernatur consectetur doloremque sunt ducimus enim iure animi fugit
+          nulla et! Perferendis autem deleniti quo eum corrupti reiciendis
+          voluptatem ab ducimus?
+        </p>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import { ref } from 'vue'
-  export default {
-    setup() {
-      const blogs = ref([
-        { title: 'What is programming?', id: 1 },
-        { title: 'What is JS?', id: 2 },
-        { title: 'What is Python?', id: 3 },
-      ])
-      return { 
-        blogs
-      }
-    }
-  }
-  </script>
+  </div>
+</template>
+
+<script>
+import { ref } from "vue";
+export default {
+  setup() {
+    const blogs = ref([
+      { title: "What is programming?", id: 1 },
+      { title: "What is JS?", id: 2 },
+      { title: "What is Python?", id: 3 },
+    ]);
+    return {
+      blogs,
+    };
+  },
+};
+</script>
