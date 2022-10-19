@@ -1,0 +1,135 @@
+<template>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 col-sm-2 col-lg-2">
+                <div class="left-navbar d-flex flex-column border-end position-sticky" style="height:100vh; align-items: center;" id="left-navbar">
+                    <div>
+                        <!-- APP_ICON Replace with app image  -->
+                        <button class="btn btn-default">
+                            <a href="main.html">
+                                <img src="public/favicon.ico" class= "fs-3 mt-3">
+                            </a>
+                        </button>
+                    </div>
+                    <!-- ICONS from FONTAWESOME -->
+                    <div class="my-3">
+                        <!-- HOME_ICON <font-awesome-icon icon="fa-solid fa-house-user" /> for Vue -->
+                        <button class="btn btn-default">
+                            <a href="main.html">
+                                <i class="fa-solid fa-house-user fs-3" ></i>
+                            </a>
+                        </button>
+                    </div>
+                    
+                    <div class="my-3">
+                        <!-- EVENTS_ICON <font-awesome-icon icon="fa-solid fa-calendar-days" /> for Vue -->
+                        <button class="btn btn-default">
+                            <a href="events.html">
+                                <i class="fa-solid fa-calendar-days fs-3"></i>
+                            </a>
+                        </button>
+                    </div>
+
+                    <div class="my-3">
+                        <!-- MESSAGES_ICON <font-awesome-icon icon="fa-solid fa-message" /> for Vue -->
+                        <button class="btn btn-default">
+                            <!-- !TODO link change to messages -->
+                            <a href="chats.html">
+                                <i class="fa-solid fa-message fs-3"></i>
+                            </a>
+                        </button>
+                    </div>
+
+                    <div class="my-3">
+                        <!-- PROFILE_ICON <font-awesome-icon icon="fa-solid fa-user" /> for Vue -->
+                        <button class="btn btn-default">
+                            <!-- !TODO link change to profile -->
+                            <a href="profilepage.html">
+                                <i class="fa-solid fa-user fs-3"></i>
+                            </a>
+                        </button>
+                    </div>
+                    
+                    <div class="profile_icon position-absolute fs-3" style="bottom:60px;">
+                        <!-- PROFILE_PIC <font-awesome-icon icon="fa-solid fa-user" /> for Vue -->
+                        <!-- REPLACE WITH PROFILE PICTURE -->
+                        <button class="btn btn-default">
+                            <!-- !TODO link change to profile -->
+                            <a href="events.html">
+                                <img src="https://placekitten.com/30/30" class="img-fluid" style="border-radius: 50%;">
+                            </a>
+                        </button>
+                    </div>
+                    <!-- Replace with username -->
+                    <p class="fs-6 fw-light position-absolute" style="bottom:15px;">
+                        @tanxx
+                    </p>
+
+                </div>
+
+                
+
+
+            </div>
+            <div class="col-10 col-sm-10 col-lg-10">
+                <div class="row align-items-center mt-3">
+                    <!-- Home Row ()-->
+                    <div class="col">
+                        <strong class="fs-4">Home</strong>
+                    </div>
+                    <!-- If bell column is needed.. -->
+                    <!-- <div class="col text-end">
+                        <i class="fa-solid fa-bell"></i>
+                    </div> -->
+                </div>
+                <div class="row align-items-center mt-3">
+                    <!-- Search Bar row-->
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search for People/Events" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="row align-items-center mt-3">
+                    <!-- 1 card from sm-md md 2 cards lg 3 cards -->
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-3 me-3">
+
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="https://placekitten.com/100/70/" alt="Card image cap" id="pic1">
+                            <div class="card-body">
+                              <h5 class="card-title" id="name1">Ah Mao</h5>
+                              <p class="card-text" id="details1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga sint hic velit? Fugiat temporibus voluptate quod, officia, nam harum repudiandae aliquam itaque iste beatae quam accusamus cumque quibusdam pariatur provident.</p>
+                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-3 me-3">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="https://placekitten.com/100/70/" alt="Card image cap" id="pic2">
+                            <div class="card-body">
+                              <h5 class="card-title" id="name2">Ah Gou</h5>
+                              <p class="card-text" id="details2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quae porro sunt maiores velit ratione totam vel labore sed ipsa, ex quas nulla exercitationem debitis quasi. Expedita minima unde voluptate.</p>
+                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-3 mr-3 me-3">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="https://placekitten.com/100/70/" alt="Card image cap" id="pic3">
+                            <div class="card-body">
+                              <h5 class="card-title" id="name3">Card title</h5>
+                              <p class="card-text" id="details3">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CARDS ROW -->
+                    
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+</template>
