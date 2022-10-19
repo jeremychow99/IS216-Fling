@@ -16,6 +16,7 @@
     <div>
       <router-link :to="{ name: 'Login' }">Login</router-link>
       <router-link :to="{ name: 'Signup' }">Signup</router-link>
+      <router-link :to="{ name: 'signup' }">ACTUAL Signup</router-link>
     </div>
   </nav>
 </template>
