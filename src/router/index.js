@@ -1,13 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
+import Main from "../views/Main.vue";
 import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
+import Events from "../views/Events.vue";
+import Chats from "../views/Chats.vue";
+import ChatRoom from "../views/ChatRoom.vue";
+import Profile from "../views/Profile.vue"
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Main,
   },
   {
     path: "/signup",
@@ -19,6 +23,26 @@ const routes = [
     name: "Login",
     component: Login,
   },
+  {
+    path: "/events",
+    name: "Events",
+    component: Events,
+  },
+  {
+    path: "/chats",
+    name: "Chats",
+    component: Chats,
+  },
+  {
+    path: "/chats/:id",
+    name: "Chatroom",
+    component: ChatRoom,
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+  }
 ];
 
 const router = createRouter({
