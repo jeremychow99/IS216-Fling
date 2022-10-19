@@ -14,8 +14,8 @@
   
       <!-- for logged out users -->
       <div>
-        <router-link to="/login">Login</router-link>
-        <router-link to="/signup">Signup</router-link>
+        <router-link :to="{ name: 'Login' }">Login</router-link>
+        <router-link :to="{ name: 'Signup'}">Signup</router-link>
       </div>
     </nav>
   </template>
