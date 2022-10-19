@@ -6,7 +6,7 @@ import Events from "../views/Events.vue";
 import Chats from "../views/Chats.vue";
 import ChatRoom from "../views/ChatRoom.vue";
 import Profile from "../views/Profile.vue"
-
+import signupFinalised from "../components/signupFinalised.vue"
 const routes = [
   {
     path: "/",
@@ -42,11 +42,11 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
-  }
+  },
   {
     path: "/signupFinal",
-    name: "signup",
-    component: signup,
+    name: "signupfinalised",
+    component: signupFinalised,
   },
 ];
 
