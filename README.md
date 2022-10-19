@@ -14,6 +14,7 @@ npm install``` after every pull in case of updated dependencies.
 - [ ] create user data linked to them when signup (v important)
 - [ ] unique user sessions after login, linked to their data (cannot have user seeing their own profile on feed, or editing other user's data etc.)
 - [ ] store user profile data
+- [ ] profile pic image file upload (using firebase storage)
 - [ ] user feed data
 - [ ] Match logic
 - [ ] feedback/comment system
