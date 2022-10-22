@@ -6,7 +6,9 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { auth } from "./config";
+import { doc, setDoc } from "firebase/firestore";
+
+import { db, auth } from "./config";
 
 const store = createStore({
   state: {
@@ -25,7 +27,7 @@ const store = createStore({
     },
   },
   actions: {
-    async signup(context, { email, password }) {
+    async signup(context, { email, password, fullname, username }) {
       const response = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -33,6 +35,11 @@ const store = createStore({
       );
       if (response) {
         context.commit("setUser", response.user);
+        await setDoc(doc(db, "testdata", email), {
+          fullname: fullname,
+          username: username,
+          password: password
+        })
       } else {
         throw new Error("signup failed");
       }
