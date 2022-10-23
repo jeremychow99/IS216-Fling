@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Main from "../views/Main.vue";
 import Signup from "../views/Signup.vue";
-import Login from "../views/Login.vue";
+import Login from "../components/login.vue";
 import Events from "../views/Events.vue";
 import Chats from "../views/Chats.vue";
 import ChatRoom from "../views/ChatRoom.vue";
 import Profile from "../views/Profile.vue"
 import signupFinalised from "../components/signupFinalised.vue"
+
 const routes = [
   {
     path: "/",
@@ -45,7 +46,7 @@ const routes = [
   },
   {
     path: "/signupFinal",
-    name: "signupfinalised",
+    name: "signupFinalised",
     component: signupFinalised,
   },
 ];
