@@ -7,11 +7,13 @@ npm install``` after every pull in case of updated dependencies.
 - [x] connect to firestore
 - [x] add and delete data from firestore
 - [x] user login using email and password
-- [ ] log out functionality
+- [x] log out functionality
 - [x] setup vue-router (view and component routing)
 - [x] add vuex store (state management)
+- [x] create user data linked to them when signup (v important)
+- [x] redirect user if not logged in
+- [ ] redirect user to login page after user logs out
 - [ ] add Google auth Login
-- [ ] create user data linked to them when signup (v important)
 - [ ] unique user sessions after login, linked to their data (cannot have user seeing their own profile on feed, or editing other user's data etc.)
 - [ ] store user profile data
 - [ ] profile pic image file upload (using firebase storage)

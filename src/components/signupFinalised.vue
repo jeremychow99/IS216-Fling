@@ -78,7 +78,7 @@ export default {
 
     const store = useStore();
     const router = useRouter();
-
+    console.log(store.state.user)
     const handleSubmit = async () => {
       try {
         await store.dispatch("signup", {
