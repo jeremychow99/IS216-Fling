@@ -1,6 +1,6 @@
 <template>
     <div class="col-10 col-sm-10 col-lg-10">
-        <div class="row align-items-center mt-3 position-sticky">
+        <div class="row align-items-center mt-3">
             <div class="col">
                 <strong class="fs-4">Home</strong>
             </div>
@@ -11,44 +11,91 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
-        <div class="row justify-content-around mt-3">
-            <!-- Contact cards should be in a new component -->
-            <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-3">
-                <div class="card mx-auto" style="width: 18rem;">
-                    <img class="card-img-top" src="https://placekitten.com/100/70/" alt="Card image cap" id="pic1">
-                    <div class="card-body">
-                        <h5 class="card-title" id="name1">Ah Mao</h5>
-                        <p class="card-text" id="details1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga sint hic velit? Fugiat temporibus voluptate quod, officia, nam harum repudiandae aliquam itaque iste beatae quam accusamus cumque quibusdam pariatur provident.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-3">
-                <div class="card mx-auto" style="width: 18rem;">
-                    <img class="card-img-top" src="https://placekitten.com/100/70/" alt="Card image cap" id="pic2">
-                    <div class="card-body">
-                        <h5 class="card-title" id="name2">Ah Gou</h5>
-                        <p class="card-text" id="details2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quae porro sunt maiores velit ratione totam vel labore sed ipsa, ex quas nulla exercitationem debitis quasi. Expedita minima unde voluptate.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-3">
-                <div class="card mx-auto" style="width: 18rem;">
-                    <img class="card-img-top" src="https://placekitten.com/100/70/" alt="Card image cap" id="pic3">
-                    <div class="card-body">
-                        <h5 class="card-title" id="name3">Card title</h5>
-                        <p class="card-text" id="details3">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <!-- CARDS ROW -->
-            
+        <div class="row mt-3">
+            <profilecard 
+                v-for="user in users" 
+                :key="user.id"
+                :name="user.name"
+                :major="user.major"
+                :year="user.year"
+                :interests="user.interests"
+            />           
         </div>
         
 
     </div>
 </template>
+
+<script>
+import profilecard from '../components/profilecard.vue'
+
+export default {
+    components: {
+        profilecard
+    },
+
+    data() {
+        return {
+            // Array to store all users in database
+            // To Include img src as well
+            users: [
+                {
+                    id: 'sclim.2021@smu.edu.sg',
+                    name: 'Lim Seow Chong',
+                    major: 'Information Systems',
+                    year: '2',
+                    interests: [
+                        'Data Science',
+                        'Artificial Intelligence',
+                        'Mathematics',
+                        'Software Engineering'
+                    ]
+                },
+                {
+                    id: 'sktam.2020@smu.edu.sg',
+                    name: 'Tam Siao Kia',
+                    major: 'Computer Science',
+                    year: '3',
+                    interests: [
+                        'Cyber Security',
+                        'Software Engineering',
+                        'Cloud Computing',
+                        'Blockchain',
+                        'Web 3.0'                        
+                    ]
+                },
+                {
+                    id: 'ctee.2022@smu.edu.sg',
+                    name: 'Clement Tee',
+                    major: 'Economics',
+                    year: '1',
+                    interests: [
+                        'Econometrics',
+                        'Business Intelligence',
+                        'FinTech',
+                        'Investment Banking'                        
+                    ]
+                },
+                {
+                    id: 'mteo.2019@smu.edu.sg',
+                    name: 'Michelle Teo',
+                    major: 'Business Management',
+                    year: '4',
+                    interests: [
+                        'Entrepreneurship',
+                        'Management',
+                        'Marketing'
+                    ]
+                }
+            ]
+            
+        }
+    },
+
+    computed: {
+        displayUsers() {
+            return this.users
+        }
+    }
+}
+</script>

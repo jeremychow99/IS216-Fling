@@ -11,33 +11,33 @@
       <div class="my-3">
         <router-link class="btn btn-default" :to="{ name: 'Home' }">
           <i class="fa-solid fa-house-user fs-3"></i>
-          <h5 class="nav-title">Home</h5>
+          <h6 class="nav-title">Home</h6>
         </router-link>
       </div>
 
       <div class="my-3">
         <router-link class="btn btn-default" :to="{ name: 'Events' }">
           <i class="fa-solid fa-calendar-days fs-3"></i>
-          <h5 class="nav-title">Events</h5>
+          <h6 class="nav-title">Events</h6>
         </router-link>
       </div>
 
       <div class="my-3">
         <router-link class="btn btn-default" :to="{ name: 'Chats' }">
           <i class="fa-solid fa-message fs-3"></i>
-          <h5 class="nav-title">Chats</h5>
+          <h6 class="nav-title">Chats</h6>
         </router-link>
       </div>
 
       <div class="my-3">
         <router-link class="btn btn-default" :to="{ name: 'Profile' }">
           <i class="fa-solid fa-user fs-3"></i>
-          <h5 class="nav-title">Profile</h5>
+          <h6 class="nav-title">Profile</h6>
         </router-link>
       </div>
       <div class="my-3">
         <router-link class="btn btn-default" :to="{ name: 'signupFinalised' }">
-          <h5 class="nav-title">Signup Page</h5>
+          <h6 class="nav-title">Signup Page</h6>
         </router-link>
       </div>
 
@@ -54,13 +54,13 @@
             <img
               src="https://placekitten.com/30/30"
               class="img-fluid"
-              style="border-radius: 50%"
+              style="border-radius: 60%"
             />
           </a>
         </button>
       </div>
       <!-- Replace with username -->
-      <p class="fs-6 fw-light position-absolute" style="bottom: 15px">@tanxx</p>
+      <p class="fs-6 fw-light position-absolute" style="bottom: 16px">@tanxx</p>
     </div>
   </div>
 </template>

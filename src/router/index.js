@@ -59,11 +59,11 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(async (to, from) => {
-  if(store.state.user == null && to.name !== 'signupFinalised'){
-    console.log('not logged in')
-    return { name: 'signupFinalised' }
-  }
-})
+// router.beforeEach(async (to, from) => {
+//   if(store.state.user == null && to.name !== 'signupFinalised'){
+//     console.log('not logged in')
+//     return { name: 'signupFinalised' }
+//   }
+// })
 
 export default router;
