@@ -40,6 +40,11 @@
           <h6 class="nav-title">Signup Page</h6>
         </router-link>
       </div>
+      <div class="my-3">
+        <router-link class="btn btn-default" :to="{ name: 'Login' }">
+          <h6 class="nav-title">Login Page</h6>
+        </router-link>
+      </div>
 
       <div class="my-3">
         <button @click="logoutFunc">logout</button>
@@ -68,15 +73,18 @@
 <script>
 import { ref } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   setup() {
     const error = ref(null);
     const store = useStore();
-
+    const router = useRouter();
     const logoutFunc = async () => {
       try {
         await store.dispatch("logout");
-      } catch (err) {
+        router.push("/Login");
+      }
+      catch (err) {
         error.value = err.message;
       }
     };
