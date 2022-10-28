@@ -1,7 +1,9 @@
 <template>
-  <div class="row">
-    <Navbar v-if='this.$store.state.user' class='col-2'/>
-    <router-view class='col-10'/>
+  <div class="container-fluid">
+    <div class="row flex-nowrap">
+      <Navbar v-if='this.$store.state.user' class='col-2'/>
+      <router-view class='col'/>
+    </div>
   </div>
 </template>
 
