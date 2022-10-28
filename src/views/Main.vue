@@ -1,19 +1,22 @@
 <template>
     <div class="col-10 col-sm-10 col-lg-10">
-        <div class="row align-items-center mt-3">
-            <div class="col">
-                <strong class="fs-4">Home</strong>
+        <div class="row align-items-center my-2">
+            
+            <div id="title" class="col-2  text-center">
+                <strong class="fs-3">Home</strong>
+            </div>
+            
+            <div class="col-10">
+                <input type="text" class="form-control w-75 mx-auto rounded-pill my-4 fontAwesome" placeholder="&#xf002; Search for People..." aria-label="search" aria-describedby="button-search" v-model="name_filter">
             </div>
         </div>
-        <div class="row align-items-center mt-3">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search for People/Events" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
+
+        <hr>
+        
+
         <div class="row mt-3">
             <profilecard 
-                v-for="user in users" 
+                v-for="user in displayUsers" 
                 :key="user.id"
                 :name="user.name"
                 :major="user.major"
@@ -87,15 +90,42 @@ export default {
                         'Marketing'
                     ]
                 }
-            ]
+            ],
+            name_filter: ''
             
         }
     },
 
     computed: {
         displayUsers() {
-            return this.users
+            // Filtering
+            if (this.name_filter.length) {
+
+                let user_arr = []
+                this.users.forEach(user => {
+                    if (user.name.includes(this.name_filter)) {
+                        user_arr.push(user)
+                    }
+                })
+
+                return user_arr
+
+            } else {
+
+                return this.users
+
+            }            
         }
+    },
+
+    setup() {
+        // Query all users and append to users array
     }
 }
 </script>
+
+<style>
+    .fontAwesome {
+        font-family: 'Helvetica', FontAwesome, sans-serif;
+    }
+</style>
