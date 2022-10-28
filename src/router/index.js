@@ -41,7 +41,7 @@ const routes = [
     component: ChatRoom,
   },
   {
-    path: "/profile",
+    path: "/profile/:id",
     name: "Profile",
     component: Profile,
   },
@@ -59,11 +59,11 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach(async (to, from) => {
-//   if(store.state.user == null && to.name !== 'signupFinalised'){
-//     console.log('not logged in')
-//     return { name: 'signupFinalised' }
-//   }
-// })
+router.beforeEach(async (to, from) => {
+  if(store.state.user == null && to.name !== 'Login'){
+    console.log('not logged in')
+    return { name: 'Login' }
+  }
+})
 
 export default router;

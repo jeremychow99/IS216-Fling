@@ -15,10 +15,11 @@
 
             <div class="row">
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary w-100" @click="view_profile">View Profile</button>
+                    <!-- Use router-link -->
+                    <router-link class="btn btn-outline-primary w-100" :to="{ name: 'Profile', params: { id: this.$.vnode.key}}">View Profile</router-link>
                 </div>
                 <div class="col-6">
-                    <button type="button" class="btn btn-success w-100" @click="message">Message</button>
+                    <button type="button" class="btn btn-outline-success w-100" @click="message">Message</button>
                 </div>
             </div>
             
@@ -59,14 +60,47 @@
 </template>
 
 <script>
+import { getDocs, addDoc, query, collection, where } from "firebase/firestore";
+import { db } from "../config";
+
 export default {
     props: ['name', 'major', 'year', 'interests'],
     methods: {
-        view_profile() {
+        async message() {
+            // Check if convo already exist
+            // Sorted Participant Array to ensure that the order is also the same for querying purposes
 
-        },
-        message() {
+            let participants = [this.$.vnode.key, this.$store.state.user.email].sort() 
+            let convo_id = "";
+            const q = query(collection(db, "convos"), where("participants", "==", participants));
 
+            // console.log("Querying convo...")
+            const querySnapshot = await getDocs(q);
+
+            console.log("Checking convo...")
+            if (!querySnapshot.empty) {
+                console.log("Convo Found!")
+                // Convo Exist, Store Convo Id
+                querySnapshot.forEach((convo) => {
+                    convo_id = convo.id
+                    console.log(convo.id, "=>", convo.data())
+                })
+
+            } else {
+                console.log("Creating New Convo")
+                // Convo Doesnt Exist, Create New Convo and Store Convo Id
+                const convoRef = await addDoc(collection(db, "convos"), {
+                    participants: participants,
+                    lastmsgtime: Date.now()
+                });
+
+                convo_id = convoRef.id
+                console.log("Newly Created Convo: ", convoRef.id)
+                
+            }
+
+            // Redict to Chatroom
+            this.$router.push({ name: 'Chatroom', params: { id: convo_id} })           
         }
     }
 }

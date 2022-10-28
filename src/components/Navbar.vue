@@ -28,9 +28,9 @@
           <h6 class="nav-title">Chats</h6>
         </router-link>
       </div>
-
+      
       <div class="my-3">
-        <router-link class="btn btn-default" :to="{ name: 'Profile' }">
+        <router-link class="btn btn-default" :to="{ name: 'Profile' ,params: { id: this.$store.state.user.email} }">
           <i class="fa-solid fa-user fs-3"></i>
           <h6 class="nav-title">Profile</h6>
         </router-link>

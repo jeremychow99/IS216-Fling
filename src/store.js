@@ -13,7 +13,7 @@ import { db, auth } from "./config";
 const store = createStore({
   state: {
     //The user state will initially be null. After login, this state will be updated
-    user: null,
+    user: null
   },
   mutations: {
     //Mutation to update the user state
