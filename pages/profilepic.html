@@ -1,40 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Picture</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://unpkg.com/vue@next"></script>
 </head>
+
 <body>
-    <!--
-        how to upload images using vue: 
-        https://www.digitalocean.com/community/tutorials/how-to-handle-file-uploads-in-vue-2
-    -->
+
     <div class="container mt-3 col-lg-6">
         <h1 class="text-center">
             Setting Up Your Profile
         </h1>
         <!--preview of profile picture-->
-        <img src="https://placekitten.com/300/300" class="mx-auto d-block my-2" style="border-radius: 50%">
+        <img id="previewProfile" src="https://placekitten.com/300/300" class="mx-auto d-block my-2"
+            style="border-radius: 50%">
 
 
         <div class="mb-3">
             <div class="input-group">
-                <input type="file" class="form-control" id="formFile" aria-describedby="inputGroupFileAddon04" accept="image/*" aria-label="Upload">
-                <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Upload</button>
-            </div>    
+                <input type="file" class="form-control" id="formFile" aria-describedby="inputGroupFileAddon04"
+                    accept="image/*" aria-label="Upload" onchange="showPreview(event);">
+                <button class="btn btn-outline-primary" type="button" id="inputGroupFileAddon04">Upload</button>
+            </div>
         </div>
 
-        <div class="links" style="display: flex; justify-content: space-between;">
-            <a href="interests.html">Not now</a>
-            <button class="rounded btn btn-primary" onclick="location.href='interests.html'">Next</button>
+        <div class="col-md my-3">
+            <div class="form-floating">
+                <select class="form-select" id="major">
+                    <option value="accountancy">Accountancy</option>
+                    <option value="businessManagement">Business Management</option>
+                    <option value="economics">Economics</option>
+                    <option value="computerScience">Computer Science</option>
+                    <option value="informationSystems">Information Systems</option>
+                    <option value="socialSciences">Social Sciences</option>
+                </select>
+                <label for="major">Major</label>
+            </div>
         </div>
+
+        <div class="col-md mb-3">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="userBio"
+                    style="height: 100px"></textarea>
+                <label for="userBio">Bio</label>
+            </div>
+        </div>
+
+        <div class="doneBtn text-center mb-3">
+            <button class="rounded btn btn-primary" id="doneBtn" onclick="location.href='interests.html'">Next</button>
+        </div>
+
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous">
+    </script>
 </body>
+
 </html>
