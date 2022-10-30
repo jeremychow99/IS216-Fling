@@ -47,6 +47,12 @@
       </div>
 
       <div class="my-3">
+        <router-link class="btn btn-default text-white" :to="{ name: 'Setup' }">
+          <h6 class="nav-title">Profile Setup</h6>
+        </router-link>
+      </div>
+
+      <div class="my-3">
         <button @click="logoutFunc">logout</button>
       </div>
 

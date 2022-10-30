@@ -8,6 +8,7 @@ import Chats from "../views/Chats.vue";
 import ChatRoom from "../views/ChatRoom.vue";
 import Profile from "../views/Profile.vue"
 import signupFinalised from "../components/signupFinalised.vue"
+import profilepic from "../components/profilepic.vue"
 
 const routes = [
   {
@@ -50,6 +51,11 @@ const routes = [
     name: "signupFinalised",
     component: signupFinalised,
   },
+  {
+    path: "/setup",
+    name: "Setup",
+    component: profilepic
+  }
 ];
 
 

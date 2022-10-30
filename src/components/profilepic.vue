@@ -4,7 +4,7 @@
             Setting Up Your Profile
         </h1>
         <!--preview of profile picture-->
-        <img id="previewProfile" src="https://placekitten.com/300/300" class="mx-auto d-block my-2"
+        <img id="previewProfile" :src=userProfile class="mx-auto d-block my-2"
             style="border-radius: 50%" @change="showPreview($event);">
 
         <!--upload pic function-->
@@ -12,7 +12,7 @@
             <div class="input-group">
                 <input type="file" class="form-control" id="formFile" aria-describedby="inputGroupFileAddon04"
                     accept="image/*" aria-label="Upload" @change="onFileChange">
-                <button class="btn btn-outline-secondary" type="button" id="uploadbtn" @click="clickTrue">
+                <button class="btn btn-outline-secondary" type="button" id="uploadbtn" @click="uploadImage">
                     Upload
                 </button>
             </div>
@@ -56,12 +56,17 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 
 import { db } from "@/config";
 
-import { getAuth } from "firebase/auth";
+import { getAuth, updateProfile } from "firebase/auth";
 
 export default {
     data() {
         return {
-            filename: "",
+            file: null,
+        }
+    },
+    computed: {
+        userProfile() {
+            return getAuth().currentUser.photoURL
         }
     },
     methods: {
@@ -80,19 +85,18 @@ export default {
             if (!files.length)
                 return;
             console.log(files)
-            this.filename = files[0].name
-            console.log(this.filename)
+            this.file = files[0]
+            console.log(this.file)
         },
 
-        clickTrue() {
-
-            var file = document.getElementById("formFile")
+        uploadImage() {
+            console.log(this.file)
 
             const storage = getStorage();
 
-            const storageRef = ref(storage, "images/" + this.filename);
+            const storageRef = ref(storage, "images/" + this.file.name);
 
-            const uploadTask = uploadBytesResumable(storageRef, file);
+            const uploadTask = uploadBytesResumable(storageRef, this.file);
 
             // To upload and obtain download URL
             uploadTask.on('state_changed',
@@ -140,10 +144,14 @@ export default {
                             if (user) {
                                 // User is signed in, see docs for a list of available properties
                                 // https://firebase.google.com/docs/reference/js/firebase.User
-                                const email = user.email;
-                                console.log(email)
-                                const testRef = db.collection('profileDetails').doc('test@gmail.com');
-                                const res = await testRef.update({photoURL: downloadURL});
+                                updateProfile(user, {
+                                    photoURL: downloadURL
+                                }).then(() => {
+                                    console.log("Profile Updated")
+                                    console.log(user.photoURL)
+                                }).catch((error) => {
+                                    console.log(error.message)
+                                })
 
                             } else {
                                 // User is signed out
