@@ -31,6 +31,8 @@
 
 <script>
 import profilecard from '../components/profilecard.vue'
+import { db } from "../config";
+import { getDocs, collection } from "firebase/firestore"
 
 export default {
     components: {
@@ -117,9 +119,33 @@ export default {
             }            
         }
     },
+    // Onmounted
+    async mounted() {
 
-    setup() {
-        // Query all users and append to users array
+        const querySnapshot = await getDocs(collection(db, "profileDetails"));
+        querySnapshot.forEach((user) => {
+            // console.log(user.id, " => ", user.data());
+
+            if (user.id != this.$store.state.user.email) {
+
+                const userData = user.data()
+
+                // console.log("Interests: ", user.data().interests)
+                const userObj = {
+                    id: user.id,
+                    name: userData.name,
+                    major: userData.major,
+                    year: userData.year,
+                    interests: userData.interests
+                    // img: IMAGEURL
+                }
+
+                this.users.push(userObj)
+                
+            }
+
+        });
+
     }
 }
 </script>
