@@ -73,7 +73,8 @@ export default {
             // Check if convo already exist
             // Sorted Participant Array to ensure that the order is also the same for querying purposes
 
-            let participants = [this.$.vnode.key, this.$store.state.user.email].sort() 
+            let participants = [this.$.vnode.key, this.$store.state.user.email].sort()
+
             let convo_id = "";
             const q = query(collection(db, "convos"), where("participants", "==", participants));
 
@@ -92,8 +93,15 @@ export default {
             } else {
                 console.log("Creating New Convo")
                 // Convo Doesnt Exist, Create New Convo and Store Convo Id
+
+                let convo_users = {}
+                // TEST: To be changed to user details
+                convo_users["test@gmail.com"] = "Alex Tan" 
+                convo_users["sclim.2021@scis.smu.edu.sg"] = "Martin"
+
                 const convoRef = await addDoc(collection(db, "convos"), {
                     participants: participants,
+                    convo_users: convo_users,
                     lastmsgtime: Date.now()
                 });
 

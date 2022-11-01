@@ -13,25 +13,16 @@
         <!-- Main Chats -->
         <div class="row mt-3">
             <ul v-if="convos.length > 0" class="list-group">
-                <router-link class="list-group-item" :to="{ name: 'Chatroom', params: { id: 'test'}}">
-                    <div>
-                        <!-- Follow tele layout? -->
-                        <!-- Profile Image -->
-                        <!-- Name -->
-                        <!-- Last convo time? -->
-                    </div>
-                </router-link>
                 <convo
                     v-for="convo in convos"
                     :key="convo.id"
-                    :userObj="convo.receiver"
+                    :user="convo.receiver"
                     :lastmsgtime="convo.lastmsgtime"
                 />
             </ul>
             <div v-else>
                 No Conversations Found!
             </div>
-            {{ convos }}
         </div>
     </div>
 </template>
@@ -39,7 +30,7 @@
 <script>
 import convo from "../components/convo.vue"
 import { db } from "../config";
-import { getDocs, collection, query, where, getDoc, doc } from "firebase/firestore"
+import { getDocs, collection, query, where } from "firebase/firestore"
 
 export default {
     components: {
@@ -76,30 +67,6 @@ export default {
     },
 
     methods: {
-        async loadUsers() {
-
-            console.log("Loading Users")
-            this.convos.forEach((convo, index) => {
-
-                console.log(convo)
-                let userID = convo.participants.filter((ele) => ele != this.$store.state.user.email)[0]
-
-                console.log("Loading: ", userID)
-
-                this.getUser(userID, index);
-                
-            })
-
-        },
-
-        async getUser(userID, index) {
-
-            const userRef = doc(db, "profileDetails", userID);
-            const docSnap = await getDoc(userRef);
-
-            this.convos[index].receiver = docSnap.data()
-        },
-
         async loadConvos() {
 
             const convoQuery = query(collection(db, "convos"), where("participants", "array-contains", this.$store.state.user.email))
@@ -110,10 +77,21 @@ export default {
 
                 const convoData = convo.data()
 
+                // Person who user is talking to in the conversation
+                let convo_participants = convoData.convo_users
+                let receiver = ''
+
+                for (let user in convo_participants) {
+                    if (user != this.$store.state.user.email) {
+                        receiver = convo_participants[user]
+                    }
+                }
+
                 const convoObj = {
                     id: convo.id,
                     lastmsgtime: convoData.lastmsgtime,
-                    participants: convoData.participants
+                    participants: convoData.participants,
+                    receiver: receiver
                 }
 
                 this.convos.push(convoObj)
@@ -128,7 +106,6 @@ export default {
     async mounted() {
 
         await this.loadConvos()
-        await this.loadUsers()
 
     }
 }

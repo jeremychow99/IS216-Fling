@@ -1,11 +1,11 @@
 <template>
-    <router-link class="list-group-item" :to="{ name: 'Chatroom', params: { id: 'test'}}">
+    <router-link class="list-group-item" :to="{ name: 'Chatroom', params: { id: this.$.vnode.key}}">
         <div>
             <!-- Follow tele layout? -->
             <!-- Profile Image -->
             <!-- Name -->
             <!-- Last convo time? -->
-            {{ userObj }}
+            {{ user }}
 
             {{ lastmsgtime }}
         </div>
@@ -14,6 +14,6 @@
 
 <script>
 export default {
-    props: ['userObj', 'lastmsgtime'],
+    props: ['user', 'lastmsgtime'],
 }
 </script>
