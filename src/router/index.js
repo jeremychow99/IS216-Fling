@@ -66,9 +66,29 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from) => {
-  if(store.state.user == null && to.name !== 'Login'){
+  if (store.state.user == null && to.name !== 'Login' && to.name !== 'signupFinalised') {
     console.log('not logged in')
     return { name: 'Login' }
+  }
+})
+
+import { db } from "@/config";
+import { doc, getDoc } from "firebase/firestore";
+router.beforeEach(async (to, from) => {
+  if (store.state.user != null) {
+    const docRef = doc(db, "testdata", store.state.user.email);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+
+      let userData = docSnap.data()
+      if (to.name !== 'Setup' && (userData.profilePicURL == "" || userData.bio == "" || userData.major =="")){
+
+        return { name: 'Setup' }
+      }
+
+    } else {
+      console.log("No such document!");
+    }
   }
 })
 

@@ -33,7 +33,7 @@
 
     <div class="container border border-dark mt-3">
       <div class="row text-center">
-        <span>Don't have an account? <a href="signup.html">Sign Up</a> </span>
+        <span>Don't have an account? <router-link :to="{ name: 'signupFinalised' }">Sign Up</router-link> </span>
       </div>
     </div>
   </div>

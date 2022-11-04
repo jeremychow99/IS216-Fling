@@ -22,7 +22,7 @@ const store = createStore({
     setUser(state, payload) {
       state.user = payload;
       //Log out the user state
-      console.log(state.user);
+      console.log(state.user.email);
       console.log("user state changeed");
     },
   },
@@ -38,7 +38,10 @@ const store = createStore({
         await setDoc(doc(db, "testdata", email), {
           fullname: fullname,
           username: username,
-          password: password
+          password: password,
+          major: "",
+          bio: "",
+          profilePicURL: ""
         })
       } else {
         throw new Error("signup failed");
