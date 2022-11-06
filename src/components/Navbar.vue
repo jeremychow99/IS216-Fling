@@ -1,79 +1,62 @@
 <template>
-  <div class="col-auto col-sm-2 col-lg-2 px-0 mx-0">
-    <div
-      class="d-flex col-md-2 flex-column border-end position-fixed "
-      style="height: 100%; width: 16%; align-items: center"
-      id="left-navbar"
-    >
-      <div>
-        <img src="public/favicon.ico" class="fs-3 mt-3" />
-      </div>
-      <div class="my-3">
-        <router-link class="btn btn-default" :to="{ name: 'Home' }">
-          <i class="fa-solid fa-house-user fs-3"></i>
-          <h6 class="nav-title">Home</h6>
-        </router-link>
-      </div>
-
-      <div class="my-3">
-        <router-link class="btn btn-default" :to="{ name: 'Events' }">
-          <i class="fa-solid fa-calendar-days fs-3"></i>
-          <h6 class="nav-title">Events</h6>
-        </router-link>
-      </div>
-
-      <div class="my-3">
-        <router-link class="btn btn-default" :to="{ name: 'Chats' }">
-          <i class="fa-solid fa-message fs-3"></i>
-          <h6 class="nav-title">Chats</h6>
-        </router-link>
-      </div>
-      
-      <div class="my-3">
-        <router-link class="btn btn-default" :to="{ name: 'Profile' ,params: { id: this.$store.state.user.email} }">
-          <i class="fa-solid fa-user fs-3"></i>
-          <h6 class="nav-title">Profile</h6>
-        </router-link>
-      </div>
-      <div class="my-3">
-        <router-link class="btn btn-default" :to="{ name: 'signupFinalised' }">
+  <div>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link class="btn btn-default" :to="{ name: 'Home' }">
+              <i class="fa-solid fa-house-user fs-3"></i>
+              <h6 class="nav-title">Home</h6>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="btn btn-default" :to="{ name: 'Events' }">
+              <i class="fa-solid fa-calendar-days fs-3"></i>
+              <h6 class="nav-title">Events</h6>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="btn btn-default" :to="{ name: 'Chats' }">
+              <i class="fa-solid fa-message fs-3"></i>
+              <h6 class="nav-title">Chats</h6>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="btn btn-default" :to="{ name: 'signupFinalised' }">
           <h6 class="nav-title">Signup Page</h6>
         </router-link>
-      </div>
-      <div class="my-3">
-        <router-link class="btn btn-default" :to="{ name: 'Login' }">
+          </li>
+          <li class="nav-item">
+            <router-link class="btn btn-default" :to="{ name: 'Login' }">
           <h6 class="nav-title">Login Page</h6>
         </router-link>
-      </div>
-
-      <div class="my-3">
-        <router-link class="btn btn-default" :to="{ name: 'Setup' }">
+          </li>
+          <li class="nav-item">
+            <router-link class="btn btn-default" :to="{ name: 'Setup' }">
           <h6 class="nav-title">Profile Setup</h6>
         </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="btn btn-default" :to="{ name: 'Login' }"><button @click="logoutFunc">logout</button></router-link>
+          </li>
+        </ul>
       </div>
-
-      <div class="my-3">
-        <router-link class="btn btn-default" :to="{ name: 'Login' }"><button @click="logoutFunc">logout</button></router-link>
-      </div>
-
-      <div class="profile_icon position-absolute fs-3" style="bottom: 60px">
-        <!-- PROFILE_PIC <font-awesome-icon icon="fa-solid fa-user" /> for Vue -->
-        <!-- REPLACE WITH PROFILE PICTURE -->
-        <button class="btn btn-default">
-          <!-- !TODO link change to profile -->
-          <a href="events.html">
-            <img
-              src="https://placekitten.com/30/30"
-              class="img-fluid"
-              style="border-radius: 60%"
-            />
-          </a>
-        </button>
-      </div>
-      <!-- Replace with username -->
-      <p class="fs-6 fw-light position-absolute" style="bottom: 16px">@tanxx</p>
     </div>
-  </div>
+  </nav>
+</div>
 </template>
 
 <script>
@@ -89,8 +72,7 @@ export default {
       try {
         await store.dispatch("logout");
         // router.push('login')
-      }
-      catch (err) {
+      } catch (err) {
         error.value = err.message;
       }
     };

@@ -1,17 +1,17 @@
 <template>
   <div class="container-fluid">
-    <div class="row flex-nowrap">
-      <Navbar v-if="this.$store.state.user" class="col-2" />
-      <router-view v-slot="{ Component }" class="col">
+    <Navbar v-if="this.$store.state.user" class="row" />
+
+      <router-view v-slot="{ Component }">
         <transition
           mode="out-in"
           enter-active-class="animate__animated animate__fadeIn"
           leave-active-class="animate__animated animate__fadeOut"
         >
-          <component :is="Component" />
+          <div><component :is="Component"/></div> 
+<!-- TRANSITIONS DONT WORK WHEN I PUT THE DIV TAG ABOVE, but if i dont the component doesnt appear -->
         </transition>
       </router-view>
-    </div>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="col-10 col-sm-10 col-lg-10">
+    <div>
         <div class="row align-items-center my-2">
             <div id="title" class="col-2  text-center">
                 <strong class="fs-3">Chats</strong>
@@ -31,10 +31,9 @@
 import convo from "../components/convo.vue"
 import { db } from "../config";
 import { getDocs, collection, query, where } from "firebase/firestore"
-
 export default {
     components: {
-        convo
+        convo,
     },
     data() {
         return {
