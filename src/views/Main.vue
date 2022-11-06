@@ -27,6 +27,7 @@
         
 
     </div>
+
 </template>
 
 <script>
@@ -154,4 +155,5 @@ export default {
     .fontAwesome {
         font-family: 'Helvetica', FontAwesome, sans-serif;
     }
+    
 </style>

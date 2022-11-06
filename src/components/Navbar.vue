@@ -1,7 +1,7 @@
 <template>
   <div class="col-auto col-sm-2 col-lg-2 px-0 mx-0">
     <div
-      class="d-flex col-md-2 flex-column border-end position-fixed bg-dark text-white"
+      class="d-flex col-md-2 flex-column border-end position-fixed "
       style="height: 100%; width: 16%; align-items: center"
       id="left-navbar"
     >
@@ -9,51 +9,51 @@
         <img src="public/favicon.ico" class="fs-3 mt-3" />
       </div>
       <div class="my-3">
-        <router-link class="btn btn-default text-white" :to="{ name: 'Home' }">
+        <router-link class="btn btn-default" :to="{ name: 'Home' }">
           <i class="fa-solid fa-house-user fs-3"></i>
           <h6 class="nav-title">Home</h6>
         </router-link>
       </div>
 
       <div class="my-3">
-        <router-link class="btn btn-default text-white" :to="{ name: 'Events' }">
+        <router-link class="btn btn-default" :to="{ name: 'Events' }">
           <i class="fa-solid fa-calendar-days fs-3"></i>
           <h6 class="nav-title">Events</h6>
         </router-link>
       </div>
 
       <div class="my-3">
-        <router-link class="btn btn-default text-white" :to="{ name: 'Chats' }">
+        <router-link class="btn btn-default" :to="{ name: 'Chats' }">
           <i class="fa-solid fa-message fs-3"></i>
           <h6 class="nav-title">Chats</h6>
         </router-link>
       </div>
       
       <div class="my-3">
-        <router-link class="btn btn-default text-white" :to="{ name: 'Profile' ,params: { id: this.$store.state.user.email} }">
+        <router-link class="btn btn-default" :to="{ name: 'Profile' ,params: { id: this.$store.state.user.email} }">
           <i class="fa-solid fa-user fs-3"></i>
           <h6 class="nav-title">Profile</h6>
         </router-link>
       </div>
       <div class="my-3">
-        <router-link class="btn btn-default text-white" :to="{ name: 'signupFinalised' }">
+        <router-link class="btn btn-default" :to="{ name: 'signupFinalised' }">
           <h6 class="nav-title">Signup Page</h6>
         </router-link>
       </div>
       <div class="my-3">
-        <router-link class="btn btn-default text-white" :to="{ name: 'Login' }">
+        <router-link class="btn btn-default" :to="{ name: 'Login' }">
           <h6 class="nav-title">Login Page</h6>
         </router-link>
       </div>
 
       <div class="my-3">
-        <router-link class="btn btn-default text-white" :to="{ name: 'Setup' }">
+        <router-link class="btn btn-default" :to="{ name: 'Setup' }">
           <h6 class="nav-title">Profile Setup</h6>
         </router-link>
       </div>
 
       <div class="my-3">
-        <button @click="logoutFunc">logout</button>
+        <router-link class="btn btn-default" :to="{ name: 'Login' }"><button @click="logoutFunc">logout</button></router-link>
       </div>
 
       <div class="profile_icon position-absolute fs-3" style="bottom: 60px">
@@ -88,7 +88,7 @@ export default {
     const logoutFunc = async () => {
       try {
         await store.dispatch("logout");
-        router.push("/Login");
+        // router.push('login')
       }
       catch (err) {
         error.value = err.message;
