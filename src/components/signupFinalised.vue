@@ -1,53 +1,39 @@
 <template>
-  <div class="container w-60 m-auto col-lg-6">
-    <div class="border border-dark mt-5">
-      <div class="row">
-        <h1 class="display-2 text-center">Fling</h1>
-      </div>
+  <div class="container w-100 m-auto">
+    <div class="row">
 
+    <div class="col-xs-3 col-lg-1"></div>
+
+    <div class="col-xs-3 col-lg-4 justify-content-center">
+      <iframe src="https://embed.lottiefiles.com/animation/87482" class="me-2 h-100"></iframe>
+    </div>
+
+    <div class="mt-5 col-xs-9 col-lg-6">
+      <h1 class="display-2 text-center">Fling</h1>
       <div class="row px-5">
-        <button class="rounded btn btn-dark w-90">Log In with Google</button>
+        <button class="rounded w-80 text-light p-2" style="background-color: #234db8">Log In with
+          Google</button>
       </div>
       <form @submit.prevent="handleSubmit">
         <div class="row">
           <!--make the text lighter-->
-          <span class="text-center my-2">OR</span>
+          <span class="text-center my-2 text-secondary">OR</span>
         </div>
 
         <div class="px-5 mb-3">
           <!--email-->
-          <label for="email" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            placeholder="name@example.com"
-            v-model="email" required 
-          />
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="name@example.com" v-model="email" required />
         </div>
 
         <div class="px-5 mb-3">
           <label for="fullname" class="form-label">Full name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="fullname"
-            placeholder="John Doe"
-            v-model="fullname" required 
-          />
+          <input type="text" class="form-control" id="fullname" placeholder="John Doe" v-model="fullname" required />
         </div>
 
         <div class="px-5 mb-3">
           <label for="username" class="form-label">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            placeholder="johndoe"
-            v-model="username" required 
-          />
+          <input type="text" class="form-control" id="username" placeholder="johndoe" v-model="username" required />
         </div>
 
         <div class="px-5 mb-3">
@@ -59,6 +45,7 @@
           <button class="rounded btn btn-primary w-90">Sign Up</button>
         </div>
       </form>
+    </div>
     </div>
   </div>
 </template>
@@ -92,7 +79,7 @@ export default {
         error.value = err.message;
       }
     };
-    return { handleSubmit,email, password, fullname, username, error };
+    return { handleSubmit, email, password, fullname, username, error };
   },
 };
 </script>
