@@ -82,12 +82,10 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
 import store from "../store";
 import { db } from "@/config";
 import { getAuth, updateProfile } from "firebase/auth";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 export default {
   data() {
