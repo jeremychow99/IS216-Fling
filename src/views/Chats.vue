@@ -10,6 +10,7 @@
             </div>
         </div>
 
+        <hr>
         <!-- Main Chats -->
         <div class="row mt-3">
             <ul v-if="convos.length > 0" class="list-group">
@@ -21,7 +22,7 @@
                 />
             </ul>
             <div v-else>
-                No Conversations Found!
+                <h1 class="display-2 text-center">No Conversations Found!</h1>
             </div>
         </div>
     </div>
@@ -103,9 +104,9 @@ export default {
         }
     },
 
-    async mounted() {
+    created() {
 
-        await this.loadConvos()
+        this.loadConvos()
 
     }
 }

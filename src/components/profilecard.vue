@@ -95,9 +95,9 @@ export default {
                 // Convo Doesnt Exist, Create New Convo and Store Convo Id
 
                 let convo_users = {}
-                // TEST: To be changed to user details
-                convo_users["test@gmail.com"] = "Alex Tan" 
-                convo_users["sclim.2021@scis.smu.edu.sg"] = "Martin"
+                // TEST: To be changed to user names
+                convo_users[this.$.vnode.key] = "Alex Tan" 
+                convo_users[this.$store.state.user.email] = "Martin"
 
                 const convoRef = await addDoc(collection(db, "convos"), {
                     participants: participants,

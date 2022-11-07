@@ -1,12 +1,11 @@
 <template>
-    <router-link class="list-group-item" :to="{ name: 'Chatroom', params: { id: this.$.vnode.key}}">
+    <router-link class="list-group-item"  :to="{ name: 'Chatroom', params: { id: this.$.vnode.key, userName: this.user }}">
         <div>
             <!-- Follow tele layout? -->
             <!-- Profile Image -->
             <!-- Name -->
             <!-- Last convo time? -->
             {{ user }}
-
             {{ lastmsgtime }}
         </div>
     </router-link>
