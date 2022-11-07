@@ -1,5 +1,7 @@
 <template>
-  <div class="container">
+  <div><LoadingScreen v-if="isLoading"></LoadingScreen></div>
+  <Navbar @logout="logoutUser" v-if="!isLoading" />
+  <div v-if="!isLoading" class="container">
     <div class="row align-items-center my-2">
       <div id="title" class="col-2 text-center">
         <strong class="fs-3">Home</strong>
@@ -37,12 +39,21 @@ import profilecard from "../components/profilecard.vue";
 import { db } from "../config";
 import { getDocs, collection } from "firebase/firestore";
 import Navbar from "../components/Navbar.vue";
+import LoadingScreen from "../components/loading.vue";
+
 export default {
   components: {
     profilecard,
     Navbar,
+    LoadingScreen,
   },
-
+  methods: {
+    logoutUser: function () {
+      setTimeout(() => {
+        this.isLoading = true;
+      }, 1000);
+    },
+  },
   data() {
     return {
       // Array to store all users in database
@@ -94,6 +105,7 @@ export default {
         },
       ],
       name_filter: "",
+      isLoading: true,
     };
   },
 
@@ -116,6 +128,9 @@ export default {
   },
   // Onmounted
   async mounted() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 500);
     const querySnapshot = await getDocs(collection(db, "profileDetails"));
     querySnapshot.forEach((user) => {
       // console.log(user.id, " => ", user.data());

@@ -2,13 +2,13 @@
     <div class="col-xl-3 col-sm-6 mb-4 text-center">
         <div class="bg-light rounded shadow-sm py-3 px-4"><img src="https://bootstrapious.com/i/snippets/sn-team/teacher-4.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
             <div style="height:70px">
-                <h5 class="mb-2">{{ name }}</h5><span class="small text-uppercase text-muted" style="font-size:12px;">{{ major }} Major (Y{{ year }})</span>
+                <h5 class="mb-2">{{ name }}</h5><span class="small text-uppercase text-muted" style="font-size:12px;">Degree: {{ major }} (Year {{ year }})</span>
             </div>
             
 
             <hr>
 
-            <h6>Interest</h6>
+            <h6>Interests</h6>
             <div style="height:120px">
                 <span v-for="(interest, index) in interests" :key="index" class="badge rounded-pill bg-dark mx-1">{{ interest }}</span>
             </div>

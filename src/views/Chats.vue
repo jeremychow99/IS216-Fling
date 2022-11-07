@@ -1,4 +1,5 @@
 <template>
+    <Navbar/>
     <div class="container">
         <div class="row align-items-center my-2">
             <div id="title" class="col-2  text-center">
@@ -32,9 +33,11 @@
 import convo from "../components/convo.vue"
 import { db } from "../config";
 import { getDocs, collection, query, where } from "firebase/firestore"
+import Navbar from "../components/Navbar.vue";
 export default {
     components: {
         convo,
+        Navbar,
     },
     data() {
         return {
