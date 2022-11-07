@@ -37,7 +37,7 @@
           </div>
 
           <div class="row px-5">
-            <button @click="setLoad(); handleSubmit()" class="rounded btn btn-primary text-light">Log In</button>
+            <button class="rounded btn btn-primary text-light">Log In</button>
           </div>
           <div v-if="error">{{ error }}</div>
           <div class="row">
@@ -77,10 +77,10 @@ import LoadingScreen from "./loading.vue";
 
 export default {
   methods: {
-    setLoad: function(){
-      console.log('dwd')
-      this.isLoading=true
-    }
+    // setLoad: function(){
+    //   console.log('dwd')
+    //   this.isLoading=true
+    // }
   },
   mounted() {
     setTimeout(() => {

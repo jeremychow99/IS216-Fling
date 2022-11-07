@@ -130,7 +130,7 @@ export default {
   async mounted() {
     setTimeout(() => {
       this.isLoading = false;
-    }, 500);
+    }, 1000);
     const querySnapshot = await getDocs(collection(db, "profileDetails"));
     querySnapshot.forEach((user) => {
       // console.log(user.id, " => ", user.data());

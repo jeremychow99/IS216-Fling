@@ -4,12 +4,17 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  getAuth,
 } from "firebase/auth";
 
+const auth = getAuth();
 import { doc, setDoc } from "firebase/firestore";
 
-import { db, auth } from "./config";
-
+import { db} from "./config";
+auth.onAuthStateChanged(user => {
+  console.log(user+'hdwhdwh')
+  
+})
 const store = createStore({
   state: {
     //The user state will initially be null. After login, this state will be updated
@@ -31,6 +36,7 @@ const store = createStore({
   },
   actions: {
     async signup(context, { email, password, fullname, username }) {
+      
       const response = await createUserWithEmailAndPassword(
         auth,
         email,

@@ -76,7 +76,6 @@ router.beforeEach(async (to, from) => {
     const docRef = doc(db, "testdata", store.state.user.email);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-
       let userData = docSnap.data()
       if (to.name !== 'Setup' && (userData.profilePicURL == "" || userData.bio == "" || userData.major =="")){
         return { name: 'Setup' }
