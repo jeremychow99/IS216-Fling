@@ -50,7 +50,7 @@
         </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="btn btn-default" :to="{ name: 'Login' }"><button @click="logoutFunc">logout</button></router-link>
+            <router-link class="btn btn-default" :to="{ name: 'Login' }"><button @click="logoutFunc(); $emit('logout')">logout</button></router-link>
           </li>
         </ul>
       </div>

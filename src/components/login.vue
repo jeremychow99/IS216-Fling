@@ -1,66 +1,71 @@
 <template>
-    <div class="container w-60 m-auto col-lg-6">
-      <div class="container border border-dark mt-5">
-        <div class="row">
-          <h1 class="display-2 text-center">Fling</h1>
+  <div><LoadingScreen v-if="isLoading"></LoadingScreen></div>
+  <div v-if="!isLoading" class="container w-60 m-auto col-lg-6">
+    <div class="container rounded border border-dark mt-5">
+      <div class="row">
+        <h1 class="display-2 text-center">Fling</h1>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            class="img-fluid"
+            alt="Phone image"
+          />
         </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-              class="img-fluid"
-              alt="Phone image"
+        <form @submit.prevent="handleSubmit" class="col-lg-6">
+          <div class="px-5 mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              name="email"
+              v-model="email"
+              required
+              class="form-control"
             />
           </div>
-          <form @submit.prevent="handleSubmit" class="col-lg-6">
-            <div class="px-5 mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input
-                type="email"
-                name="email"
-                v-model="email"
-                required
-                class="form-control"
-              />
-            </div>
 
-            <div class="px-5 mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                name="password"
-                v-model="password"
-                required
-                class="form-control"
-              />
-            </div>
+          <div class="px-5 mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              name="password"
+              v-model="password"
+              required
+              class="form-control"
+            />
+          </div>
 
-            <div class="row px-5">
-              <button class="rounded btn btn-primary">Log In</button>
-            </div>
-            <div v-if="error">{{ error }}</div>
-            <div class="row">
-              <!--make the text lighter-->
-              <span class="text-center my-2">OR</span>
-            </div>
+          <div class="row px-5">
+            <button @click="setLoad(); handleSubmit()" class="rounded btn btn-primary text-light">Log In</button>
+          </div>
+          <div v-if="error">{{ error }}</div>
+          <div class="row">
+            <!--make the text lighter-->
+            <span class="text-center my-2">OR</span>
+          </div>
 
-            <div class="row px-5 mb-3">
-              <button class="rounded btn btn-dark">Log In with Google</button>
-            </div>
-            <div class="row text-center">
-              <span
-                >Don't have an account?
-                <router-link :to="{ name: 'signupFinalised' }"
-                  >Sign Up</router-link
-                >
-              </span>
-            </div>
-          </form>
-        </div>
+          <div class="row px-5 mb-3">
+            <button
+              class="rounded btn text-light"
+              style="background-color: #55acee"
+            >
+              <i class="fab fa-google me-2"></i>Log In with Google
+            </button>
+          </div>
+          <div class="row text-center">
+            <span
+              >Don't have an account?
+              <router-link :to="{ name: 'signupFinalised' }"
+                >Sign Up</router-link
+              >
+            </span>
+          </div>
+        </form>
       </div>
     </div>
-    <!--end of container containing user login-->
-
+  </div>
+  <!--end of container containing user login-->
 </template>
 
 <script>
@@ -68,7 +73,20 @@ import { ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
+import LoadingScreen from "./loading.vue";
+
 export default {
+  methods: {
+    setLoad: function(){
+      console.log('dwd')
+      this.isLoading=true
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1500);
+  },
   setup() {
     const email = ref("");
     const password = ref("");
@@ -89,6 +107,14 @@ export default {
       }
     };
     return { handleSubmit, email, password, error };
+  },
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
+  components: {
+    LoadingScreen,
   },
 };
 </script>
