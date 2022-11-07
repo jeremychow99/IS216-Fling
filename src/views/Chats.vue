@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="row align-items-center my-2">
             <div id="title" class="col-2  text-center">
                 <strong class="fs-3">Chats</strong>
@@ -13,7 +13,7 @@
         <hr>
         <!-- Main Chats -->
         <div class="row mt-3">
-            <ul v-if="convos.length > 0" class="list-group">
+            <ul v-if="displayConvos.length > 0" class="list-group">
                 <convo
                     v-for="convo in convos"
                     :key="convo.id"
@@ -48,10 +48,11 @@ export default {
     computed: {
         displayConvos() {
             if (this.chat_filter.length) {
-
+                console.log("Filtering")
                 let convo_arr = []
                 this.convos.forEach(convo => {
-                    if (convo.name.includes(this.chat_filter)) {
+                    console.log(convo.receiver)
+                    if (convo.receiver.includes(this.chat_filter)) {
                         convo_arr.push(convo)
                     }
                 })
@@ -69,11 +70,12 @@ export default {
     methods: {
         async loadConvos() {
 
+            console.log(this.$store.state.user.email)
             const convoQuery = query(collection(db, "convos"), where("participants", "array-contains", this.$store.state.user.email))
 
             const querySnapshot = await getDocs(convoQuery);
             querySnapshot.forEach((convo) => {
-                // console.log(convo.id, " => ", convo.data());
+                console.log(convo.id, " => ", convo.data());
 
                 const convoData = convo.data()
 

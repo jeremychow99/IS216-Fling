@@ -28,37 +28,6 @@
             
         </div>
     </div>
-    <!-- <div class="col-xl-6 col-sm-12 mb-5">
-        <div class="bg-light rounded shadow-sm py-5 px-4">
-            <div class="row">
-                <div class="col-3">
-                    <img src="https://bootstrapious.com/i/snippets/sn-team/teacher-4.jpg" alt="" width="100" class="img-fluid mb-3 shadow-sm">
-                </div>
-                <div class="col-9">
-                    <h5>Michelle Teo</h5>
-
-                    <hr>
-
-                    <h6 class="small text-muted">Infomation Systems Major (Y3)</h6>
-
-                    <hr>
-
-                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto accusantium ipsa reiciendis, laudantium nesciunt exercitationem eos distinctio earum, neque dolorem perspiciatis dolore facilis natus! Asperiores consequuntur totam aperiam. Dolores, ipsa?</p>
-
-                    <hr>
-
-                    <div>
-                        <span class="badge rounded-pill bg-dark mx-1">Machine Learning</span>
-                        <span class="badge rounded-pill bg-dark mx-1">Cybersecurity</span>
-                        <span class="badge rounded-pill bg-dark mx-1">FinTech</span>
-                        <span class="badge rounded-pill bg-dark mx-1">Investment Banking</span>
-                        <span class="badge rounded-pill bg-dark mx-1">Marketing</span>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div> -->
     
 </template>
 

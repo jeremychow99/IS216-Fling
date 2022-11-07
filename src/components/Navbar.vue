@@ -80,11 +80,3 @@ export default {
   },
 };
 </script>
-
-<style>
-@media only screen and (max-width: 844px) {
-  .nav-title {
-    display: none;
-  }
-}
-</style>

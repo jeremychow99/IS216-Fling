@@ -1,21 +1,21 @@
 <template>
-    
-    <div class="col-10 col-sm-10 col-lg-10" style="position: relative;">
+    <div class="container">
         <div class="row align-items-center my-2">
-            <div id="title" class="col-2  text-center">
-                <strong class="fs-3">{{ userName }}</strong>
+            <div class="py-2 border-bottom">
+                <img src="https://firebasestorage.googleapis.com/v0/b/is216-proj-v1.appspot.com/o/images%2Fuser.png?alt=media&token=e5307efb-4818-4724-8da6-58113c302507" alt="" width="40" class="rounded-circle me-3 shadow-1-strong">
+                <span>
+                    <strong class="fs-5">{{ userName }}</strong>
+                </span>
             </div>
         </div>
 
-        <hr>
-
-        <div class="mx-2" style="height: 80vh">
-            <!-- {{ messages }} -->
+        <div class="mx-2" style="height: 620px">
             <message
             v-for="message of messages"
             :key="message.id"
             :senderName="message.senderName"
             :sender="this.$store.state.user.email === message.senderID"
+            :timestamp="message.timestamp"
             >
                 {{ message.content }}
             </message>
@@ -32,7 +32,7 @@
 
 <script>
 import { db } from "../config";
-import { collection, query, where, onSnapshot, addDoc } from "firebase/firestore"
+import { collection, query, where, onSnapshot, addDoc, getDoc, doc } from "firebase/firestore"
 import store from "../store"
 
 
@@ -44,19 +44,17 @@ export default {
     components: {
         message
     },
-    props: ['userName'],
 
     data() {
         return {
             messages: [],
             message: '',
-            user: null,
+            userName: null,
         }
     },
 
     methods: {
         getChat() {
-            console.log(this.$route.params.id)
             const messagesQuery = query(messagesCollection, where("convoID", "==", this.$route.params.id))
 
             onSnapshot(messagesQuery, (querySnapshot) => {
@@ -72,6 +70,25 @@ export default {
                 temp_messages.sort((a,b) => a.timestamp - b.timestamp)
                 this.messages = temp_messages
             })
+        },
+
+        async getConvo() {
+
+            const docRef = doc(db, "convos", this.$route.params.id);
+            const docSnap = await getDoc(docRef);
+
+            let userName = ''
+            
+            let convo_participants = docSnap.data()['convo_users']
+
+            for (let user in convo_participants) {
+                if (user != this.$store.state.user.email) {
+                    userName = convo_participants[user]
+                }
+            }
+
+            this.userName = userName
+
         },
 
         sendMessage() {
@@ -99,7 +116,7 @@ export default {
 
     created() {
         this.getChat()
-        console.log(this.$route.params)
+        this.getConvo()
         // this.user = this.$route.params
     },
 }
