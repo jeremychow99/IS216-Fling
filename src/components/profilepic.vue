@@ -2,39 +2,21 @@
   <div class="container mt-3 col-lg-6">
     <h1 class="text-center">Setting Up Your Profile</h1>
     <!--preview of profile picture-->
-    <img
-      id="previewProfile"
-      :src="userProfile"
-      class="mx-auto d-block my-2"
-      style="border-radius: 50%"
-      @change="showPreview($event)"
-    />
+    <canvas hidden></canvas>
 
     <!--upload pic function-->
     <div class="mb-3">
       <div class="input-group">
-        <input
-          type="file"
-          class="form-control"
-          id="formFile"
-          aria-describedby="inputGroupFileAddon04"
-          accept="image/*"
-          aria-label="Upload"
-          @change="onFileChange"
-        />
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          id="uploadbtn"
-          @click="uploadImage"
-        >
+        <input type="file" class="form-control" id="formFile" aria-describedby="inputGroupFileAddon04" accept="image/*"
+          aria-label="Upload" @change="onFileChange" />
+        <button class="btn btn-outline-secondary" type="button" id="uploadbtn" @click="uploadImage">
           Upload
         </button>
       </div>
     </div>
 
     <!--choose major-->
-    <div class="col-md col-lg-6 my-3">
+    <div class="col-md my-3">
       <div class="form-floating">
         <select class="form-select" id="major" v-model="userMajor">
           <option value="accountancy">Accountancy</option>
@@ -49,25 +31,17 @@
     </div>
 
     <!--user's input bio-->
-    <div class="col-md col-lg-6 mb-3">
+    <div class="col-md mb-3">
       <div class="form-floating">
-        <textarea v-model="userBio"
-          class="form-control"
-          placeholder="Leave a comment here"
-          id="userBio"
-          style="height: 100px"
-        ></textarea>
+        <textarea v-model="userBio" class="form-control" placeholder="Leave a comment here" id="userBio"
+          style="height: 100px"></textarea>
         <label for="userBio">Bio</label>
       </div>
     </div>
 
     <!--next part interests-->
     <div class="doneBtn text-center mb-3">
-      <button
-        class="rounded btn btn-primary"
-        id="doneBtn"
-        @click="sendProfileData"
-      >
+      <button class="rounded btn btn-primary" id="doneBtn" @click="sendProfileData">
         Next
       </button>
     </div>
@@ -107,18 +81,8 @@ export default {
       await updateDoc(docRef, {
         bio: `${this.userBio}`,
         major: `${this.userMajor}`,
-        profilePicURL:"tempURL"
+        profilePicURL: "tempURL"
       });
-    },
-
-    showPreview(event) {
-      // idk how to resize picture after upload to give a preview
-      // 1. can force users to upload only 300px by 300px
-      if (event.target.files.length > 0) {
-        const src = URL.createObjectURL(event.target.files[0]);
-        var preview = document.getElementById("previewProfile");
-        preview.src = src;
-      }
     },
 
     onFileChange(e) {
@@ -127,17 +91,55 @@ export default {
       console.log(files);
       this.file = files[0];
       console.log(this.file);
+
+      const file = e.target.files[0];
+      // let's load the image data
+      const canvas = document.querySelector('canvas');
+      const image = new Image();
+      image.onload = () => {
+        // use min size so we get a square
+
+        const size = Math.min(image.naturalWidth, image.naturalHeight);
+
+        // let's update the canvas size
+        canvas.width = size;
+        canvas.height = size;
+
+        // draw image to canvas
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(image, 0, 0);
+
+        // only draw image where mask is
+        ctx.globalCompositeOperation = 'destination-in';
+
+        // draw our circle mask
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        ctx.arc(
+          size * 0.5, // x
+          size * 0.5, // y
+          size * 0.5, // radius
+          0, // start angle
+          2 * Math.PI // end angle
+        );
+        ctx.fill();
+
+        // restore to default composite operation (is draw over current image)
+        ctx.globalCompositeOperation = 'source-over';
+
+        // show canvas
+        canvas.hidden = false;
+
+      },
+        image.src = URL.createObjectURL(file)
     },
+    
 
     uploadImage() {
       console.log(this.file);
-
       const storage = getStorage();
-
       const storageRef = ref(storage, "images/" + this.file.name);
-
       const uploadTask = uploadBytesResumable(storageRef, this.file);
-
       // To upload and obtain download URL
       uploadTask.on(
         "state_changed",
