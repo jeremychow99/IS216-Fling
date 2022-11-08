@@ -71,7 +71,7 @@ import { db } from "@/config";
 import { doc, getDoc } from "firebase/firestore";
 router.beforeEach(async (to, from) => {
   if (store.state.user != null) {
-    const docRef = doc(db, "testdata", store.state.user.email);
+    const docRef = doc(db, "profileDetails", store.state.user.email);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       let userData = docSnap.data()

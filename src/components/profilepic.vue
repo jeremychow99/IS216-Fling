@@ -77,7 +77,8 @@ export default {
   methods: {
     async sendProfileData() {
       console.log(store.state.user.email);
-      const docRef = doc(db, "testdata", store.state.user.email);
+      console.log('sending data')
+      const docRef = doc(db, "profileDetails", store.state.user.email);
       await updateDoc(docRef, {
         bio: `${this.userBio}`,
         major: `${this.userMajor}`,

@@ -44,13 +44,15 @@ const store = createStore({
       );
       if (response) {
         context.commit("setUser", response.user);
-        await setDoc(doc(db, "testdata", email), {
+        await setDoc(doc(db, "profileDetails", email), {
           fullname: fullname,
           username: username,
           password: password,
+          interests: [],
           major: "",
           bio: "",
-          profilePicURL: ""
+          profileURL: "",
+          year:"2"
         })
       } else {
         throw new Error("signup failed");
