@@ -30,13 +30,11 @@ const routes = [
     path: "/chats",
     name: "Chats",
     component: Chats,
-    props: true
   },
   {
     path: "/chats/:id",
     name: "Chatroom",
     component: ChatRoom,
-    props: {default: true}
   },
   {
     path: "/profile/:id",

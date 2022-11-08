@@ -1,4 +1,5 @@
 <template>
+    <Navbar />
     <div class="container">
         <div class="row align-items-center my-2">
             <div class="py-2 border-bottom">
@@ -9,7 +10,7 @@
             </div>
         </div>
 
-        <div class="mx-2" style="height: 620px">
+        <div id="msg-container" class="mx-2" style="height: 620px">
             <message
             v-for="message of messages"
             :key="message.id"
@@ -34,6 +35,8 @@
 import { db } from "../config";
 import { collection, query, where, onSnapshot, addDoc, getDoc, doc } from "firebase/firestore"
 import store from "../store"
+import Navbar from "../components/Navbar.vue";
+import { nextTick } from "vue"
 
 
 import message from '../components/message.vue'
@@ -42,7 +45,8 @@ const messagesCollection = collection(db, "chats")
 
 export default {
     components: {
-        message
+        message,
+        Navbar
     },
 
     data() {
@@ -119,6 +123,38 @@ export default {
         this.getConvo()
         // this.user = this.$route.params
     },
+
+    watch: {
+        messages() {
+
+            nextTick(() => {
+                let element = document.querySelector("#msg-container")
+                element.scrollTop = element.scrollHeight - element.clientHeight;
+                // element.scrollIntoView({behavior: 'smooth'});    
+
+                console.log("Message Updated")
+            });
+            
+        }
+    }
 }
 
 </script>
+
+
+<style>
+
+#msg-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation: hide-scroll 3s;
+}
+    
+@keyframes hide-scroll {
+    from,
+    to {
+        overflow-y: hidden;
+    }
+}
+
+</style>
