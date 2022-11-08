@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   getAuth,
+  updateProfile,
 } from "firebase/auth";
 
 const auth = getAuth();
@@ -30,6 +31,7 @@ const store = createStore({
     setUser(state, payload) {
       state.user = payload;
       //Log out the user state
+      console.log(state.user.displayName)
       console.log(state.user.email);
       console.log("user state changeed");
     },
@@ -42,7 +44,15 @@ const store = createStore({
         email,
         password
       );
+
       if (response) {
+        
+        let user = auth.currentUser
+
+        updateProfile(user, {
+          displayName: fullname
+        })
+
         context.commit("setUser", response.user);
         await setDoc(doc(db, "profileDetails", email), {
           fullname: fullname,

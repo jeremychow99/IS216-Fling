@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div id="msg-container" class="mx-2" style="height: 620px">
+        <div id="msg-container" class="mx-2" style="height: 630px">
             <message
             v-for="message of messages"
             :key="message.id"
