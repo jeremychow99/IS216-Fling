@@ -14,7 +14,7 @@
         <button class="rounded w-80 text-light p-2" style="background-color: #234db8">Log In with
           Google</button>
       </div>
-      <form @submit.prevent="handleSubmit">
+      <form @submit.prevent="handleSubmit()">
         <div class="row">
           <!--make the text lighter-->
           <span class="text-center my-2 text-secondary">OR</span>
@@ -53,7 +53,7 @@
 <script>
 import { ref } from "vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import router from "../router/index"
 
 export default {
   setup() {
@@ -64,7 +64,6 @@ export default {
     const error = ref(null);
 
     const store = useStore();
-    const router = useRouter();
     console.log(store.state.user)
     const handleSubmit = async () => {
       try {
@@ -74,7 +73,7 @@ export default {
           fullname: fullname.value,
           username: username.value,
         });
-        router.push("/");
+        router.push("/setup");
       } catch (err) {
         error.value = err.message;
       }

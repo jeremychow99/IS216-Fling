@@ -60,7 +60,7 @@ import store from "../store";
 import { db } from "@/config";
 import { getAuth, updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
-
+import router from "../router/index"
 export default {
   data() {
     return {
@@ -82,7 +82,8 @@ export default {
         bio: `${this.userBio}`,
         major: `${this.userMajor}`,
         profilePicURL: "tempURL"
-      });
+      })
+      router.push('/');
     },
 
     onFileChange(e) {
