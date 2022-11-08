@@ -1,10 +1,12 @@
 <template>
-    <div class="message mt-2">
+    <div class="message mt-2 mx-2">
         <span v-if="!sender">{{ senderName }}</span>
         <div class="d-flex flex-row" :class="sender ? 'flex-row-reverse' : 'flex-row'">
-            <div class="rounded-2 bg-light px-3 pt-2" style="max-width: 55vw; overflow-wrap: break-word;">
-                <slot></slot>
-                <p class="text-muted text-end" style="margin-bottom: 0">{{ dateTime }}</p>
+            <div class="rounded-2 bg-light" style="max-width: 55vw; overflow-wrap: break-word;">
+                <div class=" px-3 pt-2">
+                    <slot></slot>
+                </div>
+                <p class="text-muted text-end px-1" style="margin-bottom: 0; font-size: x-small;">{{ dateTime }}</p>
             </div>
         </div>
     </div>
