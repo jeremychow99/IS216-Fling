@@ -43,6 +43,8 @@ export default {
             // Sorted Participant Array to ensure that the order is also the same for querying purposes
 
             let participants = [this.$.vnode.key, this.$store.state.user.email].sort()
+            
+            console.log(participants)
 
             let convo_id = "";
             const q = query(collection(db, "convos"), where("participants", "==", participants));
@@ -64,9 +66,11 @@ export default {
                 // Convo Doesnt Exist, Create New Convo and Store Convo Id
 
                 let convo_users = {}
-                // TEST: To be changed to user names
-                convo_users[this.$.vnode.key] = this.user 
-                convo_users[this.$store.state.user.email] = "Martin"
+                
+                convo_users[this.$.vnode.key] = this.name 
+                convo_users[this.$store.state.user.email] = this.$store.state.user.displayName
+
+                console.log(convo_users)
 
                 const convoRef = await addDoc(collection(db, "convos"), {
                     participants: participants,
