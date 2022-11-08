@@ -25,7 +25,7 @@
       <profilecard
         v-for="user in displayUsers"
         :key="user.id"
-        :name="user.name"
+        :name="user.fullname"
         :major="user.major"
         :year="user.year"
         :interests="user.interests"
@@ -61,7 +61,7 @@ export default {
       users: [
         {
           id: "sclim.2021@smu.edu.sg",
-          name: "Lim Seow Chong",
+          fullname: "Lim Seow Chong",
           major: "Information Systems",
           year: "2",
           interests: [
@@ -73,7 +73,7 @@ export default {
         },
         {
           id: "sktam.2020@smu.edu.sg",
-          name: "Tam Siao Kia",
+          fullname: "Tam Siao Kia",
           major: "Computer Science",
           year: "3",
           interests: [
@@ -86,7 +86,7 @@ export default {
         },
         {
           id: "ctee.2022@smu.edu.sg",
-          name: "Clement Tee",
+          fullname: "Clement Tee",
           major: "Economics",
           year: "1",
           interests: [
@@ -98,7 +98,7 @@ export default {
         },
         {
           id: "mteo.2019@smu.edu.sg",
-          name: "Michelle Teo",
+          fullname: "Michelle Teo",
           major: "Business Management",
           year: "4",
           interests: ["Entrepreneurship", "Management", "Marketing"],
@@ -141,7 +141,7 @@ export default {
         // console.log("Interests: ", user.data().interests)
         const userObj = {
           id: user.id,
-          name: userData.name,
+          fullname: userData.fullname,
           major: userData.major,
           year: userData.year,
           interests: userData.interests,

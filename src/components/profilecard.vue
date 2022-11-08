@@ -67,7 +67,7 @@ export default {
 
                 let convo_users = {}
                 
-                convo_users[this.$.vnode.key] = this.name 
+                convo_users[this.$.vnode.key] = this.name
                 convo_users[this.$store.state.user.email] = this.$store.state.user.displayName
 
                 console.log(convo_users)
