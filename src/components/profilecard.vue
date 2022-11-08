@@ -65,7 +65,7 @@ export default {
 
                 let convo_users = {}
                 // TEST: To be changed to user names
-                convo_users[this.$.vnode.key] = "Alex Tan" 
+                convo_users[this.$.vnode.key] = this.user 
                 convo_users[this.$store.state.user.email] = "Martin"
 
                 const convoRef = await addDoc(collection(db, "convos"), {
