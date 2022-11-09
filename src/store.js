@@ -11,12 +11,15 @@ import {
 const auth = getAuth();
 import { doc, setDoc } from "firebase/firestore";
 
+import createPersistedState from "vuex-persistedstate";
+
 import { db} from "./config";
 auth.onAuthStateChanged(user => {
   console.log(user+'hdwhdwh')
   
 })
 const store = createStore({
+  plugins: [createPersistedState()],
   state: {
     //The user state will initially be null. After login, this state will be updated
     user: null,

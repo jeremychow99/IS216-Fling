@@ -65,7 +65,7 @@
       </div>
     </div>
   </div>
-  <button @click="testFunc">test</button>
+
   <!--end of container containing user login-->
 </template>
 
@@ -79,11 +79,11 @@ import myStore from "../store"
 export default {
   methods: {
     // setLoad: function(){
-    //   console.log('dwd')
     //   this.isLoading=true
     // }
   },
   mounted() {
+    console.log(myStore.state.loading)
     setTimeout(() => {
       myStore.state.loading = false;
     }, 1500);
@@ -95,11 +95,6 @@ export default {
 
     const store = useStore();
     const router = useRouter();
-
-    const testFunc = () => {
-      store.commit('setLoading')
-      console.log(store.state.loading)
-    }
 
     const handleSubmit = async () => {
       try {
@@ -113,7 +108,7 @@ export default {
         error.value = err.message;
       }
     };
-    return { testFunc, handleSubmit, email, password, error };
+    return {handleSubmit, email, password, error };
   },
   data() {
     return {
