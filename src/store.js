@@ -20,10 +20,11 @@ const store = createStore({
   state: {
     //The user state will initially be null. After login, this state will be updated
     user: null,
+    loading: true
   },
   mutations: {
-    setLoading(state,loading){
-      state.loading = loading;
+    setLoading(state){
+      state.loading = !state.loading;
     },
     //Mutation to update the user state
     //Takes in two arguments, the state and the payload. When we call this mutation, the payload will be user object from firebase auth

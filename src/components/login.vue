@@ -1,6 +1,6 @@
 <template>
-  <div><LoadingScreen v-if="isLoading"></LoadingScreen></div>
-  <div v-if="!isLoading" class="container w-60 m-auto col-lg-6">
+  <div><LoadingScreen v-if="$store.state.loading"></LoadingScreen></div>
+  <div v-if="!$store.state.loading" class="container w-60 m-auto col-lg-6">
     <div class="container rounded border border-dark mt-5">
       <div class="row">
         <h1 class="display-2 text-center">Fling</h1>
@@ -65,6 +65,7 @@
       </div>
     </div>
   </div>
+  <button @click="testFunc">test</button>
   <!--end of container containing user login-->
 </template>
 
@@ -74,7 +75,7 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 import LoadingScreen from "./loading.vue";
-
+import myStore from "../store"
 export default {
   methods: {
     // setLoad: function(){
@@ -84,7 +85,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.isLoading = false;
+      myStore.state.loading = false;
     }, 1500);
   },
   setup() {
@@ -95,18 +96,24 @@ export default {
     const store = useStore();
     const router = useRouter();
 
+    const testFunc = () => {
+      store.commit('setLoading')
+      console.log(store.state.loading)
+    }
+
     const handleSubmit = async () => {
       try {
         await store.dispatch("login", {
           email: email.value,
           password: password.value,
         });
+        store.state.loading = true
         router.push("/");
       } catch (err) {
         error.value = err.message;
       }
     };
-    return { handleSubmit, email, password, error };
+    return { testFunc, handleSubmit, email, password, error };
   },
   data() {
     return {
