@@ -2,7 +2,12 @@
   <div class="container mt-3 col-lg-6">
     <h1 class="text-center">Setting Up Your Profile</h1>
     <!--preview of profile picture-->
-    <canvas hidden></canvas>
+    <div class="mb-3" style="display: flex; justify-content: center; align-items: center;">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/is216-proj-v1.appspot.com/o/images%2Fuser.png?alt=media&token=e5307efb-4818-4724-8da6-58113c302507"
+        id="initialDisplayPic" style="height: 300px">
+      <canvas hidden style="height: 300px"></canvas>
+    </div>
 
     <!--upload pic function-->
     <div class="mb-3">
@@ -82,60 +87,101 @@ export default {
       await updateDoc(docRef, {
         bio: `${this.userBio}`,
         major: `${this.userMajor}`,
-        profilePicURL: "tempURL"
       })
       router.push('/');
     },
 
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      console.log(files);
-      this.file = files[0];
-      console.log(this.file);
+      if (files.length != 0) {
+        console.log(files);
+        this.file = files[0];
+        console.log(this.file);
 
-      const file = e.target.files[0];
-      // let's load the image data
-      const canvas = document.querySelector('canvas');
-      const image = new Image();
-      image.onload = () => {
-        // use min size so we get a square
+        var initialDisplayPic = document.getElementById("initialDisplayPic")
+        initialDisplayPic.hidden = true
 
-        const size = Math.min(image.naturalWidth, image.naturalHeight);
+        const file = e.target.files[0];
+        // let's load the image data
+        const canvas = document.querySelector('canvas');
+        const image = new Image();
+        image.onload = () => {
+          // use min size so we get a square
 
-        // let's update the canvas size
-        canvas.width = size;
-        canvas.height = size;
+          const size = Math.min(image.naturalWidth, image.naturalHeight);
 
-        // draw image to canvas
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(image, 0, 0);
+          // let's update the canvas size
+          canvas.width = size;
+          canvas.height = size;
 
-        // only draw image where mask is
-        ctx.globalCompositeOperation = 'destination-in';
+          // draw image to canvas
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(image, 0, 0);
 
-        // draw our circle mask
-        ctx.fillStyle = '#000';
-        ctx.beginPath();
-        ctx.arc(
-          size * 0.5, // x
-          size * 0.5, // y
-          size * 0.5, // radius
-          0, // start angle
-          2 * Math.PI // end angle
-        );
-        ctx.fill();
+          // only draw image where mask is
+          ctx.globalCompositeOperation = 'destination-in';
 
-        // restore to default composite operation (is draw over current image)
-        ctx.globalCompositeOperation = 'source-over';
+          // draw our circle mask
+          ctx.fillStyle = '#000';
+          ctx.beginPath();
+          ctx.arc(
+            size * 0.5, // x
+            size * 0.5, // y
+            size * 0.5, // radius
+            0, // start angle
+            2 * Math.PI // end angle
+          );
+          ctx.fill();
 
-        // show canvas
-        canvas.hidden = false;
+          // restore to default composite operation (is draw over current image)
+          ctx.globalCompositeOperation = 'source-over';
 
-      },
-        image.src = URL.createObjectURL(file)
+          // show canvas
+          canvas.hidden = false;
+
+        },
+          image.src = URL.createObjectURL(file)
+      }
+      else {
+        const canvas = document.querySelector('canvas');
+        const image = new Image();
+        image.onload = () => {
+          // use min size so we get a square
+
+          const size = Math.min(image.naturalWidth, image.naturalHeight);
+
+          // let's update the canvas size
+          canvas.width = size;
+          canvas.height = size;
+
+          // draw image to canvas
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(image, 0, 0);
+
+          // only draw image where mask is
+          ctx.globalCompositeOperation = 'destination-in';
+
+          // draw our circle mask
+          ctx.fillStyle = '#000';
+          ctx.beginPath();
+          ctx.arc(
+            size * 0.5, // x
+            size * 0.5, // y
+            size * 0.5, // radius
+            0, // start angle
+            2 * Math.PI // end angle
+          );
+          ctx.fill();
+
+          canvas.hidden = false
+
+          // restore to default composite operation (is draw over current image)
+          ctx.globalCompositeOperation = 'source-over';
+        }
+        image.src = "https://firebasestorage.googleapis.com/v0/b/is216-proj-v1.appspot.com/o/images%2Fuser.png?alt=media&token=e5307efb-4818-4724-8da6-58113c302507"
+      }
     },
-    
+
 
     uploadImage() {
       console.log(this.file);
