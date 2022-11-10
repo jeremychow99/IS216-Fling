@@ -10,13 +10,17 @@ import {
 
 const auth = getAuth();
 import { doc, setDoc } from "firebase/firestore";
+import VuexPersistence from 'vuex-persist'
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+})
 
 import createPersistedState from "vuex-persistedstate";
 import Vuex from "vuex";
-import { db} from "./config";
+import { db } from "./config";
 
 const store = new Vuex.Store({
-  plugins: [createPersistedState({storage: window.sessionStorage,})],
+  plugins: [vuexLocal.plugin],
   state: {
     //The user state will initially be null. After login, this state will be updated
     user: null,

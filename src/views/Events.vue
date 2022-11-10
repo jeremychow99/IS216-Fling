@@ -1,83 +1,81 @@
 <template>
-  <!-- main right side -->
-  <!-- <div class="col-10 col-sm-10 col-lg-10">
-        <div class="row align-items-center mt-3">
-            <div class="col">
-                <strong class="fs-4">Events</strong>
+    <Navbar />
+    <div><LoadingScreen v-if="isLoading"></LoadingScreen></div>
+    <div v-if="!isLoading" class="container justify-content-center">
+      <div class="row">
+        <div
+          class="card col-sm-11 col-lg-5 mx-2 my-3"
+          v-for="event of displayEvents"
+        >
+          <div class="card-body">
+            <h5 class="card-title">{{ event.eventName }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ event.eventDate }}</h6>
+            <p class="card-text">
+              {{ event.eventDetails }}
+            </p>
+            <div class="row">
+              <div class="col-4">
+                <i class="fa-solid fa-calendar"></i> 22/2/22
+              </div>
+              <div class="col-4"></div>
+              <div class="col-4">
+                <i class="fa-solid fa-location-dot"></i> SMU
+              </div>
             </div>
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary" type="button">
+                Click to open MODAL
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="row align-items-center mt-3">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search for People/Events" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-        <div class="row align-items-center mt-3">
-
-            <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-3 me-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://placekitten.com/100/70/" alt="Image of event" id="event_pic">
-                    <div class="card-body">
-                        <h5 class="card-title" id="event_name">Recruiting for Tic Tac Toe Hackathon</h5>
-                        <p class="card-text" id="lister_name">Tan Ah Meng</p>
-                        <p class="card-text" id="event_details">Looking for 1 more person to join our team. More details...</p>
-                        <p class="card-text" id="event_date">Listed on 10/10/2022</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-3 me-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://placekitten.com/100/70/" alt="Image of event" id="event_pic2">
-                    <div class="card-body">
-                        <h5 class="card-title" id="event_name2">Recruiting for Toe Tac Tic Hackathon</h5>
-                        <p class="card-text" id="lister_name2">Tan Ah Chew</p>
-                        <p class="card-text" id="event_details2">Looking for 3 more people to join our team. More details...</p>
-                        <p class="card-text" id="event_date2">Listed on 20/10/2022</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-3 me-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://placekitten.com/100/70/" alt="Image of event" id="event_pic2">
-                    <div class="card-body">
-                        <h5 class="card-title" id="event_name2">Recruiting for Shopee Internship</h5>
-                        <p class="card-text" id="lister_name2">John Lee</p>
-                        <p class="card-text" id="event_details2">Looking for 3 more people to join our team. Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus corrupti quaerat eligendi sint. Mollitia, id repellat. Molestias, dolore. Suscipit nulla architecto aspernatur beatae odio adipisci provident. At ullam iste quam!</p>
-                        <p class="card-text" id="event_date2">Listed on 17/10/2022</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div> -->
-</template>
-
-<script>
-import { db } from "../config";
-import { getDocs, collection } from "firebase/firestore";
-
-import EventCard from "../components/eventcard.vue";
-import Navbar from "../components/Navbar.vue";
-import LoadingScreen from "../components/loading.vue";
-export default {
-  components: {
-    EventCard,
-    Navbar,
-    LoadingScreen,
-  },
-  async mounted() {
-    const querySnapshot = await getDocs(collection(db, "events"));
-    querySnapshot.forEach((event) => {
-        const eventData = event.data()
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  import { db } from "../config";
+  import { getDocs, collection } from "firebase/firestore";
+  
+  import EventCard from "../components/eventcard.vue";
+  import Navbar from "../components/Navbar.vue";
+  import LoadingScreen from "../components/loading.vue";
+  export default {
+    components: {
+      EventCard,
+      Navbar,
+      LoadingScreen,
+    },
+    data() {
+      return {
+        events: [],
+        isLoading: true,
+      };
+    },
+    computed: {
+      displayEvents() {
+        return this.events;
+      },
+    },
+    async mounted() {
+      setTimeout(() => {
+        this.isLoading = false;
+        console.log('hello')
+      }, 1500);
+      
+      const querySnapshot = await getDocs(collection(db, "events"));
+      querySnapshot.forEach((event) => {
+        const eventData = event.data();
         const eventObj = {
-            
-        }
-    })
-  }
-};
-</script>
+          eventDate: eventData.eventDate,
+          eventDetails: eventData.eventDetails,
+          eventName: eventData.eventName,
+          eventLocation: eventData.eventLocation,
+          eventTime: eventData.eventTime,
+        };
+        this.events.push(eventObj);
+      });
+    },
+  };
+  </script>
+  

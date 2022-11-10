@@ -69,6 +69,7 @@ export default {
     const store = useStore();
     const router = useRouter();
     const logoutFunc = async () => {
+      localStorage.clear();
       try {
         await store.dispatch("logout");
         // router.push('login')
