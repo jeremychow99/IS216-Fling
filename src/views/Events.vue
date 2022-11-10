@@ -1,6 +1,6 @@
 <template>
-    <!-- main right side -->
-    <div class="col-10 col-sm-10 col-lg-10">
+  <!-- main right side -->
+  <!-- <div class="col-10 col-sm-10 col-lg-10">
         <div class="row align-items-center mt-3">
             <div class="col">
                 <strong class="fs-4">Events</strong>
@@ -54,5 +54,30 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
 </template>
+
+<script>
+import { db } from "../config";
+import { getDocs, collection } from "firebase/firestore";
+
+import EventCard from "../components/eventcard.vue";
+import Navbar from "../components/Navbar.vue";
+import LoadingScreen from "../components/loading.vue";
+export default {
+  components: {
+    EventCard,
+    Navbar,
+    LoadingScreen,
+  },
+  async mounted() {
+    const querySnapshot = await getDocs(collection(db, "events"));
+    querySnapshot.forEach((event) => {
+        const eventData = event.data()
+        const eventObj = {
+            
+        }
+    })
+  }
+};
+</script>

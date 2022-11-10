@@ -12,14 +12,11 @@ const auth = getAuth();
 import { doc, setDoc } from "firebase/firestore";
 
 import createPersistedState from "vuex-persistedstate";
-
+import Vuex from "vuex";
 import { db} from "./config";
-auth.onAuthStateChanged(user => {
-  console.log(user+'hdwhdwh')
-  
-})
-const store = createStore({
-  plugins: [createPersistedState()],
+
+const store = new Vuex.Store({
+  plugins: [createPersistedState({storage: window.sessionStorage,})],
   state: {
     //The user state will initially be null. After login, this state will be updated
     user: null,
@@ -85,6 +82,7 @@ const store = createStore({
     async logout(context) {
       await signOut(auth);
       context.commit("setUser", null);
+      console.log('out')
     },
   },
 });

@@ -61,8 +61,9 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from) => {
+  console.log(store.state.user + '!')
   if (store.state.user == null && to.name !== 'Login' && to.name !== 'signupFinalised') {
-    console.log('not logged in')
+    console.log('routerTest')
     return { name: 'Login' }
   }
 })

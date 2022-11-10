@@ -83,7 +83,6 @@ export default {
     // }
   },
   mounted() {
-    console.log(myStore.state.loading)
     setTimeout(() => {
       myStore.state.loading = false;
     }, 1500);
