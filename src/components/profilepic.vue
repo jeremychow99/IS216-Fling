@@ -5,8 +5,8 @@
     <div class="mb-3" style="display: flex; justify-content: center; align-items: center;">
       <img
         src="https://firebasestorage.googleapis.com/v0/b/is216-proj-v1.appspot.com/o/images%2Fuser.png?alt=media&token=e5307efb-4818-4724-8da6-58113c302507"
-        id="initialDisplayPic" style="height: 300px">
-      <canvas hidden style="height: 300px"></canvas>
+        id="initialDisplayPic" style="height: 200px">
+      <canvas hidden style="height: 200px"></canvas>
     </div>
 
     <!--upload pic function-->
@@ -38,13 +38,34 @@
     <!--user's input bio-->
     <div class="col-md mb-3">
       <div class="form-floating">
-        <textarea v-model="userBio" class="form-control" placeholder="Leave a comment here" id="userBio"
+        <textarea v-model="userBio" class="form-control" id="userBio"
           style="height: 100px"></textarea>
         <label for="userBio">Bio</label>
       </div>
     </div>
 
     <!--next part interests-->
+    <div class="col-md mb-3">
+      <select id="interests" v-model="userInterests" multiple>
+        <option value="artificialIntelligence">Artificial Intelligence</option>
+        <option value="blockchain">Blockchain</option>
+        <option value="businessAnalytics">Business Intelligence</option>
+        <option value="cloudComputing">Cloud Computing</option>
+        <option value="cyberSecurity">Cyber Security</option>
+        <option value="dataScience">Data Science</option>
+        <option value="econometrics">Econometrics</option>
+        <option value="entrepreneurship">Entrepreneurship</option>
+        <option value="finance">Finance</option>
+        <option value="fintech">FinTech</option>
+        <option value="investmentBanking">Investment Banking</option>
+        <option value="management">Management</option>
+        <option value="marketing">Marketing</option>
+        <option value="math">Mathematics</option>
+        <option value="softwareEng">Software Engineering</option>
+        <option value="web3">Web 3.0</option>
+      </select>
+    </div>
+
     <div class="doneBtn text-center mb-3">
       <button class="rounded btn btn-primary" id="doneBtn" @click="sendProfileData">
         Next
@@ -65,13 +86,14 @@ import store from "../store";
 import { db } from "@/config";
 import { getAuth, updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
-import router from "../router/index"
+import router from "../router/index";
 export default {
   data() {
     return {
       file: null,
       userBio: "",
-      userMajor: ""
+      userMajor: "",
+      userInterests: [],
     };
   },
   computed: {
