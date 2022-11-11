@@ -8,7 +8,6 @@ import ChatRoom from "../views/ChatRoom.vue";
 import Profile from "../views/Profile.vue"
 import signupFinalised from "../components/signupFinalised.vue"
 import profilepic from "../components/profilepic.vue"
-import profilePage from "../components/profilepage.vue"
 
 const routes = [
   {

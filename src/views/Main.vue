@@ -1,7 +1,7 @@
 <template>
   <div><LoadingScreen v-if="isLoading"></LoadingScreen></div>
   <Navbar @logout="logoutUser" v-if="!isLoading" />
-  <div v-if="!isLoading" class="container">
+  <div v-if="!isLoading" class="container" id="main-content">
     <div class="row align-items-center my-2">
       <div id="title" class="col-2 text-center">
         <strong class="fs-3">Home</strong>
@@ -297,7 +297,7 @@ export default {
   font-family: "Helvetica", FontAwesome, sans-serif;
 }
 
-body {
-  overflow-y: scroll
+html {
+    overflow-y: overlay;
 }
 </style>
