@@ -28,9 +28,6 @@ export default {
   methods: {
     deleteEvent: async function () {
       await deleteDoc(doc(db, "events", this.$.vnode.key));
-      // setTimeout(()=>{
-      //   location.reload()
-      // },1000)
     }
     ,
   },
