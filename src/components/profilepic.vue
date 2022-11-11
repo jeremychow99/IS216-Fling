@@ -14,57 +14,60 @@
       <div class="input-group">
         <input type="file" class="form-control" id="formFile" aria-describedby="inputGroupFileAddon04" accept="image/*"
           aria-label="Upload" @change="onFileChange" />
-        <button class="btn btn-outline-secondary" type="button" id="uploadbtn" @click="uploadImage">
-          Upload
+        <button class="btn btn-outline-primary" type="button" id="uploadbtn" @click="uploadImage">
+          Upload Picture
         </button>
       </div>
     </div>
 
-    <!--choose major-->
-    <div class="col-md my-3">
-      <div class="form-floating">
-        <select class="form-select" id="major" v-model="userMajor">
-          <option value="accountancy">Accountancy</option>
-          <option value="businessManagement">Business Management</option>
-          <option value="economics">Economics</option>
-          <option value="computerScience">Computer Science</option>
-          <option value="informationSystems">Information Systems</option>
-          <option value="socialSciences">Social Sciences</option>
-        </select>
-        <label for="major">Major</label>
-      </div>
+    <!--first major-->
+    <div class="col-md mb-3">
+      <label for="major1DataList" class="form-label">Your First Major</label>
+      <input class="form-control" list="major1Options" id="major1DataList" placeholder="Type to search..."
+        v-model="userFirstMajor">
+      <datalist id="major1Options">
+        <option v-for="(major, index) of major1" :key="index" :value="major"></option>
+      </datalist>
+    </div>
+
+    <!--second major-->
+    <div class="col-md mb-3">
+      <label for="major2DataList" class="form-label">Your Second Major</label>
+      <input class="form-control" list="major2Options" id="major1DataList" placeholder="Type to search..."
+        v-model="userSecondMajor">
+      <datalist id="major2Options">
+        <option v-for="(major, index) of major2" :key="index" :value="major"></option>
+      </datalist>
     </div>
 
     <!--user's input bio-->
     <div class="col-md mb-3">
+      <label for="userBio" class="mb-2">Your Bio</label>
       <div class="form-floating">
-        <textarea v-model="userBio" class="form-control" id="userBio"
-          style="height: 100px"></textarea>
-        <label for="userBio">Bio</label>
+        <textarea v-model="userBio" class="form-control" id="userBio" style="height: 100px" maxlength="100"></textarea>
       </div>
     </div>
 
-    <!--next part interests-->
-    <div class="col-md mb-3">
-      <select id="interests" v-model="userInterests" multiple>
-        <option value="artificialIntelligence">Artificial Intelligence</option>
-        <option value="blockchain">Blockchain</option>
-        <option value="businessAnalytics">Business Intelligence</option>
-        <option value="cloudComputing">Cloud Computing</option>
-        <option value="cyberSecurity">Cyber Security</option>
-        <option value="dataScience">Data Science</option>
-        <option value="econometrics">Econometrics</option>
-        <option value="entrepreneurship">Entrepreneurship</option>
-        <option value="finance">Finance</option>
-        <option value="fintech">FinTech</option>
-        <option value="investmentBanking">Investment Banking</option>
-        <option value="management">Management</option>
-        <option value="marketing">Marketing</option>
-        <option value="math">Mathematics</option>
-        <option value="softwareEng">Software Engineering</option>
-        <option value="web3">Web 3.0</option>
-      </select>
+    <div class="row">
+
+      <div class="col-md mb-3">
+        <p class="mb-2">Your Interests</p>
+        <Multiselect v-model="userInterests" mode="multiple" placeholder="Choose your interests" :options="interests" />
+      </div>
+
+      <div class="col-md mb-3">
+        <label for="userYear" class="mb-3">Year </label>
+        <select class="form-select" v-model="userYear">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">Four</option>
+          <option value="5">Five</option>
+        </select>
+      </div>
+
     </div>
+
 
     <div class="doneBtn text-center mb-3">
       <button class="rounded btn btn-primary" id="doneBtn" @click="sendProfileData">
@@ -87,13 +90,127 @@ import { db } from "@/config";
 import { getAuth, updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import router from "../router/index";
+import Multiselect from '@vueform/multiselect'
+
 export default {
   data() {
     return {
+      years: [1, 2, 3, 4, 5],
+      major1: [
+        "Accounting",
+        "Communication Management",
+        "Communication Management (Data, Design and Communication)",
+        "Entrepreneurship",
+        "Finance",
+        "Finance (Real Estate)",
+        "Finance (Wealth Management)",
+        "Finance (International Trading)",
+        "Finance (Banking)",
+        "Marketing",
+        "Marketing (Marketing Analytics)",
+        "Marketing (Retail and Services Management)",
+        "Operations Management",
+        "Operations Management (Operation Analytics)",
+        "Operations Mangement (Maritime Business and Operations)",
+        "Organisational Behaviour & Human Resources",
+        "Quantitative Finance",
+        "Strategic Management",
+        "Economics",
+        "Economics (Quantitative Economics)",
+        "Economics (Real Estate)",
+        "Law",
+        "Information Systems (Business Analytics)",
+        "Information Systems (Digitalisation & Cloud Solutions)",
+        "Information System (Financial Technology)",
+        "Information Systems (Business Analytics & Digitalisation & Cloud Solutions)",
+        "Information Systems (Digitalisation & Cloud Solutions & Financial Technology)",
+        "Information System (Business Analytics & Financial Technology)",
+        "Smart City Management & Technology",
+        "Computer Science (Artificial Intelligence)",
+        "Computer Science (Cybersecurity)",
+        "Computer Science (Cyber-Physical Systems)",
+        "Computer Science (Artificial Intelligence & Cybersecurity)",
+        "Computer Science (Artificial Intelligence & Cyber-Physical Systems)",
+        "Computer Science (Cybersecurity & Cyber-Physical Systems)",
+        "Computing & Law",
+        "Software Engineering",
+        "Politics, Law and Economics",
+        "Political Science",
+        "Psychology",
+        "Sociology",
+      ],
+      major2: [
+        "N.A.",
+        "Accounting",
+        "Accounting Data and Analytics",
+        "Financial Forensics",
+        "Communication Management",
+        "Communication Management (Data, Design and Communication)",
+        "Entrepreneurship",
+        "Finance",
+        "Finance (Real Estate)",
+        "Finance (Wealth Management)",
+        "Finance (International Trading)",
+        "Finance (Banking)",
+        "Marketing",
+        "Marketing (Marketing Analytics)",
+        "Marketing (Retail and Services Management)",
+        "Operations Management",
+        "Operations Management (Operation Analytics)",
+        "Operations Mangement (Maritime Business and Operations)",
+        "Organisational Behaviour & Human Resources",
+        "Quantitative Finance",
+        "Strategic Management",
+        "Digital Business",
+        "Sustainability",
+        "Economics",
+        "Economics (Quantitative Economics)",
+        "Economics (Real Estate)",
+        "Actuarial Science",
+        "Health Economics & Management",
+        "Data Science and Analytics",
+        "Legal Studies",
+        "Computing Studies (Artificial Intelligence)",
+        "Computing Studies (Cybersecurity)",
+        "Computing Studies (Cyber-Physical Systems)",
+        "Technology for Business Solutions (Business Analytics)",
+        "Technology for Business Solutions (Digitalisation & Cloud Solutions)",
+        "Technology for Business Solutions (Financial Technology)",
+        "IT Solution Mangement",
+        "Technology for Business",
+        "Political Science",
+        "Psychology",
+        "Sociology",
+        "Arts and Culture Management",
+        "Global Asia",
+        "Public Policy and Public Management",
+      ],
+      interests: [
+        "Artificial Intelligence",
+        "Blockchain",
+        "Business Intelligence",
+        "Cyber Security",
+        "Data Science",
+        "Econometrics",
+        "Entrepreneurship",
+        "Finance",
+        "FinTech",
+        "Investment Banking",
+        "Law",
+        "Machine Learning",
+        "Management",
+        "Marketing",
+        "Mathematics",
+        "Political Science",
+        "Psychology",
+        "Software Engineering",
+        "Web 3.0"],
       file: null,
       userBio: "",
-      userMajor: "",
+      userFirstMajor: "",
+      userSecondMajor: "",
       userInterests: [],
+      userYear: 0,
     };
   },
   computed: {
@@ -101,6 +218,7 @@ export default {
       return getAuth().currentUser.photoURL;
     },
   },
+  components: { Multiselect },
   methods: {
     async sendProfileData() {
       console.log(store.state.user.email);
@@ -108,7 +226,11 @@ export default {
       const docRef = doc(db, "profileDetails", store.state.user.email);
       await updateDoc(docRef, {
         bio: `${this.userBio}`,
-        major: `${this.userMajor}`,
+        firstMajor: `${this.userFirstMajor}`,
+        secondMajor: `${this.userSecondMajor}`,
+        interests: `${this.userInterests}`,
+        year: `${this.userYear}`
+
       })
       router.push('/');
     },
@@ -278,3 +400,6 @@ export default {
   },
 };
 </script>
+<style src="@vueform/multiselect/themes/default.css">
+
+</style>
