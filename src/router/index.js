@@ -8,7 +8,7 @@ import ChatRoom from "../views/ChatRoom.vue";
 import Profile from "../views/Profile.vue"
 import signupFinalised from "../components/signupFinalised.vue"
 import profilepic from "../components/profilepic.vue"
-
+import myEvents from "../views/myEvents.vue"
 const routes = [
   {
     path: "/",
@@ -49,6 +49,11 @@ const routes = [
     path: "/setup",
     name: "Setup",
     component: profilepic
+  },
+  {
+    path: "/myEvents",
+    name: "myEvents",
+    component: myEvents
   },
 ];
 

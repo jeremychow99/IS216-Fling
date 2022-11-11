@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">{{ name }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ date }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{ creator }}</h6>
         <p class="card-text">
           {{ details }}
         </p>
@@ -44,7 +44,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body"></div>
+          <div class="modal-body">
           <div>{{details}}</div>
           <div class="my-2">{{desc}}</div>
           
@@ -55,6 +55,7 @@
               <i class="fa-solid fa-location-dot"></i>
                {{ location }}
             </div>
+          </div>
           </div>
           <div class="modal-footer">
             <button
@@ -75,7 +76,7 @@
 <script>
 
 export default {
-  props: ["name", "details", "time", "date", "location", "desc"],
+  props: ["name", "details", "time", "date", "location", "desc", "creator"],
   methods: {},
 };
 </script>

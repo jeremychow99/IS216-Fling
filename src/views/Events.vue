@@ -10,6 +10,7 @@
     >
       Add Your Own Event!
     </button>
+    <router-link class="btn btn-default" :to="{ name: 'myEvents' }">go to my events</router-link>
     <div class="row">
       <EventCard
         v-for="event of displayEvents"
@@ -19,6 +20,7 @@
         :date="event.eventDate"
         :location="event.eventLocation"
         :desc="event.eventDesc"
+        :creator="event.eventCreator"
       >
       </EventCard>
     </div>
@@ -117,9 +119,10 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary" @click="addEvent">
+          <button type="button"  data-bs-dismiss="modal" class="btn btn-primary" @click="addEvent">
             Add Event
           </button>
+
         </div>
       </div>
     </div>
@@ -133,6 +136,8 @@ import EventCard from "../components/eventcard.vue";
 import Navbar from "../components/Navbar.vue";
 import LoadingScreen from "../components/loading.vue";
 import { doc, setDoc } from "firebase/firestore";
+
+import store from "../store"
 
 export default {
   components: {
@@ -166,8 +171,9 @@ export default {
         eventDesc: this.inputDesc,
         eventDetails: this.inputDetails,
         eventLocation: this.inputLocation,
-        creator: "test",
-      })
+        creator: this.$store.state.user.displayName,
+      }
+      );
     },
   },
   computed: {
@@ -178,7 +184,6 @@ export default {
   async mounted() {
     setTimeout(() => {
       this.isLoading = false;
-      console.log("hello");
     }, 1500);
 
     const querySnapshot = await getDocs(collection(db, "events"));
@@ -191,9 +196,11 @@ export default {
         eventLocation: eventData.eventLocation,
         eventTime: eventData.eventTime,
         eventDesc: eventData.eventDesc,
-        eventCreator: eventData.Creator,
+        eventCreator: eventData.creator,
       };
-      this.events.push(eventObj);
+      if(eventObj.eventCreator != this.$store.state.user.displayName){
+        this.events.push(eventObj);
+      }
     });
   },
 };
