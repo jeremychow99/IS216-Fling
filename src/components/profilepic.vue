@@ -3,16 +3,13 @@
     <h1 class="text-center">Setting Up Your Profile</h1>
     <!--preview of profile picture-->
     <div class="mb-3" style="display: flex; justify-content: center; align-items: center;">
-      <img
-        :src="userProfile"
-        id="initialDisplayPic" style="height: 200px">
-      <canvas hidden style="height: 200px"></canvas>
+      <img :src="userProfile" class="mx-auto d-block rounded-circle" style="height: 200px; width: 200px">
     </div>
 
     <!--upload pic function-->
     <div class="mb-3">
       <div class="input-group">
-        <input type="file" class="form-control" id="formFile" aria-describedby="inputGroupFileAddon04" accept="image/*"
+        <input type="file" class="form-control" id="formFile" ref="fileupload" aria-describedby="inputGroupFileAddon04" accept="image/*"
           aria-label="Upload" @change="onFileChange" />
         <button class="btn btn-outline-primary" type="button" id="uploadbtn" @click="uploadImage">
           Upload Picture
@@ -236,7 +233,7 @@ export default {
       userSecondMajor: "",
       userInterests: [],
       userYear: 0,
-      userProfile: "",
+      userProfile: this.$store.state.user.photoURL
     };
   },
   computed: {
@@ -244,7 +241,8 @@ export default {
   },
   components: { Multiselect },
   async mounted() {
-
+    console.log(this.$store.state.user)
+    
     const docRef = doc(db, "profileDetails", this.$store.state.user.email);
     const docSnap = await getDoc(docRef);
     console.log(docSnap.data())
@@ -253,13 +251,13 @@ export default {
     this.userSecondMajor = docSnap.data()['secondMajor']
     this.userInterests = docSnap.data()['interests']
     this.userYear = docSnap.data()['year']
-    this.userProfile = docSnap.data()['profileURL']
 
   },
 
   methods: {
     async sendProfileData() {
-      console.log(store.state.user.email);
+      console.log(store.state.user);
+      console.log(store.state.user.photoURL);
       console.log('sending data')
       const docRef = doc(db, "profileDetails", store.state.user.email);
       await updateDoc(docRef, {
@@ -268,99 +266,31 @@ export default {
         secondMajor: this.userSecondMajor,
         interests: this.userInterests,
         year: this.userYear,
-        profileURL: this.profileURL
+        profileURL: store.state.user.photoURL
       })
       router.push('/');
     },
 
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
+
       if (files.length != 0) {
-        console.log(files);
-        this.file = files[0];
-        console.log(this.file);
+        console.log("Image change detected")
 
-        var initialDisplayPic = document.getElementById("initialDisplayPic")
-        initialDisplayPic.hidden = true
+        this.file = e.target.files[0];
 
-        const file = e.target.files[0];
-        // let's load the image data
-        const canvas = document.querySelector('canvas');
-        const image = new Image();
-        image.onload = () => {
-          // use min size so we get a square
-
-          const size = Math.min(image.naturalWidth, image.naturalHeight);
-
-          // let's update the canvas size
-          canvas.width = size;
-          canvas.height = size;
-
-          // draw image to canvas
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(image, 0, 0);
-
-          // only draw image where mask is
-          ctx.globalCompositeOperation = 'destination-in';
-
-          // draw our circle mask
-          ctx.fillStyle = '#000';
-          ctx.beginPath();
-          ctx.arc(
-            size * 0.5, // x
-            size * 0.5, // y
-            size * 0.5, // radius
-            0, // start angle
-            2 * Math.PI // end angle
-          );
-          ctx.fill();
-
-          // restore to default composite operation (is draw over current image)
-          ctx.globalCompositeOperation = 'source-over';
-
-          // show canvas
-          canvas.hidden = false;
-
-        },
-          image.src = URL.createObjectURL(file)
+        console.log(URL.createObjectURL(this.file))
+        
+        this.userProfile = URL.createObjectURL(this.file)
       }
       else {
-        const canvas = document.querySelector('canvas');
-        const image = new Image();
-        image.onload = () => {
-          // use min size so we get a square
+        
+        console.log("Image Clear detected")
+        console.log(files)
+        this.file = null
+        console.log(this.$store.state.user.photoURL)
+        this.userProfile = this.$store.state.user.photoURL
 
-          const size = Math.min(image.naturalWidth, image.naturalHeight);
-
-          // let's update the canvas size
-          canvas.width = size;
-          canvas.height = size;
-
-          // draw image to canvas
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(image, 0, 0);
-
-          // only draw image where mask is
-          ctx.globalCompositeOperation = 'destination-in';
-
-          // draw our circle mask
-          ctx.fillStyle = '#000';
-          ctx.beginPath();
-          ctx.arc(
-            size * 0.5, // x
-            size * 0.5, // y
-            size * 0.5, // radius
-            0, // start angle
-            2 * Math.PI // end angle
-          );
-          ctx.fill();
-
-          canvas.hidden = false
-
-          // restore to default composite operation (is draw over current image)
-          ctx.globalCompositeOperation = 'source-over';
-        }
-        image.src = this.profileURL
       }
     },
 
@@ -411,23 +341,31 @@ export default {
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             console.log("File available at", downloadURL);
+
             // right after that, link downloadURL to document with specific id
             const auth = getAuth();
             const user = auth.currentUser;
             if (user) {
               // User is signed in, see docs for a list of available properties
               // https://firebase.google.com/docs/reference/js/firebase.User
-              this.profileURL = downloadURL
               updateProfile(user, {
                 photoURL: downloadURL,
               })
-                .then(() => {
-                  console.log("Profile Updated");
-                  console.log(user.photoURL);
-                })
-                .catch((error) => {
-                  console.log(error.message);
-                });
+              .then(() => {
+                console.log("Profile Updated");
+                console.log(user.photoURL);
+                
+                store.dispatch("updatePhotoURL", downloadURL)
+
+                this.userProfile = downloadURL
+
+                this.$refs.fileupload.value = null;
+
+                alert("Profile Picture Uploaded")
+              })
+              .catch((error) => {
+                console.log(error.message);
+              });
             } else {
               // User is signed out
               // ...

@@ -39,6 +39,10 @@ const store = new Vuex.Store({
       console.log(state.user.email);
       console.log("user state changeed");
     },
+
+    updatePhotoURL(state, url) {
+      state.user.photoURL = url
+    }
   },
   actions: {
     async signup(context, { email, password, fullname, username }) {
@@ -54,10 +58,11 @@ const store = new Vuex.Store({
         let user = auth.currentUser
 
         updateProfile(user, {
-          displayName: fullname
+          displayName: fullname,
+          photoURL: "https://firebasestorage.googleapis.com/v0/b/is216-proj-v1.appspot.com/o/images%2Fuser.png?alt=media&token=e5307efb-4818-4724-8da6-58113c302507"
         })
 
-        context.commit("setUser", response.user);
+        context.commit("setUser", user);
         await setDoc(doc(db, "profileDetails", email), {
           fullname: fullname,
           username: username,
@@ -88,6 +93,10 @@ const store = new Vuex.Store({
       context.commit("setUser", null);
       console.log('out')
     },
+
+    updatePhotoURL(context, photoURL) {
+      context.commit("updatePhotoURL", photoURL);
+    }
   },
 });
 
