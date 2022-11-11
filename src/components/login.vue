@@ -7,11 +7,12 @@
       </div>
       <div class="row">
         <div class="col-lg-6">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-            class="img-fluid"
-            alt="Phone image"
-          />
+          <lottie-player 
+          autoplay 
+          loop 
+          src="https://assets7.lottiefiles.com/packages/lf20_and4mptz.json"
+          class="me-2 h-90">
+        </lottie-player>
         </div>
         <form @submit.prevent="handleSubmit" class="col-lg-6">
           <div class="px-5 mb-3">

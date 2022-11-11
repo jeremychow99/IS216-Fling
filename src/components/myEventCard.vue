@@ -12,7 +12,7 @@
           <div><i class="fa-solid fa-location-dot"></i> {{ location }}</div>
         </div>
         <div class="d-grid gap-2">
-          <button type="button" @click="deleteEvent" class="btn btn-danger">
+          <button type="button" @click="deleteEvent(); $emit('deleteEvent', this.$.vnode.key)" class="btn btn-danger">
             Delete Event
           </button>
         </div>
@@ -27,13 +27,13 @@ import { db } from "../config";
 export default {
   methods: {
     deleteEvent: async function () {
-      await deleteDoc(doc(db, "events", this.name));
-      setTimeout(()=>{
-        location.reload()
-      },1000)
+      await deleteDoc(doc(db, "events", this.$.vnode.key));
+      // setTimeout(()=>{
+      //   location.reload()
+      // },1000)
     }
     ,
   },
-  props: ["name", "details", "time", "date", "location", "desc", "creator"],
+  props: ["name", "details", "time", "date", "location", "desc", "creator", "key"],
 };
 </script>

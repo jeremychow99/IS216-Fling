@@ -1,8 +1,17 @@
 <template>
-  <Navbar />
+  <Navbar @logout="logoutUser" />
   <div><LoadingScreen v-if="isLoading"></LoadingScreen></div>
   <div v-if="!isLoading" class="container justify-content-center">
-    <button
+  
+    <div class="row">
+      <lottie-player 
+          autoplay 
+          loop 
+          src="https://assets6.lottiefiles.com/packages/lf20_ieyjhrgh.json"
+          class="col-lg-6 col-sm-12">
+        </lottie-player>
+        <div class="col-lg-6 col-sm-12">
+          <button
       type="button"
       class="btn btn-primary my-2"
       data-bs-toggle="modal"
@@ -11,9 +20,13 @@
       Add Your Own Event!
     </button>
     <router-link class="btn btn-default" :to="{ name: 'myEvents' }">go to my events</router-link>
+        </div>
+
+    </div>
     <div class="row">
       <EventCard
         v-for="event of displayEvents"
+        :key="event.eventID"
         :name="event.eventName"
         :details="event.eventDetails"
         :time="event.eventTime"
@@ -21,6 +34,7 @@
         :location="event.eventLocation"
         :desc="event.eventDesc"
         :creator="event.eventCreator"
+        :creatorEmail="event.creatorEmail"
       >
       </EventCard>
     </div>
@@ -131,11 +145,11 @@
 
 <script>
 import { db } from "../config";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, addDoc, doc  } from "firebase/firestore";
 import EventCard from "../components/eventcard.vue";
 import Navbar from "../components/Navbar.vue";
 import LoadingScreen from "../components/loading.vue";
-import { doc, setDoc } from "firebase/firestore";
+
 
 import store from "../store"
 
@@ -164,7 +178,7 @@ export default {
       // console.log(this.inputDate)
       // console.log(typeof this.inputTime)
       // console.log(typeof this.inputDate)
-      await setDoc(doc(db, "events", this.inputName), {
+      await addDoc(collection(db, "events"), {
         eventName: this.inputName,
         eventDate: this.inputDate,
         eventTime: this.inputTime,
@@ -172,8 +186,14 @@ export default {
         eventDetails: this.inputDetails,
         eventLocation: this.inputLocation,
         creator: this.$store.state.user.displayName,
+        creatorEmail: this.$store.state.user.email
       }
       );
+    },
+    logoutUser: function () {
+      setTimeout(() => {
+        this.isLoading = true;
+      }, 1000);
     },
   },
   computed: {
@@ -190,6 +210,7 @@ export default {
     querySnapshot.forEach((event) => {
       const eventData = event.data();
       const eventObj = {
+        eventID: event.id,
         eventDate: eventData.eventDate,
         eventDetails: eventData.eventDetails,
         eventName: eventData.eventName,
@@ -197,8 +218,10 @@ export default {
         eventTime: eventData.eventTime,
         eventDesc: eventData.eventDesc,
         eventCreator: eventData.creator,
+        creatorEmail: eventData.creatorEmail
       };
       if(eventObj.eventCreator != this.$store.state.user.displayName){
+        console.log(eventObj)
         this.events.push(eventObj);
       }
     });

@@ -32,6 +32,13 @@
       </ul>
       <div v-else>
         <h1 class="display-2 text-center">No Conversations Found!</h1>
+        <lottie-player 
+          autoplay 
+          loop 
+          src="https://assets8.lottiefiles.com/private_files/lf30_gqs2uqht.json"
+          class="me-2 h-50">
+        </lottie-player>
+        
       </div>
     </div>
   </div>
