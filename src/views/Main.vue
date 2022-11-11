@@ -26,18 +26,6 @@
     <div class="collapse" id="collapseFilter">
       <!-- Filter by interest, First Major, Second Major, Year of Study -->
       <div class="container">
-        
-        <div class="row">
-          <div class="col-6 col-xl-3 mb-3">
-            <label class="form-label">Year of Study</label>
-            <select class="form-select" aria-label="year">
-              <option v-for="year of years" :value="year" :key="year">{{ year }}</option>
-            </select>
-          </div>
-          <div class="col-12 col-xl-9">
-              <!-- Interest -->
-          </div>
-        </div> 
 
         <div class="row">
           <div class="col-12 col-xl-6 mb-3">
@@ -56,6 +44,25 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-6 col-xl-3 mb-3">
+            <label class="form-label">Year of Study</label>
+            <select class="form-select" aria-label="year">
+              <option v-for="year of years" :value="year" :key="year">{{ year }}</option>
+            </select>
+          </div>
+          <div class="col-12 col-xl-9">
+              <!-- Interest -->
+              <label class="form-label">Interests</label>
+              <Multiselect 
+              v-model="userInterests" 
+              mode="tags" 
+              placeholder="Choose your interests" :close-on-select="false"
+              :searchable="true"
+              :max="5" :options="interests" />
+          </div>
+        </div> 
+
         <button class="btn btn-primary">Apply</button>
       </div>
     </div>
@@ -67,9 +74,11 @@
         v-for="user in displayUsers"
         :key="user.id"
         :name="user.fullname"
-        :major="user.major"
+        :firstmajor="user.firstmajor"
+        :secondmajor="user.secondmajor"
         :year="user.year"
         :interests="user.interests"
+        :profileURL="user.profileURL"
       />
     </div>
   </div>
@@ -81,12 +90,14 @@ import { db } from "../config";
 import { getDocs, collection } from "firebase/firestore";
 import Navbar from "../components/Navbar.vue";
 import LoadingScreen from "../components/loading.vue";
+import Multiselect from '@vueform/multiselect'
 
 export default {
   components: {
     profilecard,
     Navbar,
     LoadingScreen,
+    Multiselect,
   },
   methods: {
     logoutUser: function () {
@@ -100,50 +111,13 @@ export default {
       // Array to store all users in database
       // To Include img src as well
       users: [
-        // {
-        //   id: "sclim.2021@smu.edu.sg",
-        //   fullname: "Lim Seow Chong",
-        //   major: "Information Systems",
-        //   year: "2",
-        //   interests: [
-        //     "Data Science",
-        //     "Artificial Intelligence",
-        //     "Mathematics",
-        //     "Software Engineering",
-        //   ],
-        // },
-        // {
-        //   id: "sktam.2020@smu.edu.sg",
-        //   fullname: "Tam Siao Kia",
-        //   major: "Computer Science",
-        //   year: "3",
-        //   interests: [
-        //     "Cyber Security",
-        //     "Software Engineering",
-        //     "Cloud Computing",
-        //     "Blockchain",
-        //     "Web 3.0",
-        //   ],
-        // },
-        // {
-        //   id: "ctee.2022@smu.edu.sg",
-        //   fullname: "Clement Tee",
-        //   major: "Economics",
-        //   year: "1",
-        //   interests: [
-        //     "Econometrics",
-        //     "Business Intelligence",
-        //     "FinTech",
-        //     "Investment Banking",
-        //   ],
-        // },
-        // {
-        //   id: "mteo.2019@smu.edu.sg",
-        //   fullname: "Michelle Teo",
-        //   major: "Business Management",
-        //   year: "4",
-        //   interests: ["Entrepreneurship", "Management", "Marketing"],
-        // },
+          // id: user.id,
+          // fullname: userData.fullname,
+          // firstmajor: userData.firstMajor,
+          // secondmajor: userData.secondMajor,
+          // year: userData.year,
+          // interests: userData.interests,
+          // profileURL: userData.profileURL
       ],
       years: [1, 2, 3, 4, 5],
       major1: [
@@ -235,12 +209,13 @@ export default {
         "Global Asia",
         "Public Policy and Public Management",
       ],
+      interests: null,
 
       name_filter: "",
       year_filter: "",
       major1_filter: "",
       major2_filter: "",
-      interest_filter: [],
+      interest_filter: new Set(),
 
       isLoading: true,
     };
@@ -252,7 +227,7 @@ export default {
       if (this.name_filter.length) {
         let user_arr = [];
         this.users.forEach((user) => {
-          if (user.name.includes(this.name_filter)) {
+          if (user.fullname.includes(this.name_filter)) {
             user_arr.push(user);
           }
         });
@@ -269,6 +244,9 @@ export default {
       this.isLoading = false;
     }, 1000);
     const querySnapshot = await getDocs(collection(db, "profileDetails"));
+
+    var temp_interests = new Set()
+
     querySnapshot.forEach((user) => {
       // console.log(user.id, " => ", user.data());
 
@@ -277,18 +255,25 @@ export default {
 
         console.log(userData.interests)
         // console.log("Interests: ", user.data().interests)
+
+        const userInterest = new Set(userData.interests)
+        temp_interests = new Set([temp_interests, userInterest])
+
         const userObj = {
           id: user.id,
           fullname: userData.fullname,
-          major: userData.major,
+          firstmajor: userData.firstMajor,
+          secondmajor: userData.secondMajor,
           year: userData.year,
           interests: userData.interests,
-          // img: IMAGEURL
+          profileURL: userData.profileURL
         };
 
         this.users.push(userObj);
       }
     });
+
+    this.interests = Array.from(temp_interests)
   },
 };
 </script>

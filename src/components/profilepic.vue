@@ -46,7 +46,7 @@
     <div class="row">
 
       <div class="col-md mb-3">
-        <p class="mb-2">Your Interests</p>
+        <label class="form-label">Your Interests</label>
         <Multiselect 
         v-model="userInterests" 
         mode="tags" 

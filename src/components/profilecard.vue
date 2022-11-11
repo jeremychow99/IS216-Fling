@@ -1,8 +1,11 @@
 <template>
     <div class="col-xl-3 col-sm-6 mb-4 text-center">
-        <div class="bg-light rounded shadow-sm py-3 px-4"><img src="https://bootstrapious.com/i/snippets/sn-team/teacher-4.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-            <div style="height:70px">
-                <h5 class="mb-2">{{ name }}</h5><span class="small text-uppercase text-muted" style="font-size:12px;">Degree: {{ major }} (Year {{ year }})</span>
+        <div class="bg-light rounded shadow-sm py-3 px-4"><img :src="profileURL" alt="" style="width:80px; height:80px" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+            <div style="height:150px">
+                <h5 class="mb-2">{{ name }}</h5>
+                <p class="small text-muted" style="margin-bottom: 8px">Year {{ year }}</p>
+                <p class="small " style="font-size:15px; margin-bottom: 8px">{{ firstmajor }} </p>
+                <p class="small text-muted" style="font-size:15px; margin-bottom: 8px">{{ secondmajor }} </p>
             </div>
             
 
@@ -10,7 +13,8 @@
 
             <h6>Interests</h6>
             <div style="height:120px">
-                <span v-for="(interest, index) in interests" :key="index" class="badge rounded-pill bg-dark mx-1">{{ interest }}</span>
+                <span v-for="interest in interests.slice(0,10)" :key="interest" class="badge rounded-pill bg-dark mx-1">{{ interest }}</span>
+                <span v-if="interests.length > 5"><i class="fa-solid fa-ellipsis"></i></span>
             </div>
 
 
@@ -36,7 +40,7 @@ import { getDocs, addDoc, query, collection, where } from "firebase/firestore";
 import { db } from "../config";
 
 export default {
-    props: ['name', 'major', 'year', 'interests'],
+    props: ['name', 'firstmajor', 'secondmajor', 'year', 'interests', 'profileURL'],
     methods: {
         async message() {
             // Check if convo already exist
