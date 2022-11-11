@@ -8,6 +8,7 @@
             <!-- Image col -->
             <div class="col-12 col-xl-3 text-center">
                 <img src="https://placekitten.com/150" class="img-fluid img-thumbnail mt-4 mb-2 rounded-circle" style="z-index: 1">
+                <!-- <img :src="profileURL" class="img-fluid img-thumbnail mt-4 mb-2 rounded-circle" style="z-index: 1"> -->
             </div>
 
             <!-- Details col -->
@@ -91,8 +92,8 @@ export default {
         this.bio = docSnap.data()['bio']
         this.fullname = docSnap.data()['fullname']
         this.interests = docSnap.data()['interests']
-        this.major1 = docSnap.data()['major'] //To be changed to major1
-        // this.major2 = docSnap.data()['major2']
+        this.major1 = docSnap.data()['firstMajor']
+        this.major2 = docSnap.data()['secondMajor']
         this.profileURL = docSnap.data()['profileURL']
         this.year = docSnap.data()['year']
         this.username = docSnap.data()['username']
