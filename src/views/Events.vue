@@ -8,18 +8,27 @@
           v-for="event of displayEvents"
         >
           <div class="card-body">
-            <h5 class="card-title">{{ event.eventName }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ event.eventDate }}</h6>
+            <div class="row">
+                <div class="col-4">
+                    <h5 class="card-title">{{ event.eventName }}</h5>
+                </div>
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <p>{{event.eventCreator}}</p>
+                </div>
+            </div>
+
+            <h6 class="card-subtitle mb-2 text-muted">Created: {{ event.eventCreatedate }}</h6>
             <p class="card-text">
               {{ event.eventDetails }}
             </p>
             <div class="row">
               <div class="col-4">
-                <i class="fa-solid fa-calendar"></i> 22/2/22
+                <i class="fa-solid fa-calendar"></i> {{ event.eventDate }}
               </div>
               <div class="col-4"></div>
               <div class="col-4">
-                <i class="fa-solid fa-location-dot"></i> SMU
+                <i class="fa-solid fa-location-dot"></i> {{event.eventLocation}}
               </div>
             </div>
             <div class="d-grid gap-2">
@@ -72,6 +81,9 @@
           eventName: eventData.eventName,
           eventLocation: eventData.eventLocation,
           eventTime: eventData.eventTime,
+          eventCreator: eventData.creator,
+          eventCreatedate: eventData.eventCreatedate
+
         };
         this.events.push(eventObj);
       });
