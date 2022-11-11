@@ -4,7 +4,7 @@
     <!--preview of profile picture-->
     <div class="mb-3" style="display: flex; justify-content: center; align-items: center;">
       <img
-        src="https://firebasestorage.googleapis.com/v0/b/is216-proj-v1.appspot.com/o/images%2Fuser.png?alt=media&token=e5307efb-4818-4724-8da6-58113c302507"
+        :src="userProfile"
         id="initialDisplayPic" style="height: 200px">
       <canvas hidden style="height: 200px"></canvas>
     </div>
@@ -75,7 +75,7 @@
 
     <div class="doneBtn text-center mb-3">
       <button class="rounded btn btn-primary" id="doneBtn" @click="sendProfileData">
-        Next
+        Update
       </button>
     </div>
   </div>
@@ -123,6 +123,7 @@ export default {
         "Economics (Quantitative Economics)",
         "Economics (Real Estate)",
         "Law",
+        "Information Systems",
         "Information Systems (Business Analytics)",
         "Information Systems (Digitalisation & Cloud Solutions)",
         "Information System (Financial Technology)",
@@ -130,6 +131,7 @@ export default {
         "Information Systems (Digitalisation & Cloud Solutions & Financial Technology)",
         "Information System (Business Analytics & Financial Technology)",
         "Smart City Management & Technology",
+        "Computer Science",
         "Computer Science (Artificial Intelligence)",
         "Computer Science (Cybersecurity)",
         "Computer Science (Cyber-Physical Systems)",
@@ -144,7 +146,7 @@ export default {
         "Sociology",
       ],
       major2: [
-        "N.A.",
+        "",
         "Accounting",
         "Accounting Data and Analytics",
         "Financial Forensics",
@@ -215,12 +217,11 @@ export default {
       userSecondMajor: "",
       userInterests: [],
       userYear: 0,
+      userProfile: "",
     };
   },
   computed: {
-    userProfile() {
-      return getAuth().currentUser.photoURL;
-    },
+
   },
   components: { Multiselect },
   async mounted() {
@@ -233,6 +234,7 @@ export default {
     this.userSecondMajor = docSnap.data()['secondMajor']
     this.userInterests = docSnap.data()['interests']
     this.userYear = docSnap.data()['year']
+    this.userProfile = docSnap.data()['profileURL']
 
   },
 
@@ -246,7 +248,8 @@ export default {
         firstMajor: this.userFirstMajor,
         secondMajor: this.userSecondMajor,
         interests: this.userInterests,
-        year: this.userYear
+        year: this.userYear,
+        profileURL: this.profileURL
       })
       router.push('/');
     },
@@ -338,7 +341,7 @@ export default {
           // restore to default composite operation (is draw over current image)
           ctx.globalCompositeOperation = 'source-over';
         }
-        image.src = "https://firebasestorage.googleapis.com/v0/b/is216-proj-v1.appspot.com/o/images%2Fuser.png?alt=media&token=e5307efb-4818-4724-8da6-58113c302507"
+        image.src = this.profileURL
       }
     },
 
@@ -395,6 +398,7 @@ export default {
             if (user) {
               // User is signed in, see docs for a list of available properties
               // https://firebase.google.com/docs/reference/js/firebase.User
+              this.profileURL = downloadURL
               updateProfile(user, {
                 photoURL: downloadURL,
               })
