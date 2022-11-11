@@ -275,6 +275,7 @@ export default {
       if (user.id != this.$store.state.user.email) {
         const userData = user.data();
 
+        console.log(userData.interests)
         // console.log("Interests: ", user.data().interests)
         const userObj = {
           id: user.id,

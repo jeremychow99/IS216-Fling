@@ -15,7 +15,6 @@ const vuexLocal = new VuexPersistence({
   storage: window.localStorage
 })
 
-import createPersistedState from "vuex-persistedstate";
 import Vuex from "vuex";
 import { db } from "./config";
 
@@ -64,9 +63,10 @@ const store = new Vuex.Store({
           username: username,
           password: password,
           interests: [],
-          major: "",
+          firstMajor: "",
+          secondMajor: "",
           bio: "",
-          profileURL: "",
+          profileURL: "https://firebasestorage.googleapis.com/v0/b/is216-proj-v1.appspot.com/o/images%2Fuser.png?alt=media&token=e5307efb-4818-4724-8da6-58113c302507",
           year:"2"
         })
       } else {

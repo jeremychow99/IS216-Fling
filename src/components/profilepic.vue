@@ -43,16 +43,20 @@
     <!--user's input bio-->
     <div class="col-md mb-3">
       <label for="userBio" class="mb-2">Your Bio</label>
-      <div class="form-floating">
-        <textarea v-model="userBio" class="form-control" id="userBio" style="height: 100px" maxlength="100"></textarea>
-      </div>
+      <textarea v-model="userBio" class="form-control" id="userBio" style="height: 100px" maxlength="280"></textarea>
     </div>
 
     <div class="row">
 
       <div class="col-md mb-3">
         <p class="mb-2">Your Interests</p>
-        <Multiselect v-model="userInterests" mode="multiple" placeholder="Choose your interests" :options="interests" />
+        <Multiselect 
+        v-model="userInterests" 
+        mode="tags" 
+        placeholder="Choose your interests" :close-on-select="false"
+        :searchable="true"
+        :max="15" 
+        :create-option="true" :options="interests" />
       </div>
 
       <div class="col-md mb-3">
@@ -88,7 +92,7 @@ import {
 import store from "../store";
 import { db } from "@/config";
 import { getAuth, updateProfile } from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import router from "../router/index";
 import Multiselect from '@vueform/multiselect'
 
@@ -219,18 +223,30 @@ export default {
     },
   },
   components: { Multiselect },
+  async mounted() {
+
+    const docRef = doc(db, "profileDetails", this.$store.state.user.email);
+    const docSnap = await getDoc(docRef);
+    console.log(docSnap.data())
+    this.userBio = docSnap.data()['bio']
+    this.userFirstMajor = docSnap.data()['firstMajor']
+    this.userSecondMajor = docSnap.data()['secondMajor']
+    this.userInterests = docSnap.data()['interests']
+    this.userYear = docSnap.data()['year']
+
+  },
+
   methods: {
     async sendProfileData() {
       console.log(store.state.user.email);
       console.log('sending data')
       const docRef = doc(db, "profileDetails", store.state.user.email);
       await updateDoc(docRef, {
-        bio: `${this.userBio}`,
-        firstMajor: `${this.userFirstMajor}`,
-        secondMajor: `${this.userSecondMajor}`,
-        interests: `${this.userInterests}`,
-        year: `${this.userYear}`
-
+        bio: this.userBio,
+        firstMajor: this.userFirstMajor,
+        secondMajor: this.userSecondMajor,
+        interests: this.userInterests,
+        year: this.userYear
       })
       router.push('/');
     },
