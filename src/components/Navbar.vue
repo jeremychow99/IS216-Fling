@@ -1,6 +1,6 @@
 <template>
   <div>
-  <nav class="navbar navbar-expand-lg bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark gradient-custom">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="https://placekitten.com/g/30/30" class="d-inline-block align-top mx-3" alt="Kitten">
@@ -19,27 +19,26 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mx-auto mt-2">
           <li class="nav-item me-3">
             <router-link class="btn btn-default" :to="{ name: 'Home' }">
-              <i class="fa-solid fa-house-user fs-3"></i>
-              <h6 class="nav-title">Home</h6>
+              <h4 class="nav-title">Home</h4>
             </router-link>
           </li>
           <li class="nav-item me-3">
             <router-link class="btn btn-default" :to="{ name: 'Events' }">
-              <i class="fa-solid fa-calendar-days fs-3"></i>
-              <h6 class="nav-title">Events</h6>
+
+              <h4 class="nav-title">Events</h4>
             </router-link>
           </li>
           <li class="nav-item me-3">
             <router-link class="btn btn-default" :to="{ name: 'Chats' }">
-              <i class="fa-solid fa-message fs-3"></i>
-              <h6 class="nav-title ">Chats</h6>
+
+              <h4 class="nav-title ">Chats</h4>
             </router-link>
           </li>
         </ul>
-        <ul class="navbar-nav ms-auto me-3 mb-3">
+        <ul class="navbar-nav me-3 mb-3">
           <li class="nav-item">
             <div class="dropdown d-flex">
               <button class="btn btn-secondary dropdown-toggle mt-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -84,9 +83,19 @@ export default {
 
 <style scoped>
 .nav-item:hover{
-  color:blue;
+  color:white;
+
 }
 .router-link-active{
   text-decoration:underline;
+  color:white;
+  
+}
+.navbar{
+  font-family: Futura, Trebuchet MS, Arial, sans-serif;
+}
+.gradient-custom{
+  background: #c471f5;
+  background: linear-gradient(to right, rgba(196, 113, 245, 1), rgba(250, 113, 205, 1))
 }
 </style>
