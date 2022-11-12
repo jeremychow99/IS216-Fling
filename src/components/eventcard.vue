@@ -7,7 +7,7 @@
         <p class="card-text">
           {{ details }}
         </p>
-        <div class="d-flex justify-content-around">
+        <div class="d-flex justify-content-between p-0">
           <div><i class="fa-solid fa-calendar"></i> {{ date }}</div>
           <div><i class="fa-solid fa-clock"></i> {{ time }}</div>
           <div><i class="fa-solid fa-location-dot"></i> {{ location }}</div>
@@ -18,6 +18,7 @@
             class="btn btn-primary"
             data-bs-toggle="modal"
             :data-bs-target="'#exampleModal' + name"
+            style="margin-top: 10px"
           ><i class="fa-solid fa-circle-info me-2"></i>See Details
           </button>
         </div>
