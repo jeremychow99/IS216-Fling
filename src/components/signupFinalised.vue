@@ -20,13 +20,17 @@
             class="rounded btn text-light"
             style="background-color: #55acee"
           >
-            <i class="fab fa-google me-2"></i>Log In with Google
+            <router-link
+              style="text-decoration: none; color: inherit"
+              :to="{ name: 'Login' }"
+            >
+            <i class="fa-solid fa-right-to-bracket me-2"></i>Log In
+            </router-link>
           </button>
         </div>
         <form @submit.prevent="handleSubmit()">
           <div class="row">
-            <!--make the text lighter-->
-            <span class="text-center my-2 text-secondary">OR</span>
+            <span class="text-center my-2">OR</span>
           </div>
 
           <div class="px-5 mb-3">
