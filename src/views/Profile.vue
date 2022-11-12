@@ -18,7 +18,7 @@
                     <h3 class="text-capitalize">{{ fullname }}</h3>
                     <p class="my-1">Year {{ year }}</p>
                     <p class="my-1">{{ major1 }} Major 📈</p>
-                    <p v-show="major2 != '' " class="my-1 text-muted">{{ major2 }} Second Major 📈</p>
+                    <p v-if="major2 != '' " class="my-1 text-muted">{{ major2 }} Second Major 📈</p>
                     <p>@{{ username }}</p>
                 </div>
             </div>
