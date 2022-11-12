@@ -42,12 +42,11 @@
           <li class="nav-item">
             <div class="dropdown d-flex">
               <button class="btn btn-secondary dropdown-toggle mt-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Picture UserName 
+                Picture UserName
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Route to Profile</a></li>
-                <li><a class="dropdown-item" href="#">Route to edit bio etc</a></li>
-                <li><a class="dropdown-item" @click="logoutFunc(); $emit('logout')"><router-link :to="{ name: 'Login' }">Logout</router-link></a></li>
+                <li><router-link class="dropdown-item" :to="{ name: 'Profile', params: {id: this.$store.state.user.email} }">Profile</router-link></li>
+                <li><router-link class="dropdown-item" @click="logoutFunc(); $emit('logout')" :to="{ name: 'Login' }">Logout</router-link></li>
               </ul>
             </div>
           </li>
@@ -96,6 +95,6 @@ export default {
 }
 .gradient-custom{
   background: #c471f5;
-  background: linear-gradient(to right, rgba(196, 113, 245, 1), rgba(250, 113, 205, 1))
+  background: linear-gradient(to right, #17ACEB, #5E8BF5)
 }
 </style>
