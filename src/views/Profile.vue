@@ -1,6 +1,7 @@
 <template>
     <Navbar />
-    <div class="container-fluid" style="width: 100%">
+    <LoadingScreen v-if="isLoading"/>
+    <div v-if="!isLoading" class="container-fluid" style="width: 100%">
         <div class="row py-3 position-relative" style="background-color: #142d6b;">
 
             <router-link v-if="this.$route.params.id == this.$store.state.user.email" class="text-white position-absolute fs-3" :to="{ name: 'Setup' }" style="width: 30px; top: 30px; right:60px"><i class="fa-solid fa-pen rounded-circle border border-white border-3 p-2"></i></router-link>
@@ -72,6 +73,7 @@ export default {
     },
     data() {
         return {
+            isLoading: true,
             bio: '',
             fullname: '',
             interests: [],
@@ -83,7 +85,9 @@ export default {
         }
     },
     async mounted() {
-
+        setTimeout(()=>{
+            this.isLoading=false
+        }, 1200)
         const docRef = doc(db, "profileDetails", this.$route.params.id);
         const docSnap = await getDoc(docRef);
 

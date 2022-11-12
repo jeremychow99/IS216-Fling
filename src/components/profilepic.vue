@@ -1,5 +1,6 @@
 <template>
-  <div class="container mt-3 col-lg-6">
+  <LoadingScreen v-if="isLoading"/>
+  <div v-if="!isLoading" class="container mt-3 col-lg-6">
     <h1 class="text-center">Setting Up Your Profile</h1>
     <!--preview of profile picture-->
     <div class="mb-3" style="display: flex; justify-content: center; align-items: center;">
@@ -73,7 +74,7 @@
 
 
     <div class="doneBtn text-center mb-3">
-      <button class="rounded btn btn-primary" id="doneBtn" @click="sendProfileData">
+      <button class="rounded btn btn-primary" id="doneBtn" @click="sendProfileData(); setLoad()">
         Update
       </button>
     </div>
@@ -94,10 +95,12 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import router from "../router/index";
 import Multiselect from '@vueform/multiselect'
+import LoadingScreen from "./loading.vue"
 
 export default {
   data() {
     return {
+      isLoading: true,
       years: [1, 2, 3, 4, 5],
       major1: [
         "Accounting",
@@ -241,9 +244,13 @@ export default {
   computed: {
 
   },
-  components: { Multiselect },
+  components: { Multiselect, LoadingScreen },
   async mounted() {
+    setTimeout(()=>{
+      this.isLoading=false
+    },1500)
     console.log(this.$store.state.user)
+
     
     const docRef = doc(db, "profileDetails", this.$store.state.user.email);
     const docSnap = await getDoc(docRef);
@@ -257,6 +264,9 @@ export default {
   },
 
   methods: {
+    setLoad: function(){
+      this.isLoading = true
+    },
     async sendProfileData() {
       console.log(store.state.user);
       console.log(store.state.user.photoURL);
