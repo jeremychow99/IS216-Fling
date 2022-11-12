@@ -2,9 +2,17 @@
   <Navbar @logout="logoutUser" />
   <div><LoadingScreen v-if="isLoading"></LoadingScreen></div>
   <div v-if="!isLoading" class="container justify-content-center">
-    <router-link class="btn btn-primary" :to="{ name: 'Events' }"
-      >to events feed</router-link
-    >
+    <ul class="nav nav-tabs justify-content-center">
+      <li class="nav-item">
+          <router-link class="btn btn-default" :to="{ name: 'Events' }">
+            Events Feed
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Your Events</a>
+      </li>
+    </ul>
+
     <div class="row">
       <div class="row">
         <myEventCard
@@ -22,6 +30,8 @@
         </myEventCard>
       </div>
     </div>
+    <div v-if="this.events.length == 0"><h1 class="display-2 text-center">You have not created any events!</h1></div>
+
   </div>
 </template>
 

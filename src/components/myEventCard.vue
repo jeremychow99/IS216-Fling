@@ -13,6 +13,7 @@
         </div>
         <div class="d-grid gap-2">
           <button type="button" @click="deleteEvent(); $emit('deleteEvent', this.$.vnode.key)" class="btn btn-danger">
+            <i class="fa-solid fa-trash-can me-2"></i>
             Delete Event
           </button>
         </div>

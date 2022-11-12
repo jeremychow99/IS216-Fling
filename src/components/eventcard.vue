@@ -18,8 +18,7 @@
             class="btn btn-primary"
             data-bs-toggle="modal"
             :data-bs-target="'#exampleModal' + name"
-          >
-            See Details
+          ><i class="fa-solid fa-circle-info me-2"></i>See Details
           </button>
         </div>
       </div>
@@ -45,15 +44,15 @@
             ></button>
           </div>
           <div class="modal-body">
-          <div>{{details}}</div>
-          <div class="my-2">{{desc}}</div>
+          <div><strong>Description: </strong>{{details}}</div>
+          <div class="my-2"><strong>Details: </strong>{{desc}}</div>
           
           <div class="d-flex justify-content-around my-2">
             <div><i class="fa-solid fa-calendar"></i> {{ date }}</div>
             <div><i class="fa-solid fa-clock"></i> {{ time }}</div>
             <div>
               <i class="fa-solid fa-location-dot"></i>
-               {{ location }} {{creatorEmail}}
+               {{ location }}
             </div>
           </div>
           </div>
@@ -62,9 +61,10 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
-            >Close</button>
+            ><i class="fa-solid fa-circle-xmark me-2"></i>Close
+          </button>
             <button type="button" data-bs-dismiss="modal" class="btn btn-primary" @click="message">
-              Message
+              <i class="fa-solid fa-message me-2"></i>Message
             </button>
           </div>
         </div>
@@ -131,3 +131,4 @@ export default {
   },
 };
 </script>
+

@@ -2,26 +2,35 @@
   <Navbar @logout="logoutUser" />
   <div><LoadingScreen v-if="isLoading"></LoadingScreen></div>
   <div v-if="!isLoading" class="container justify-content-center">
-  
-    <div class="row">
-      <lottie-player 
-          autoplay 
-          loop 
-          src="https://assets6.lottiefiles.com/packages/lf20_ieyjhrgh.json"
-          class="col-lg-6 col-sm-12">
-        </lottie-player>
-        <div class="col-lg-6 col-sm-12">
-          <button
-      type="button"
-      class="btn btn-primary my-2"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-    >
-      Add Your Own Event!
-    </button>
-    <router-link class="btn btn-default" :to="{ name: 'myEvents' }">go to my events</router-link>
-        </div>
+    <ul class="nav nav-tabs justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Events Feed</a>
+      </li>
+      <li class="nav-item">
+        <router-link class="btn btn-default" :to="{ name: 'myEvents' }">
+          Your Events
+        </router-link>
+      </li>
+    </ul>
 
+    <div class="row">
+      <lottie-player
+        autoplay
+        loop
+        src="https://assets6.lottiefiles.com/packages/lf20_ieyjhrgh.json"
+        class="col-lg-6 col-sm-12"
+      >
+      </lottie-player>
+      <div class="col-lg-6 col-sm-12">
+        <button
+          type="button"
+          class="btn btn-primary my-2"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Add Your Own Event!
+        </button>
+      </div>
     </div>
     <div class="row">
       <EventCard
@@ -133,10 +142,14 @@
           >
             Close
           </button>
-          <button type="button"  data-bs-dismiss="modal" class="btn btn-primary" @click="addEvent">
+          <button
+            type="button"
+            data-bs-dismiss="modal"
+            class="btn btn-primary"
+            @click="addEvent"
+          >
             Add Event
           </button>
-
         </div>
       </div>
     </div>
@@ -145,13 +158,12 @@
 
 <script>
 import { db } from "../config";
-import { getDocs, collection, addDoc, doc  } from "firebase/firestore";
+import { getDocs, collection, addDoc, doc } from "firebase/firestore";
 import EventCard from "../components/eventcard.vue";
 import Navbar from "../components/Navbar.vue";
 import LoadingScreen from "../components/loading.vue";
 
-
-import store from "../store"
+import store from "../store";
 
 export default {
   components: {
@@ -186,9 +198,8 @@ export default {
         eventDetails: this.inputDetails,
         eventLocation: this.inputLocation,
         creator: this.$store.state.user.displayName,
-        creatorEmail: this.$store.state.user.email
-      }
-      );
+        creatorEmail: this.$store.state.user.email,
+      });
     },
     logoutUser: function () {
       setTimeout(() => {
@@ -218,10 +229,10 @@ export default {
         eventTime: eventData.eventTime,
         eventDesc: eventData.eventDesc,
         eventCreator: eventData.creator,
-        creatorEmail: eventData.creatorEmail
+        creatorEmail: eventData.creatorEmail,
       };
-      if(eventObj.eventCreator != this.$store.state.user.displayName){
-        console.log(eventObj)
+      if (eventObj.eventCreator != this.$store.state.user.displayName) {
+        console.log(eventObj);
         this.events.push(eventObj);
       }
     });
