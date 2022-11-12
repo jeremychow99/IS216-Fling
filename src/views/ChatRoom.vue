@@ -10,7 +10,8 @@
             </div>
         </div>
 
-        <div id="msg-container" class="mx-2" style="height: 630px">
+        <div style="height: 80vh; position: relative;">
+            <div id="msg-container" class="mx-2" style="height: calc(100% - 80px)">
             <message
             v-for="message of messages"
             :key="message.id"
@@ -20,13 +21,14 @@
             >
                 {{ message.content }}
             </message>
-        </div>
-        
-        <hr>
+            </div>
+            
+            <hr>
 
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Message" aria-label="Message" aria-describedby="button-addon2" v-model="message" required>
-            <button class="btn btn-success" type="button" id="button-addon2" :disabled="message.length == 0" @click="sendMessage">Send</button>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Message" aria-label="Message" aria-describedby="button-addon2" v-model="message" required>
+                <button class="btn btn-success" type="button" id="button-addon2" :disabled="message.length == 0" @click="sendMessage">Send</button>
+            </div>
         </div>
     </div>
 </template>

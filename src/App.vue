@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid" style="padding: 0px">
+  <div style="padding: 0px">
     <!-- <Navbar v-if="this.$store.state.user" class="row" /> -->
 
       <router-view v-slot="{ Component }">

@@ -37,17 +37,17 @@
                 <p class="lead fw-normal m-1 fs-2">Interests</p>
                 <div class="p-2 rounded" style="background-color: #dee3f1;"> <!--#f8f9fa-->
                     <!-- Dynamic Color Coding -->
-                    <span v-for="(interest, i) of interests" :key="i" class="rounded-pill p-2 m-1" style="border: 1px solid #234d88; color: #234d88;">
+                    <span v-for="(interest, i) of interests" :key="i" class="d-inline-block rounded-pill p-2 m-1" style="border: 1px solid #234d88; color: #234d88;">
                         {{ interest }}
                     </span>
 
-                    <span class="d-inline-block rounded-pill p-2 m-1" style="border: 1px solid #234d88; color: #234d88;">
+                    <!-- <span class="d-inline-block rounded-pill p-2 m-1" style="border: 1px solid #234d88; color: #234d88;">
                         Cybersecurity
                     </span>
 
                     <span class="d-inline-block rounded-pill p-2 m-1" style="border: 1px solid #234d88; color: #234d88;">
                         Artificial Intelligence
-                    </span>
+                    </span> -->
                     
                 </div>
             </div>
