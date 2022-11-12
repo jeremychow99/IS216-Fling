@@ -65,7 +65,6 @@
       </div>
     </div>
   </div>
-
   <!--end of container containing user login-->
 </template>
 
