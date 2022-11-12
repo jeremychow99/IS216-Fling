@@ -30,14 +30,14 @@
         <div class="row">
           <div class="col-12 col-xl-6 mb-3">
             <label for="major1DataList" class="form-label">First Major</label>
-            <input class="form-control" list="major1Options" id="major1DataList" placeholder="Type to search...">
+            <input class="form-control" list="major1Options" id="major1DataList" placeholder="Type to search..." v-model="major1_filter">
             <datalist id="major1Options">
               <option v-for="(major, index) of major1" :key="index" :value="major"></option>
             </datalist>
           </div>
           <div class="col-12 col-xl-6 mb-3">
             <label for="major2DataList" class="form-label">Second Major</label>
-            <input class="form-control" list="major2Options" id="major2DataList" placeholder="Type to search...">
+            <input class="form-control" list="major2Options" id="major2DataList" placeholder="Type to search..." v-model="major2_filter">
             <datalist id="major2Options">
               <option v-for="(major, index) of major2" :key="index" :value="major"></option>
             </datalist>
@@ -45,9 +45,9 @@
         </div>
 
         <div class="row">
-          <div class="col-6 col-xl-3 mb-3">
+          <div class="col-12 col-xl-3 mb-3">
             <label class="form-label">Year of Study</label>
-            <select class="form-select" aria-label="year">
+            <select class="form-select" aria-label="year" v-model="year_filter">
               <option v-for="year of years" :value="year" :key="year">{{ year }}</option>
             </select>
           </div>
@@ -55,15 +55,31 @@
               <!-- Interest -->
               <label class="form-label">Interests</label>
               <Multiselect 
-              v-model="userInterests" 
+              v-model="interest_filter" 
               mode="tags" 
-              placeholder="Choose your interests" :close-on-select="false"
+              placeholder="Select interests filter (Up to 5)" :close-on-select="false"
               :searchable="true"
               :max="5" :options="interests" />
           </div>
         </div> 
 
-        <button class="btn btn-primary">Apply</button>
+        <!-- <div class="row">
+          Major1: {{ major1_filter }}
+          Major2: {{ major2_filter }}
+          Year: {{ year_filter }}
+          Interests: {{ interest_filter }}
+        </div> -->
+
+        <div class="row mt-3">
+          <div class="col-12 col-xl-10"></div>
+          <div class="col-12 col-xl-1">
+              <button class="btn btn-warning w-100" @click="clearFilter">Clear</button>
+          </div>
+          <div class="col-12 col-xl-1">
+              <button class="btn btn-primary w-100" @click="filterUsers" :disabled="!hasFilters">Apply</button>
+          </div>
+        </div>
+        
       </div>
     </div>
 
@@ -105,6 +121,50 @@ export default {
         this.isLoading = true;
       }, 1000);
     },
+
+    clearFilter() {
+      this.major1_filter = ""
+      this.major2_filter = ""
+      this.year_filter = ""
+      this.interest_filter = []
+      this.filtered_users = this.users
+    },
+
+    filterUsers() {
+      let user_arr = []
+
+      if (this.hasFilters) {
+        console.log("Filtering User")
+        this.users.forEach((user) => {
+          var filter = true
+          if (this.major1_filter.length > 0) {
+            console.log(`${user.fullname}: ${user.firstmajor}`)
+            filter = filter && user.firstmajor == this.major1_filter
+          }
+
+          if (this.major2_filter.length > 0) {
+            console.log(`${user.fullname}: ${user.secondmajor}`)
+            filter = filter && user.secondmajor == this.major2_filter
+          }
+
+          if (this.year_filter > 0) {
+            console.log(`${user.fullname}: ${user.year}`)
+            filter = filter && user.year == this.year_filter
+          }
+
+          if (this.interest_filter.length > 0) {
+            filter = filter && user.interests.some( ai => this.interest_filter.includes(ai) );
+          }
+
+          if (filter) {
+            user_arr.push(user);
+          }
+          
+        });
+      }
+
+      this.filtered_users = user_arr
+    }
   },
   data() {
     return {
@@ -119,7 +179,10 @@ export default {
           // interests: userData.interests,
           // profileURL: userData.profileURL
       ],
-      years: [1, 2, 3, 4, 5],
+      filtered_users: [
+        
+      ],
+      years: ["",1, 2, 3, 4, 5],
       major1: [
         "Accounting",
         "Communication Management",
@@ -209,13 +272,51 @@ export default {
         "Global Asia",
         "Public Policy and Public Management",
       ],
-      interests: null,
+      interests: [
+        "Artificial Intelligence",
+        "Anthropology",
+        "Blockchain",
+        "Business Intelligence",
+        "Communications",
+        "Criminology",
+        "Cultural Studies",
+        "Cyber Security",
+        "Data Science",
+        "Econometrics",
+        "Entrepreneurship",
+        "Finance",
+        "FinTech", 
+        "Game Design", 
+        "Geography",
+        "Health Technology",
+        "Investment Banking",
+        "International Relations",
+        "International Trade",
+        "Law",
+        "Literature",
+        "Machine Learning",
+        "Management",
+        "Marketing",
+        "Mathematics",
+        "Operations Management",
+        "Physics",
+        "Political Science",
+        "Public Policy",
+        "Psychology",
+        "Physics",
+        "Real Estate",
+        "Robotics",
+        "Sociology",
+        "Software Engineering",
+        "Statistics",
+        "Strategic Management",
+        "Web 3.0"],
 
       name_filter: "",
       year_filter: "",
       major1_filter: "",
       major2_filter: "",
-      interest_filter: new Set(),
+      interest_filter: [],
 
       isLoading: true,
     };
@@ -226,7 +327,7 @@ export default {
       // Filtering
       if (this.name_filter.length) {
         let user_arr = [];
-        this.users.forEach((user) => {
+        this.filtered_users.forEach((user) => {
           if (user.fullname.includes(this.name_filter)) {
             user_arr.push(user);
           }
@@ -234,10 +335,15 @@ export default {
 
         return user_arr;
       } else {
-        return this.users;
+        return this.filtered_users;
       }
     },
+
+    hasFilters() {
+      return this.major1_filter.length > 0 || this.major2_filter.length > 0 || this.year_filter > 0 || this.interest_filter.length > 0
+    }
   },
+
   // Onmounted
   async mounted() {
     setTimeout(() => {
@@ -245,7 +351,7 @@ export default {
     }, 1000);
     const querySnapshot = await getDocs(collection(db, "profileDetails"));
 
-    var temp_interests = new Set()
+    var temp_interest = new Set(this.interests)
 
     querySnapshot.forEach((user) => {
       // console.log(user.id, " => ", user.data());
@@ -253,11 +359,9 @@ export default {
       if (user.id != this.$store.state.user.email) {
         const userData = user.data();
 
-        console.log(userData.interests)
         // console.log("Interests: ", user.data().interests)
-
-        const userInterest = new Set(userData.interests)
-        temp_interests = new Set([temp_interests, userInterest])
+        let userInterest = new Set(user.data().interests)
+        temp_interest = new Set([...temp_interest, ...userInterest])
 
         const userObj = {
           id: user.id,
@@ -273,7 +377,8 @@ export default {
       }
     });
 
-    this.interests = Array.from(temp_interests)
+    this.interests = Array.from(temp_interest)
+    this.filtered_users = this.users
   },
 };
 </script>
