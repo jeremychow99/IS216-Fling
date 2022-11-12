@@ -20,21 +20,23 @@
     <!--first major-->
     <div class="col-md mb-3">
       <label for="major1DataList" class="form-label">Your First Major</label>
-      <input class="form-control" list="major1Options" id="major1DataList" placeholder="Type to search..."
-        v-model="userFirstMajor">
-      <datalist id="major1Options">
-        <option v-for="(major, index) of major1" :key="index" :value="major"></option>
-      </datalist>
+      <Multiselect
+      v-model="userFirstMajor"
+      placeholder="Type to search..."
+      :searchable=true
+      :options="major1"
+      />
     </div>
 
     <!--second major-->
     <div class="col-md mb-3">
       <label for="major2DataList" class="form-label">Your Second Major</label>
-      <input class="form-control" list="major2Options" id="major1DataList" placeholder="Type to search..."
-        v-model="userSecondMajor">
-      <datalist id="major2Options">
-        <option v-for="(major, index) of major2" :key="index" :value="major"></option>
-      </datalist>
+      <Multiselect
+      v-model="userSecondMajor"
+      placeholder="Type to search..."
+      :searchable=true
+      :options="major2"
+      />
     </div>
 
     <!--user's input bio-->

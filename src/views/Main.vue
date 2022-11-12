@@ -30,17 +30,21 @@
         <div class="row">
           <div class="col-12 col-xl-6 mb-3">
             <label for="major1DataList" class="form-label">First Major</label>
-            <input class="form-control" list="major1Options" id="major1DataList" placeholder="Type to search..." v-model="major1_filter">
-            <datalist id="major1Options">
-              <option v-for="(major, index) of major1" :key="index" :value="major"></option>
-            </datalist>
+            <Multiselect
+            v-model="major1_filter"
+            placeholder="Type to search..."
+            :searchable=true
+            :options="major1"
+            />
           </div>
           <div class="col-12 col-xl-6 mb-3">
             <label for="major2DataList" class="form-label">Second Major</label>
-            <input class="form-control" list="major2Options" id="major2DataList" placeholder="Type to search..." v-model="major2_filter">
-            <datalist id="major2Options">
-              <option v-for="(major, index) of major2" :key="index" :value="major"></option>
-            </datalist>
+            <Multiselect
+            v-model="major2_filter"
+            placeholder="Type to search..."
+            :searchable=true
+            :options="major2"
+            />
           </div>
         </div>
 
@@ -73,10 +77,10 @@
         <div class="row mt-3">
           <div class="col-12 col-xl-10"></div>
           <div class="col-12 col-xl-1">
-              <button class="btn btn-warning w-100" @click="clearFilter">Clear</button>
+              <button class="btn btn-warning w-100 mb-3" @click="clearFilter">Clear</button>
           </div>
           <div class="col-12 col-xl-1">
-              <button class="btn btn-primary w-100" @click="filterUsers" :disabled="!hasFilters">Apply</button>
+              <button class="btn btn-primary w-100" @click="filterUsers" :disabled="!hasFilters" data-bs-toggle="collapse" data-bs-target="#collapseFilter">Apply</button>
           </div>
         </div>
         
