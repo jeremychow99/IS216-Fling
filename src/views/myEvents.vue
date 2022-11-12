@@ -65,12 +65,18 @@ export default {
   methods: {
     deleteEvent: function (s){
       console.log(s)
-      for(let item of this.events){
-        console.log(item)
-        if(item.eventID == s){
-          this.events.pop(item)
+      for (let index = 0; index < this.events.length; index++) {
+        if(this.events[index].eventID== s){
+          this.events.splice(index,1)
         }
+        
       }
+      // for(let item of this.events){
+      //   console.log(item)
+      //   if(item.eventID == s){
+      //     this.events.pop(item)
+      //   }
+      // }
     },
    
     logoutUser: function () {
@@ -106,6 +112,7 @@ export default {
       if (eventObj.eventCreator == this.$store.state.user.displayName) {
         this.events.push(eventObj);
       }
+      console.log(this.events)
     });
   },
 };
