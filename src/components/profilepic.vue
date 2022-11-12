@@ -6,6 +6,19 @@
       <img :src="userProfile" class="mx-auto d-block rounded-circle" style="height: 200px; width: 200px">
     </div>
 
+    <!-- Info box for uploading Images -->
+    <div class="alert alert-info d-flex">
+      <div>
+        <i class="fa-solid fa-circle-info"></i>
+      </div>
+      <p class="ms-3 mb-0">
+        Did you know? Having a professional profile photo allows you to make solid first impression to your network and makes you <u><strong>36 times</strong></u> more likely to be contacted!
+        <br>
+        <br>
+        Do remember to preview your profile photo before uploading. The recommended profile picture size is <u><strong>320 x 320 pixels</strong></u>.      
+      </p>
+    </div>
+
     <!--upload pic function-->
     <div class="mb-3">
       <div class="input-group">
@@ -41,14 +54,14 @@
 
     <!--user's input bio-->
     <div class="col-md mb-3">
-      <label for="userBio" class="mb-2">Your Bio</label>
+      <label for="userBio" class="mb-2">Your Bio ({{ userBio.length }}/280)</label>
       <textarea v-model="userBio" class="form-control" id="userBio" style="height: 100px" maxlength="280"></textarea>
     </div>
 
     <div class="row">
 
       <div class="col-md mb-3">
-        <label class="form-label">Your Interests</label>
+        <label class="form-label">Your Interests ({{ userInterests.length }}/15)</label>
         <Multiselect 
         v-model="userInterests" 
         mode="tags" 
@@ -59,7 +72,7 @@
       </div>
 
       <div class="col-md mb-3">
-        <label for="userYear" class="mb-3">Year </label>
+        <label for="userYear" class="mb-2">Year </label>
         <select class="form-select" v-model="userYear">
           <option value="1">One</option>
           <option value="2">Two</option>

@@ -60,9 +60,10 @@ const store = new Vuex.Store({
         updateProfile(user, {
           displayName: fullname,
           photoURL: "https://firebasestorage.googleapis.com/v0/b/is216-proj-v1.appspot.com/o/images%2Fuser.png?alt=media&token=e5307efb-4818-4724-8da6-58113c302507"
+        }).then(() => {
+          context.commit("setUser", user);
         })
-
-        context.commit("setUser", user);
+        
         await setDoc(doc(db, "profileDetails", email), {
           fullname: fullname,
           username: username,
@@ -82,6 +83,7 @@ const store = new Vuex.Store({
       const response = await signInWithEmailAndPassword(auth, email, password);
       if (response) {
         context.commit("setUser", response.user);
+        console.log(context.user)
       } else {
         throw new Error("login failed");
       }

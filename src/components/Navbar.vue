@@ -3,7 +3,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark gradient-custom">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <img src="../assets/logo-no-background.png" class="d-inline-block align-top mx-3" alt="Kitten" style="height:100px">
+        <img src="../assets/logo-no-background.png" class="d-inline-block align-top mx-3" alt="Kitten" style="height:80px">
       </a>
 
       <button
@@ -38,15 +38,16 @@
           </li>
         </ul>
         <ul class="navbar-nav me-3 mb-3">
-          <li class="nav-item">
-            <div class="dropdown d-flex">
-              <button class="btn btn-secondary dropdown-toggle mt-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Picture UserName
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><router-link class="dropdown-item" :to="{ name: 'Profile', params: {id: this.$store.state.user.email} }">Profile</router-link></li>
-                <li><router-link class="dropdown-item" @click="logoutFunc(); $emit('logout')" :to="{ name: 'Login' }">Logout</router-link></li>
-              </ul>
+          <li class="nav-item dropdown mx-2 ">
+            <a class="nav-link dropdown-toggle mt-3" id="dropdownMenuButton1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img :src="this.$store.state.user.photoURL" class="img-fluid rounded-circle mb-3 img-thumbnail" style="height: 60px; width: 60px;">
+            </a>
+            
+            <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
+              <p class="text-center fw-bold">{{ this.$store.state.user.displayName }}</p>
+              <hr>
+                <router-link class="dropdown-item border-bottom" :to="{ name: 'Profile', params: {id: this.$store.state.user.email} }">My Profile</router-link>
+                <router-link class="dropdown-item " @click="logoutFunc(); $emit('logout')" :to="{ name: 'Login' }">Logout</router-link>
             </div>
           </li>
         </ul>
@@ -65,6 +66,7 @@ export default {
     const error = ref(null);
     const store = useStore();
     const router = useRouter();
+    console.log(store.state.user.displayName)
     const logoutFunc = async () => {
       localStorage.clear();
       try {

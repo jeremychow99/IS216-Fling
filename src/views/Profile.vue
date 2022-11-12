@@ -7,7 +7,7 @@
 
             <!-- Image col -->
             <div class="col-12 col-xl-3 text-center">
-                <img src="https://placekitten.com/150" class="img-fluid img-thumbnail mt-4 mb-2 rounded-circle" style="z-index: 1">
+                <img :src="profileURL" class="img-fluid img-thumbnail mt-4 mb-2 rounded-circle" style="z-index: 1; width: 150px; height: 150px;">
                 <!-- <img :src="profileURL" class="img-fluid img-thumbnail mt-4 mb-2 rounded-circle" style="z-index: 1"> -->
             </div>
 
