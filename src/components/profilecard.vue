@@ -14,11 +14,14 @@
 
             <h6>Interests</h6>
             <div style="height:120px">
-                <span v-for="interest in interests.slice(0, 10)" :key="interest"
+                <span v-for="interest in interests.slice(0, 5)" :key="interest"
                     class="badge rounded-pill mx-1" :class=" interestCat[interest] ? interestCat[interest] : 'bg-dark' ">{{
                             interest
                     }}</span>
-                <span v-if="interests.length > 5"><i class="fa-solid fa-ellipsis"></i></span>
+                <div v-if="interests.length > 5" class="text-center">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+                
             </div>
 
 
