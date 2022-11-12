@@ -2,8 +2,8 @@
   <div>
   <nav class="navbar navbar-expand-lg navbar-dark gradient-custom">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="../assets/logo-no-background.png" class="d-inline-block align-top mx-3" alt="Kitten" style="height:80px">
+      <a class="navbar-brand">
+        <img src="../assets/logo-no-background.png" class="d-inline-block align-top mx-3" alt="Kitten" style="height:65px">
       </a>
 
       <button

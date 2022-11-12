@@ -13,9 +13,12 @@
         </lottie-player>
       </div>
       <div class="mt-5 col-xs-9 col-lg-6">
-        <h1 class="display-2 text-center">Fling</h1>
+        <!-- <h1 class="display-2 text-center">Fling</h1> -->
 
         <form @submit.prevent="handleSubmit">
+          <div class="mx-auto px-5">
+            <img src="../assets/cropped.png" style="width:85%">
+          </div>
           <div class="px-5 mb-3">
             <label for="email" class="form-label">Email</label>
             <input
@@ -52,15 +55,11 @@
 
         <div class="row px-5 mb-3">
           <button
+            @click="setLoad"
             class="rounded btn text-light"
             style="background-color: #55acee"
           >
-            <router-link
-              style="text-decoration: none; color: inherit"
-              :to="{ name: 'signupFinalised' }"
-            >
             <i class="fa-solid fa-circle-plus me-2"></i>Create an Account
-            </router-link>
           </button>
         </div>
       </div>
@@ -76,11 +75,13 @@ import { useRouter } from "vue-router";
 
 import LoadingScreen from "./loading.vue";
 import myStore from "../store";
+import router from "../router";
 export default {
   methods: {
-    // setLoad: function(){
-    //   this.isLoading=true
-    // }
+    setLoad: function () {
+      myStore.state.loading = true;
+      router.push("/signupFinalised");
+    },
   },
   mounted() {
     setTimeout(() => {

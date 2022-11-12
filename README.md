@@ -1,28 +1,5 @@
 # is216-vue-vite
 
-## Please take note
-Run ``` 
-npm install``` after every pull in case of updated dependencies.
-## To-Do List:
-- [x] connect to firestore
-- [x] add and delete data from firestore
-- [x] user login using email and password
-- [x] log out functionality
-- [x] setup vue-router (view and component routing)
-- [x] add vuex store (state management)
-- [x] create user data linked to them when signup (v important)
-- [x] redirect user if not logged in
-- [ ] redirect user to login page after user logs out
-- [ ] add Google auth Login
-- [ ] unique user sessions after login, linked to their data (cannot have user seeing their own profile on feed, or editing other user's data etc.)
-- [ ] store user profile data
-- [ ] profile pic image file upload (using firebase storage)
-- [ ] user feed data
-- [ ] Match logic
-- [ ] feedback/comment system
-- [ ] events creation and listings
-etc...
-
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
