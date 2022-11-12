@@ -14,6 +14,20 @@
     </ul>
 
     <div class="row">
+      <div class="col-lg-12 col-sm-12">
+        <button
+          type="button"
+          class="btn btn-primary my-2"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          style="float: right;"
+        >
+        <i class="fa-solid fa-plus"></i> Add Another Event
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="row">
         <myEventCard
           v-for="event of displayEvents"

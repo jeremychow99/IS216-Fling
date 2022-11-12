@@ -6,13 +6,13 @@
         <p class="card-text">
           {{ details }}
         </p>
-        <div class="d-flex justify-content-around">
+        <div class="d-flex justify-content-between">
           <div><i class="fa-solid fa-calendar"></i> {{ date }}</div>
           <div><i class="fa-solid fa-clock"></i> {{ time }}</div>
           <div><i class="fa-solid fa-location-dot"></i> {{ location }}</div>
         </div>
         <div class="d-grid gap-2">
-          <button type="button" @click="deleteEvent(); $emit('deleteEvent', this.$.vnode.key)" class="btn btn-danger">
+          <button type="button" @click="deleteEvent(); $emit('deleteEvent', this.$.vnode.key)" class="btn btn-danger" style="margin-top: 10px;">
             <i class="fa-solid fa-trash-can me-2"></i>
             Delete Event
           </button>
