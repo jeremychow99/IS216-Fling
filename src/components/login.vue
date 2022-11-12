@@ -1,32 +1,6 @@
 <template>
   <div><LoadingScreen v-if="$store.state.loading"></LoadingScreen></div>
   <div v-if="!$store.state.loading" class="container w-100 m-auto">
-<<<<<<< HEAD
-      <div class="row">
-        <div class="col-xs-3 col-lg-1"></div>
-        <div class="col-xs-3 col-lg-4 justify-content-center">
-          <lottie-player
-            autoplay
-            loop
-            src="https://assets7.lottiefiles.com/packages/lf20_and4mptz.json"
-            class="me-2 h-90"
-          >
-          </lottie-player>
-        </div>
-        <div class="mt-5 col-xs-9 col-lg-6">
-          <h1 class="display-2 text-center">Fling</h1>
-      <form @submit.prevent="handleSubmit">
-        <div class="px-5 mb-3">
-          <label for="email" class="form-label">Email Address</label>
-          <input
-            type="email"
-            name="email"
-            v-model="email"
-            required
-            class="form-control"
-          />
-        </div>
-=======
     <div class="row">
       <div class="col-xs-3 col-lg-1"></div>
       <div class="col-xs-3 col-lg-4 justify-content-center">
@@ -51,7 +25,6 @@
               class="form-control"
             />
           </div>
->>>>>>> 4f493d5e84dd23623e88d7998b81ffcb8ff9fc49
 
           <div class="px-5 mb-3">
             <label for="password" class="form-label">Password</label>
@@ -92,7 +65,6 @@
       </div>
     </div>
   </div>
-
   <!--end of container containing user login-->
 </template>
 
