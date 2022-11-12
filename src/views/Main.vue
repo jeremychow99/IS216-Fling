@@ -332,7 +332,7 @@ export default {
       if (this.name_filter.length) {
         let user_arr = [];
         this.filtered_users.forEach((user) => {
-          if (user.fullname.includes(this.name_filter)) {
+          if (user.fullname.toLowerCase().includes(this.name_filter.toLowerCase())) {
             user_arr.push(user);
           }
         });
