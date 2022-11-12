@@ -66,7 +66,6 @@ const store = new Vuex.Store({
         await setDoc(doc(db, "profileDetails", email), {
           fullname: fullname,
           username: username,
-          password: password,
           interests: [],
           firstMajor: "",
           secondMajor: "",
