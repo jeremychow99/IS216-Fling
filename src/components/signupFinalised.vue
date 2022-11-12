@@ -16,7 +16,10 @@
       <div class="mt-5 col-xs-9 col-lg-6">
         <h1 class="display-2 text-center">Fling</h1>
         <div class="row px-5">
-          <button class="rounded w-80 text-light p-2" style="background-color: #234db8">
+          <button
+            class="rounded btn text-light"
+            style="background-color: #55acee"
+          >
             <i class="fab fa-google me-2"></i>Log In with Google
           </button>
         </div>
@@ -49,7 +52,10 @@
           </div>
           <div v-if="error">{{ error }}</div>
           <div class="row px-5 mb-3">
-            <button class="rounded btn btn-primary w-90">Sign Up</button>
+            <button class="rounded btn btn-primary w-90">
+              <i class="fa fa-user"></i>
+              Sign Up
+            </button>
           </div>
         </form>
       </div>

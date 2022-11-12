@@ -16,7 +16,7 @@
           <h1 class="display-2 text-center">Fling</h1>
       <form @submit.prevent="handleSubmit">
         <div class="px-5 mb-3">
-          <label for="email" class="form-label">Email</label>
+          <label for="email" class="form-label">Email Address</label>
           <input
             type="email"
             name="email"
