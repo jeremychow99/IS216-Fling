@@ -5,8 +5,8 @@
             <div style="height:150px">
                 <h5 class="mb-2">{{ name }}</h5>
                 <p class="small text-muted" style="margin-bottom: 8px">Year {{ year }}</p>
-                <p class="small " style="font-size:15px; margin-bottom: 8px">{{ firstMajorDisplay[firstmajor] }} </p>
-                <p class="small text-muted" style="font-size:15px; margin-bottom: 8px">{{ secondMajorDisplay[secondmajor] }} </p>
+                <p class="small fw-bold" style="font-size:15px; margin-bottom: 8px">{{ firstMajorDisplay[firstmajor] }} </p>
+                <p class="small text-muted" style="font-size:15px; margin-bottom: 6px">{{ secondMajorDisplay[secondmajor] }} </p>
             </div>
 
 

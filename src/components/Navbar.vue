@@ -40,7 +40,7 @@
         <ul class="navbar-nav me-3 mb-3">
           <li class="nav-item dropdown mx-2 ">
             <a class="nav-link dropdown-toggle mt-3" id="dropdownMenuButton1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img :src="this.$store.state.user.photoURL" class="img-fluid rounded-circle mb-3 img-thumbnail" style="height: 60px; width: 60px;">
+              <img :src="this.$store.state.user.photoURL" class="img-fluid rounded-circle mb-3" style="height: 60px; width: 60px; border: 2px solid white;">
             </a>
             
             <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
