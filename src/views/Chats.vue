@@ -25,7 +25,7 @@
       <div class="container-fluid">
         <ul v-if="displayConvos.length > 0" class="list-group">
         <convo
-          v-for="convo in convos"
+          v-for="convo in displayConvos"
           :key="convo.id"
           :user="convo.receiver"
           :lastmsgtime="convo.lastmsgtime"
@@ -79,7 +79,7 @@ export default {
         let convo_arr = [];
         this.convos.forEach((convo) => {
           console.log(convo.receiver);
-          if (convo.receiver.includes(this.chat_filter)) {
+          if (convo.receiver.toLowerCase().includes(this.chat_filter.toLowerCase())) {
             convo_arr.push(convo);
           }
         });

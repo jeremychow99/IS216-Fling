@@ -18,7 +18,7 @@ export default {
     computed: {
         dateTime() {
             var date = new Date(this.lastmsgtime);
-            let date_str = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+            let date_str = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
             return date_str;
         }
     }
