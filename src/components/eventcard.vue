@@ -51,14 +51,15 @@
           <div><strong>Description: </strong>{{details}}</div>
           <div class="my-2"><strong>Details: </strong>{{desc}}</div>
           
-          <div class="d-flex justify-content-around my-2">
+          <div class="d-flex justify-content-between my-2">
             <div><i class="fa-solid fa-calendar"></i> {{ date }} </div>
             <div><i class="fa-solid fa-clock"></i> {{ time }}</div>
-            <div>
+            
+          </div>
+          <div>
               <i class="fa-solid fa-location-dot"></i>
                {{ location }}
             </div>
-          </div>
           </div>
           <div class="modal-footer">
             

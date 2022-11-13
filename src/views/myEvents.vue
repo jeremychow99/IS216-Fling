@@ -91,9 +91,8 @@
             />
           </div>
 
-          <label for="basic-url" class="form-label"></label>
           <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon3">Description</span>
+            <span class="input-group-text" id="basic-addon3">Description <br>({{inputDetails.length}}/100)</span>
             <textarea
               v-model="inputDetails"
               maxlength="100"
@@ -125,7 +124,7 @@
           </div>
 
           <div class="input-group">
-            <span class="input-group-text">Details</span>
+            <span class="input-group-text">Details <br>({{inputDesc.length}}/500)</span>
             <textarea
               v-model="inputDesc"
               class="form-control"
