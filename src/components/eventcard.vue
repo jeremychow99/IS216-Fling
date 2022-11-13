@@ -15,18 +15,20 @@
         <div class="d-grid gap-2">
           <button
             type="button"
+            @click="check"
             class="btn btn-primary"
             data-bs-toggle="modal"
-            :data-bs-target="'#exampleModal' + key"
+            :data-bs-target="'#exampleModal' + this.$.vnode.key"
             style="margin-top: 10px"
           ><i class="fa-solid fa-circle-info me-2"></i>See Details
           </button>
         </div>
       </div>
     </div>
+
     <div
       class="modal fade"
-      :id="'exampleModal' + key"
+      :id="'exampleModal' + this.$.vnode.key"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -49,7 +51,7 @@
           <div class="my-2"><strong>Details: </strong>{{desc}}</div>
           
           <div class="d-flex justify-content-around my-2">
-            <div><i class="fa-solid fa-calendar"></i> {{ date }}</div>
+            <div><i class="fa-solid fa-calendar"></i> {{ date }} </div>
             <div><i class="fa-solid fa-clock"></i> {{ time }}</div>
             <div>
               <i class="fa-solid fa-location-dot"></i>
@@ -81,6 +83,8 @@ import { db } from "../config"
 export default {
   props: ["name", "details", "time", "date", "location", "desc", "creator", "creatorEmail", "key"],
   methods: {
+    check: function (){
+    },
     async message() {
             // Check if convo already exist
             // Sorted Participant Array to ensure that the order is also the same for querying purposes
