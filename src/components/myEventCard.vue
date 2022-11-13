@@ -1,6 +1,6 @@
 <template>
   <div class="col-lg-4 col-sm-12 my-3">
-    <div class="card" style="height:180px">
+    <div class="card" style="height:200px">
       <div class="card-body">
         <h5 class="card-title">{{ name }}</h5>
         <p class="card-text">
