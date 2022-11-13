@@ -1,11 +1,11 @@
 <template>
   <div class="col-lg-4 col-sm-12 my-3">
-    <div class="card" style="height:200px">
+    <div class="card" style="height:180px">
       <div class="card-body">
         <h5 class="card-title">{{ name }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ creator }}</h6>
         <p class="card-text">
-          {{ details.slice(0,40) }}...
+          {{ details.slice(0,40) }}<span v-if="this.details.length>40">...</span>
         </p>
         <div class="d-flex justify-content-between p-0">
           <div><i class="fa-solid fa-calendar"></i> {{ date }}</div>
