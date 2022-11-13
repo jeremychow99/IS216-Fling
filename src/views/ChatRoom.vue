@@ -2,12 +2,25 @@
     <Navbar />
     <div class="container">
         <div class="row align-items-center my-2">
-            <div class="py-2 border-bottom">
+            <div class="py-2 border-bottom" style="position: relative;">
                 <img src="https://firebasestorage.googleapis.com/v0/b/is216-proj-v1.appspot.com/o/images%2Fuser.png?alt=media&token=e5307efb-4818-4724-8da6-58113c302507" alt="" width="40" class="rounded-circle me-3 shadow-1-strong">
                 <span>
                     <strong class="fs-5">{{ userName }}</strong>
                 </span>
+
+                <!-- <div class="d-inline">
+                    <button class="btn" type="button" id="viewProfile" data-bs-toggle="dropdown" aria-expanded="false" style="position: absolute; right: 20px;">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                    
+                    <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="viewProfile">
+                        <router-link id="profile" class="dropdown-item" :to="{ name: 'Profile', params: {id: userID} }">View Profile</router-link>
+                    </div>
+                </div> -->
+                
+      
             </div>
+            
         </div>
 
         <div style="height: 80vh; position: relative;">
@@ -39,6 +52,7 @@ import { collection, query, where, onSnapshot, addDoc, getDoc, doc } from "fireb
 import store from "../store"
 import Navbar from "../components/Navbar.vue";
 import { nextTick } from "vue"
+import router from "../router/index.js"
 
 
 import message from '../components/message.vue'
@@ -56,6 +70,7 @@ export default {
             messages: [],
             message: '',
             userName: null,
+            userID: '',
         }
     },
 
@@ -84,16 +99,21 @@ export default {
             const docSnap = await getDoc(docRef);
 
             let userName = ''
+            let userID = ''
             
             let convo_participants = docSnap.data()['convo_users']
 
             for (let user in convo_participants) {
                 if (user != this.$store.state.user.email) {
                     userName = convo_participants[user]
+                    userID = user
                 }
             }
 
+            this.userID = userID
             this.userName = userName
+
+            console.log(this.userID)
 
         },
 
@@ -117,6 +137,11 @@ export default {
                 this.message = ''
             }
             
+        },
+
+        toProfile() {
+            console.log("Redirecting")
+            this.$router.push({name: 'Profile', params: { id: this.userID }})
         }
     },
 

@@ -65,7 +65,6 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from) => {
-  console.log(store.state.user + '!')
   if (store.state.user == null && to.name !== 'Login' && to.name !== 'signupFinalised') {
     console.log('routerTest')
     return { name: 'Login' }
@@ -75,6 +74,7 @@ router.beforeEach(async (to, from) => {
 import { db } from "@/config";
 import { doc, getDoc } from "firebase/firestore";
 router.beforeEach(async (to, from) => {
+  console.log(store.state.user)
   if (store.state.user != null) {
     const docRef = doc(db, "profileDetails", store.state.user.email);
     const docSnap = await getDoc(docRef);
