@@ -1,12 +1,12 @@
 <template>
   <div class="col-lg-4 col-sm-12 my-3">
-    <div class="card">
+    <div class="card" style="height:180px">
       <div class="card-body">
         <h5 class="card-title">{{ name }}</h5>
         <p class="card-text">
-          {{ details }}
+          {{ details.slice(0,40) }}...
         </p>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between" >
           <div><i class="fa-solid fa-calendar"></i> {{ date }}</div>
           <div><i class="fa-solid fa-clock"></i> {{ time }}</div>
           <div><i class="fa-solid fa-location-dot"></i> {{ location }}</div>

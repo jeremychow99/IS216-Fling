@@ -1,11 +1,11 @@
 <template>
   <div class="col-lg-4 col-sm-12 my-3">
-    <div class="card">
+    <div class="card" style="height:180px">
       <div class="card-body">
         <h5 class="card-title">{{ name }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ creator }}</h6>
         <p class="card-text">
-          {{ details }}
+          {{ details.slice(0,40) }}...
         </p>
         <div class="d-flex justify-content-between p-0">
           <div><i class="fa-solid fa-calendar"></i> {{ date }}</div>
@@ -17,7 +17,7 @@
             type="button"
             class="btn btn-primary"
             data-bs-toggle="modal"
-            :data-bs-target="'#exampleModal' + name"
+            :data-bs-target="'#exampleModal' + key"
             style="margin-top: 10px"
           ><i class="fa-solid fa-circle-info me-2"></i>See Details
           </button>
@@ -26,7 +26,7 @@
     </div>
     <div
       class="modal fade"
-      :id="'exampleModal' + name"
+      :id="'exampleModal' + key"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -79,7 +79,7 @@ import { getDocs, addDoc, query, collection, where } from "firebase/firestore";
 import { db } from "../config"
 
 export default {
-  props: ["name", "details", "time", "date", "location", "desc", "creator", "creatorEmail"],
+  props: ["name", "details", "time", "date", "location", "desc", "creator", "creatorEmail", "key"],
   methods: {
     async message() {
             // Check if convo already exist
