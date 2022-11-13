@@ -23,7 +23,7 @@
             
         </div>
 
-        <div style="height: 80vh; position: relative;">
+        <div style="height: 75vh; position: relative;">
             <div id="msg-container" class="mx-2" style="height: calc(100% - 80px)">
             <message
             v-for="message of messages"
