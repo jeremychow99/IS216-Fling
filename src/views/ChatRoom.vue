@@ -48,7 +48,7 @@
 
 <script>
 import { db } from "../config";
-import { collection, query, where, onSnapshot, addDoc, getDoc, doc } from "firebase/firestore"
+import { collection, query, where, onSnapshot, addDoc, getDoc, doc, updateDoc } from "firebase/firestore"
 import store from "../store"
 import Navbar from "../components/Navbar.vue";
 import { nextTick } from "vue"
@@ -58,6 +58,7 @@ import router from "../router/index.js"
 import message from '../components/message.vue'
 
 const messagesCollection = collection(db, "chats")
+const convosCollection = collection(db, "convos")
 
 export default {
     components: {
@@ -135,6 +136,12 @@ export default {
                 })
 
                 this.message = ''
+
+                const docRef = doc(db, "convos", this.$route.params.id);
+
+                updateDoc(docRef, {
+                    lastmsgtime: Date.now()
+                })
             }
             
         },
