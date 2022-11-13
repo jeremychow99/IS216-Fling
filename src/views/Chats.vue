@@ -99,6 +99,8 @@ export default {
         where("participants", "array-contains", this.$store.state.user.email)
       );
 
+      let temp_convos = []
+
       const querySnapshot = await getDocs(convoQuery);
       querySnapshot.forEach((convo) => {
         console.log(convo.id, " => ", convo.data());
@@ -109,6 +111,7 @@ export default {
         let convo_participants = convoData.convo_users;
         let receiver = "";
 
+        
         for (let user in convo_participants) {
           if (user != this.$store.state.user.email) {
             receiver = convo_participants[user];
@@ -122,9 +125,12 @@ export default {
           receiver: receiver,
         };
 
-        this.convos.push(convoObj);
+        temp_convos.push(convoObj)
+        
       });
 
+      temp_convos.sort((a,b) => a.lastmsgtime - b.lastmsgtime)
+      this.convos = temp_convos
       console.log("Convo Load Completed");
       console.log(this.convos);
     },
