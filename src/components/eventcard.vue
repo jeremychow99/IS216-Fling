@@ -1,6 +1,6 @@
 <template>
   <div class="col-lg-4 col-sm-12 my-3">
-    <div class="card" style="height:180px">
+    <div class="card" style="height:220px">
       <div class="card-body">
         <h5 class="card-title">{{ name }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ creator }}</h6>
@@ -10,8 +10,9 @@
         <div class="d-flex justify-content-between p-0">
           <div><i class="fa-solid fa-calendar"></i> {{ date }}</div>
           <div><i class="fa-solid fa-clock"></i> {{ time }}</div>
-          <div><i class="fa-solid fa-location-dot"></i> {{ location }}</div>
+
         </div>
+        <div><i class="fa-solid fa-location-dot"></i> {{ location }}</div>
         <div class="d-grid gap-2">
           <button
             type="button"
@@ -50,22 +51,18 @@
           <div><strong>Description: </strong>{{details}}</div>
           <div class="my-2"><strong>Details: </strong>{{desc}}</div>
           
-          <div class="d-flex justify-content-around my-2">
+          <div class="d-flex justify-content-between my-2">
             <div><i class="fa-solid fa-calendar"></i> {{ date }} </div>
             <div><i class="fa-solid fa-clock"></i> {{ time }}</div>
-            <div>
+            
+          </div>
+          <div>
               <i class="fa-solid fa-location-dot"></i>
                {{ location }}
             </div>
           </div>
-          </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            ><i class="fa-solid fa-circle-xmark me-2"></i>Close
-          </button>
+            
             <button type="button" data-bs-dismiss="modal" class="btn btn-primary" @click="message">
               <i class="fa-solid fa-message me-2"></i>Message
             </button>
