@@ -96,6 +96,7 @@
             <span class="input-group-text" id="basic-addon3">Description</span>
             <textarea
               v-model="inputDetails"
+              maxlength="100"
               type="text"
               class="form-control"
               id="basic-url"
@@ -211,6 +212,12 @@ export default {
       };
       console.log(docRef.id)
       this.events.push(addedObj);
+      this.inputName = ""
+      this.inputDate = ""
+      this.inputTime = ""
+      this.inputDesc = ""
+      this.inputDetails = ""
+      this.inputLocation = ""
     },
     deleteEvent: function (s) {
       console.log(s);

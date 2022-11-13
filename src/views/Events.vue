@@ -99,6 +99,7 @@
             <span class="input-group-text" id="basic-addon3">Description</span>
             <textarea
               v-model="inputDetails"
+              maxlength="100"
               type="text"
               class="form-control"
               id="basic-url"
