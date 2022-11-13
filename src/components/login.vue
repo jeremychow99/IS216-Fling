@@ -40,6 +40,7 @@
               class="form-control"
             />
           </div>
+          <div v-if="this.password.length < 6"></div>
           <div class="row px-5 text-danger my-1" v-if="error">{{ error }}</div>
 
           <div class="row px-5">

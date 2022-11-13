@@ -84,7 +84,7 @@
               required
             />
           </div>
-          <div v-if="error">{{ error }}</div>
+          <div class="px-5 mb-3" v-if="error" style="color:red">{{ error }}</div>
           <div class="row px-5 mb-3">
             <button class="rounded btn btn-primary w-90">
               <i class="fa fa-user"></i>
@@ -109,10 +109,14 @@ export default {
   data() {
     return {
       isLoading: true,
+      password:""
     };
   },
   methods: {
     setLoad: function () {
+      if(this.password.length<6){
+        return
+      }
       this.isLoading = true;
     },
   },
@@ -131,6 +135,10 @@ export default {
     const store = useStore();
     console.log(store.state.user);
     const handleSubmit = async () => {
+      if(password.length<6){
+        console.log('error')
+        return
+      }
       try {
         await store.dispatch("signup", {
           email: email.value,
