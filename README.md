@@ -1,10 +1,18 @@
+# Fling
 
-STEPS TO RUN APPLICATION LOCALLY:
+Web application project for IS216 (Web Application Develoment II). 
 
-1. INSTALL NPM/NODE.JS, IF NOT ALREADY INSTALLED ON MACHINE
-2. NAVIGATE TO ROOT OF DIRECTORY, EITHER IN CHOSEN IDE (SUCH AS VSCODE) OR TERMINAL
-3. IN TERMINAL/IDE COMMAND LINE, RUN 'npm install' TO INSTALL ALL DEPENDENCIES
-4. RUN 'npm run build'
-5. RUN 'npm run preview' TO RUN APP LOCALLY, OPEN PAGE IN WEB BROWSER.
+Fling is a chat application for SMU students to network and join ad-hoc events such as hackathons.
+
+Built using Vite, Vue, Bootstrap and Google Firebase. [Deployed on Firebase Hosting](https://is216-proj-v1.web.app/).
+
+## To run locally:
+Install Node.js/NPM.
+
+In folder root, run `npm install`.
+
+To preview local devopment server:`npm run preview`.
+
+To build and minify for production:`npm run build`.
 
 
