@@ -11,7 +11,7 @@ Works on mobile devices.
 
 Built using Vite, Vue, Bootstrap and Google Firebase. [Deployed on Firebase Hosting](https://is216-proj-v1.web.app/).
 
-<div style="display:flex; align-items:center; width: 50%;" >
+<div style="display:flex; align-items:center;" >
     <img src='img/login.png' style=" height:auto; display:inline;">
     <img src='img/filter.png' style=" height:auto; display:inline;">
     <img src='img/profile.png' style=" height:auto; display:inline;">
