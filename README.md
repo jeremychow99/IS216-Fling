@@ -6,12 +6,12 @@
 Web application project for IS216 (Web Application Develoment II). 
 
 Fling is a chat application for SMU students to network and join ad-hoc events such as hackathons.
-Repsonive and works on mobile devices.
+Responsive and works on mobile devices.
 
 ## Deployment
 Built using Vite, Vue, Bootstrap and Google Firebase. [Deployed on Firebase Hosting](https://is216-proj-v1.web.app/).
 
-Merged pull requests are automatically deployed to live site.
+Pushes to `main` and merged pull requests are automatically deployed to live site.
 
 
 ## Preview Images
