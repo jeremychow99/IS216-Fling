@@ -13,16 +13,6 @@
       </li>
     </ul>
 
-    <div class="row">
-      <lottie-player
-        autoplay
-        loop
-        src="https://assets6.lottiefiles.com/packages/lf20_ieyjhrgh.json"
-        class="col-lg-12 col-sm-12 justify-content-center"
-        style="height: 300px"
-      >
-      </lottie-player>
-    </div>
     <!-- <div class="row">
       <div class="col-lg-6 col-sm-12">
         <button
