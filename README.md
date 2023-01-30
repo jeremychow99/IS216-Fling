@@ -6,6 +6,7 @@
 Web application project for IS216 (Web Application Develoment II). 
 
 Fling is a chat application for SMU students to network and join ad-hoc events such as hackathons.
+
 Responsive and works on mobile devices.
 
 ## Deployment

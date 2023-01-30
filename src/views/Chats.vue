@@ -32,7 +32,7 @@
         />
         </ul>
         <div v-else>
-          <h1 class="display-2 text-center">No Conversations Found!</h1>
+          <h1 class="display-2 text-center">No Conversations Found!!</h1>
           <lottie-player 
             autoplay 
             loop 
